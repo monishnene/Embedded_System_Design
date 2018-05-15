@@ -1,0 +1,2980 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.6.0 #4309 (Jul 28 2006)
+                              4 ; This file generated Sat Apr 14 20:31:04 2018
+                              5 ;--------------------------------------------------------
+                              6 	.module main
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _waves_init
+                             14 	.globl _wave_interrupt_handler
+                             15 	.globl __sdcc_external_startup
+                             16 	.globl _TF1
+                             17 	.globl _TR1
+                             18 	.globl _TF0
+                             19 	.globl _TR0
+                             20 	.globl _IE1
+                             21 	.globl _IT1
+                             22 	.globl _IE0
+                             23 	.globl _IT0
+                             24 	.globl _SM0
+                             25 	.globl _SM1
+                             26 	.globl _SM2
+                             27 	.globl _REN
+                             28 	.globl _TB8
+                             29 	.globl _RB8
+                             30 	.globl _TI
+                             31 	.globl _RI
+                             32 	.globl _CY
+                             33 	.globl _AC
+                             34 	.globl _F0
+                             35 	.globl _RS1
+                             36 	.globl _RS0
+                             37 	.globl _OV
+                             38 	.globl _F1
+                             39 	.globl _P
+                             40 	.globl _RD
+                             41 	.globl _WR
+                             42 	.globl _T1
+                             43 	.globl _T0
+                             44 	.globl _INT1
+                             45 	.globl _INT0
+                             46 	.globl _TXD0
+                             47 	.globl _TXD
+                             48 	.globl _RXD0
+                             49 	.globl _RXD
+                             50 	.globl _P3_7
+                             51 	.globl _P3_6
+                             52 	.globl _P3_5
+                             53 	.globl _P3_4
+                             54 	.globl _P3_3
+                             55 	.globl _P3_2
+                             56 	.globl _P3_1
+                             57 	.globl _P3_0
+                             58 	.globl _P2_7
+                             59 	.globl _P2_6
+                             60 	.globl _P2_5
+                             61 	.globl _P2_4
+                             62 	.globl _P2_3
+                             63 	.globl _P2_2
+                             64 	.globl _P2_1
+                             65 	.globl _P2_0
+                             66 	.globl _P1_7
+                             67 	.globl _P1_6
+                             68 	.globl _P1_5
+                             69 	.globl _P1_4
+                             70 	.globl _P1_3
+                             71 	.globl _P1_2
+                             72 	.globl _P1_1
+                             73 	.globl _P1_0
+                             74 	.globl _P0_7
+                             75 	.globl _P0_6
+                             76 	.globl _P0_5
+                             77 	.globl _P0_4
+                             78 	.globl _P0_3
+                             79 	.globl _P0_2
+                             80 	.globl _P0_1
+                             81 	.globl _P0_0
+                             82 	.globl _PS
+                             83 	.globl _PT1
+                             84 	.globl _PX1
+                             85 	.globl _PT0
+                             86 	.globl _PX0
+                             87 	.globl _EA
+                             88 	.globl _ES
+                             89 	.globl _ET1
+                             90 	.globl _EX1
+                             91 	.globl _ET0
+                             92 	.globl _EX0
+                             93 	.globl _BREG_F7
+                             94 	.globl _BREG_F6
+                             95 	.globl _BREG_F5
+                             96 	.globl _BREG_F4
+                             97 	.globl _BREG_F3
+                             98 	.globl _BREG_F2
+                             99 	.globl _BREG_F1
+                            100 	.globl _BREG_F0
+                            101 	.globl _P5_7
+                            102 	.globl _P5_6
+                            103 	.globl _P5_5
+                            104 	.globl _P5_4
+                            105 	.globl _P5_3
+                            106 	.globl _P5_2
+                            107 	.globl _P5_1
+                            108 	.globl _P5_0
+                            109 	.globl _P4_7
+                            110 	.globl _P4_6
+                            111 	.globl _P4_5
+                            112 	.globl _P4_4
+                            113 	.globl _P4_3
+                            114 	.globl _P4_2
+                            115 	.globl _P4_1
+                            116 	.globl _P4_0
+                            117 	.globl _PX0L
+                            118 	.globl _PT0L
+                            119 	.globl _PX1L
+                            120 	.globl _PT1L
+                            121 	.globl _PLS
+                            122 	.globl _PT2L
+                            123 	.globl _PPCL
+                            124 	.globl _EC
+                            125 	.globl _CCF0
+                            126 	.globl _CCF1
+                            127 	.globl _CCF2
+                            128 	.globl _CCF3
+                            129 	.globl _CCF4
+                            130 	.globl _CR
+                            131 	.globl _CF
+                            132 	.globl _TF2
+                            133 	.globl _EXF2
+                            134 	.globl _RCLK
+                            135 	.globl _TCLK
+                            136 	.globl _EXEN2
+                            137 	.globl _TR2
+                            138 	.globl _C_T2
+                            139 	.globl _CP_RL2
+                            140 	.globl _T2CON_7
+                            141 	.globl _T2CON_6
+                            142 	.globl _T2CON_5
+                            143 	.globl _T2CON_4
+                            144 	.globl _T2CON_3
+                            145 	.globl _T2CON_2
+                            146 	.globl _T2CON_1
+                            147 	.globl _T2CON_0
+                            148 	.globl _PT2
+                            149 	.globl _ET2
+                            150 	.globl _TMOD
+                            151 	.globl _TL1
+                            152 	.globl _TL0
+                            153 	.globl _TH1
+                            154 	.globl _TH0
+                            155 	.globl _TCON
+                            156 	.globl _SP
+                            157 	.globl _SCON
+                            158 	.globl _SBUF0
+                            159 	.globl _SBUF
+                            160 	.globl _PSW
+                            161 	.globl _PCON
+                            162 	.globl _P3
+                            163 	.globl _P2
+                            164 	.globl _P1
+                            165 	.globl _P0
+                            166 	.globl _IP
+                            167 	.globl _IE
+                            168 	.globl _DP0L
+                            169 	.globl _DPL
+                            170 	.globl _DP0H
+                            171 	.globl _DPH
+                            172 	.globl _B
+                            173 	.globl _ACC
+                            174 	.globl _EECON
+                            175 	.globl _KBF
+                            176 	.globl _KBE
+                            177 	.globl _KBLS
+                            178 	.globl _BRL
+                            179 	.globl _BDRCON
+                            180 	.globl _T2MOD
+                            181 	.globl _SPDAT
+                            182 	.globl _SPSTA
+                            183 	.globl _SPCON
+                            184 	.globl _SADEN
+                            185 	.globl _SADDR
+                            186 	.globl _WDTPRG
+                            187 	.globl _WDTRST
+                            188 	.globl _P5
+                            189 	.globl _P4
+                            190 	.globl _IPH1
+                            191 	.globl _IPL1
+                            192 	.globl _IPH0
+                            193 	.globl _IPL0
+                            194 	.globl _IEN1
+                            195 	.globl _IEN0
+                            196 	.globl _CMOD
+                            197 	.globl _CL
+                            198 	.globl _CH
+                            199 	.globl _CCON
+                            200 	.globl _CCAPM4
+                            201 	.globl _CCAPM3
+                            202 	.globl _CCAPM2
+                            203 	.globl _CCAPM1
+                            204 	.globl _CCAPM0
+                            205 	.globl _CCAP4L
+                            206 	.globl _CCAP3L
+                            207 	.globl _CCAP2L
+                            208 	.globl _CCAP1L
+                            209 	.globl _CCAP0L
+                            210 	.globl _CCAP4H
+                            211 	.globl _CCAP3H
+                            212 	.globl _CCAP2H
+                            213 	.globl _CCAP1H
+                            214 	.globl _CCAP0H
+                            215 	.globl _CKRL
+                            216 	.globl _AUXR1
+                            217 	.globl _AUXR
+                            218 	.globl _TH2
+                            219 	.globl _TL2
+                            220 	.globl _RCAP2H
+                            221 	.globl _RCAP2L
+                            222 	.globl _T2CON
+                            223 	.globl _mode
+                            224 	.globl _gain
+                            225 	.globl _wave
+                            226 	.globl _loop
+                            227 ;--------------------------------------------------------
+                            228 ; special function registers
+                            229 ;--------------------------------------------------------
+                            230 	.area RSEG    (DATA)
+                    00C8    231 G$T2CON$0$0 == 0x00c8
+                    00C8    232 _T2CON	=	0x00c8
+                    00CA    233 G$RCAP2L$0$0 == 0x00ca
+                    00CA    234 _RCAP2L	=	0x00ca
+                    00CB    235 G$RCAP2H$0$0 == 0x00cb
+                    00CB    236 _RCAP2H	=	0x00cb
+                    00CC    237 G$TL2$0$0 == 0x00cc
+                    00CC    238 _TL2	=	0x00cc
+                    00CD    239 G$TH2$0$0 == 0x00cd
+                    00CD    240 _TH2	=	0x00cd
+                    008E    241 G$AUXR$0$0 == 0x008e
+                    008E    242 _AUXR	=	0x008e
+                    00A2    243 G$AUXR1$0$0 == 0x00a2
+                    00A2    244 _AUXR1	=	0x00a2
+                    0097    245 G$CKRL$0$0 == 0x0097
+                    0097    246 _CKRL	=	0x0097
+                    00FA    247 G$CCAP0H$0$0 == 0x00fa
+                    00FA    248 _CCAP0H	=	0x00fa
+                    00FB    249 G$CCAP1H$0$0 == 0x00fb
+                    00FB    250 _CCAP1H	=	0x00fb
+                    00FC    251 G$CCAP2H$0$0 == 0x00fc
+                    00FC    252 _CCAP2H	=	0x00fc
+                    00FD    253 G$CCAP3H$0$0 == 0x00fd
+                    00FD    254 _CCAP3H	=	0x00fd
+                    00FE    255 G$CCAP4H$0$0 == 0x00fe
+                    00FE    256 _CCAP4H	=	0x00fe
+                    00EA    257 G$CCAP0L$0$0 == 0x00ea
+                    00EA    258 _CCAP0L	=	0x00ea
+                    00EB    259 G$CCAP1L$0$0 == 0x00eb
+                    00EB    260 _CCAP1L	=	0x00eb
+                    00EC    261 G$CCAP2L$0$0 == 0x00ec
+                    00EC    262 _CCAP2L	=	0x00ec
+                    00ED    263 G$CCAP3L$0$0 == 0x00ed
+                    00ED    264 _CCAP3L	=	0x00ed
+                    00EE    265 G$CCAP4L$0$0 == 0x00ee
+                    00EE    266 _CCAP4L	=	0x00ee
+                    00DA    267 G$CCAPM0$0$0 == 0x00da
+                    00DA    268 _CCAPM0	=	0x00da
+                    00DB    269 G$CCAPM1$0$0 == 0x00db
+                    00DB    270 _CCAPM1	=	0x00db
+                    00DC    271 G$CCAPM2$0$0 == 0x00dc
+                    00DC    272 _CCAPM2	=	0x00dc
+                    00DD    273 G$CCAPM3$0$0 == 0x00dd
+                    00DD    274 _CCAPM3	=	0x00dd
+                    00DE    275 G$CCAPM4$0$0 == 0x00de
+                    00DE    276 _CCAPM4	=	0x00de
+                    00D8    277 G$CCON$0$0 == 0x00d8
+                    00D8    278 _CCON	=	0x00d8
+                    00F9    279 G$CH$0$0 == 0x00f9
+                    00F9    280 _CH	=	0x00f9
+                    00E9    281 G$CL$0$0 == 0x00e9
+                    00E9    282 _CL	=	0x00e9
+                    00D9    283 G$CMOD$0$0 == 0x00d9
+                    00D9    284 _CMOD	=	0x00d9
+                    00A8    285 G$IEN0$0$0 == 0x00a8
+                    00A8    286 _IEN0	=	0x00a8
+                    00B1    287 G$IEN1$0$0 == 0x00b1
+                    00B1    288 _IEN1	=	0x00b1
+                    00B8    289 G$IPL0$0$0 == 0x00b8
+                    00B8    290 _IPL0	=	0x00b8
+                    00B7    291 G$IPH0$0$0 == 0x00b7
+                    00B7    292 _IPH0	=	0x00b7
+                    00B2    293 G$IPL1$0$0 == 0x00b2
+                    00B2    294 _IPL1	=	0x00b2
+                    00B3    295 G$IPH1$0$0 == 0x00b3
+                    00B3    296 _IPH1	=	0x00b3
+                    00C0    297 G$P4$0$0 == 0x00c0
+                    00C0    298 _P4	=	0x00c0
+                    00E8    299 G$P5$0$0 == 0x00e8
+                    00E8    300 _P5	=	0x00e8
+                    00A6    301 G$WDTRST$0$0 == 0x00a6
+                    00A6    302 _WDTRST	=	0x00a6
+                    00A7    303 G$WDTPRG$0$0 == 0x00a7
+                    00A7    304 _WDTPRG	=	0x00a7
+                    00A9    305 G$SADDR$0$0 == 0x00a9
+                    00A9    306 _SADDR	=	0x00a9
+                    00B9    307 G$SADEN$0$0 == 0x00b9
+                    00B9    308 _SADEN	=	0x00b9
+                    00C3    309 G$SPCON$0$0 == 0x00c3
+                    00C3    310 _SPCON	=	0x00c3
+                    00C4    311 G$SPSTA$0$0 == 0x00c4
+                    00C4    312 _SPSTA	=	0x00c4
+                    00C5    313 G$SPDAT$0$0 == 0x00c5
+                    00C5    314 _SPDAT	=	0x00c5
+                    00C9    315 G$T2MOD$0$0 == 0x00c9
+                    00C9    316 _T2MOD	=	0x00c9
+                    009B    317 G$BDRCON$0$0 == 0x009b
+                    009B    318 _BDRCON	=	0x009b
+                    009A    319 G$BRL$0$0 == 0x009a
+                    009A    320 _BRL	=	0x009a
+                    009C    321 G$KBLS$0$0 == 0x009c
+                    009C    322 _KBLS	=	0x009c
+                    009D    323 G$KBE$0$0 == 0x009d
+                    009D    324 _KBE	=	0x009d
+                    009E    325 G$KBF$0$0 == 0x009e
+                    009E    326 _KBF	=	0x009e
+                    00D2    327 G$EECON$0$0 == 0x00d2
+                    00D2    328 _EECON	=	0x00d2
+                    00E0    329 G$ACC$0$0 == 0x00e0
+                    00E0    330 _ACC	=	0x00e0
+                    00F0    331 G$B$0$0 == 0x00f0
+                    00F0    332 _B	=	0x00f0
+                    0083    333 G$DPH$0$0 == 0x0083
+                    0083    334 _DPH	=	0x0083
+                    0083    335 G$DP0H$0$0 == 0x0083
+                    0083    336 _DP0H	=	0x0083
+                    0082    337 G$DPL$0$0 == 0x0082
+                    0082    338 _DPL	=	0x0082
+                    0082    339 G$DP0L$0$0 == 0x0082
+                    0082    340 _DP0L	=	0x0082
+                    00A8    341 G$IE$0$0 == 0x00a8
+                    00A8    342 _IE	=	0x00a8
+                    00B8    343 G$IP$0$0 == 0x00b8
+                    00B8    344 _IP	=	0x00b8
+                    0080    345 G$P0$0$0 == 0x0080
+                    0080    346 _P0	=	0x0080
+                    0090    347 G$P1$0$0 == 0x0090
+                    0090    348 _P1	=	0x0090
+                    00A0    349 G$P2$0$0 == 0x00a0
+                    00A0    350 _P2	=	0x00a0
+                    00B0    351 G$P3$0$0 == 0x00b0
+                    00B0    352 _P3	=	0x00b0
+                    0087    353 G$PCON$0$0 == 0x0087
+                    0087    354 _PCON	=	0x0087
+                    00D0    355 G$PSW$0$0 == 0x00d0
+                    00D0    356 _PSW	=	0x00d0
+                    0099    357 G$SBUF$0$0 == 0x0099
+                    0099    358 _SBUF	=	0x0099
+                    0099    359 G$SBUF0$0$0 == 0x0099
+                    0099    360 _SBUF0	=	0x0099
+                    0098    361 G$SCON$0$0 == 0x0098
+                    0098    362 _SCON	=	0x0098
+                    0081    363 G$SP$0$0 == 0x0081
+                    0081    364 _SP	=	0x0081
+                    0088    365 G$TCON$0$0 == 0x0088
+                    0088    366 _TCON	=	0x0088
+                    008C    367 G$TH0$0$0 == 0x008c
+                    008C    368 _TH0	=	0x008c
+                    008D    369 G$TH1$0$0 == 0x008d
+                    008D    370 _TH1	=	0x008d
+                    008A    371 G$TL0$0$0 == 0x008a
+                    008A    372 _TL0	=	0x008a
+                    008B    373 G$TL1$0$0 == 0x008b
+                    008B    374 _TL1	=	0x008b
+                    0089    375 G$TMOD$0$0 == 0x0089
+                    0089    376 _TMOD	=	0x0089
+                            377 ;--------------------------------------------------------
+                            378 ; special function bits
+                            379 ;--------------------------------------------------------
+                            380 	.area RSEG    (DATA)
+                    00AD    381 G$ET2$0$0 == 0x00ad
+                    00AD    382 _ET2	=	0x00ad
+                    00BD    383 G$PT2$0$0 == 0x00bd
+                    00BD    384 _PT2	=	0x00bd
+                    00C8    385 G$T2CON_0$0$0 == 0x00c8
+                    00C8    386 _T2CON_0	=	0x00c8
+                    00C9    387 G$T2CON_1$0$0 == 0x00c9
+                    00C9    388 _T2CON_1	=	0x00c9
+                    00CA    389 G$T2CON_2$0$0 == 0x00ca
+                    00CA    390 _T2CON_2	=	0x00ca
+                    00CB    391 G$T2CON_3$0$0 == 0x00cb
+                    00CB    392 _T2CON_3	=	0x00cb
+                    00CC    393 G$T2CON_4$0$0 == 0x00cc
+                    00CC    394 _T2CON_4	=	0x00cc
+                    00CD    395 G$T2CON_5$0$0 == 0x00cd
+                    00CD    396 _T2CON_5	=	0x00cd
+                    00CE    397 G$T2CON_6$0$0 == 0x00ce
+                    00CE    398 _T2CON_6	=	0x00ce
+                    00CF    399 G$T2CON_7$0$0 == 0x00cf
+                    00CF    400 _T2CON_7	=	0x00cf
+                    00C8    401 G$CP_RL2$0$0 == 0x00c8
+                    00C8    402 _CP_RL2	=	0x00c8
+                    00C9    403 G$C_T2$0$0 == 0x00c9
+                    00C9    404 _C_T2	=	0x00c9
+                    00CA    405 G$TR2$0$0 == 0x00ca
+                    00CA    406 _TR2	=	0x00ca
+                    00CB    407 G$EXEN2$0$0 == 0x00cb
+                    00CB    408 _EXEN2	=	0x00cb
+                    00CC    409 G$TCLK$0$0 == 0x00cc
+                    00CC    410 _TCLK	=	0x00cc
+                    00CD    411 G$RCLK$0$0 == 0x00cd
+                    00CD    412 _RCLK	=	0x00cd
+                    00CE    413 G$EXF2$0$0 == 0x00ce
+                    00CE    414 _EXF2	=	0x00ce
+                    00CF    415 G$TF2$0$0 == 0x00cf
+                    00CF    416 _TF2	=	0x00cf
+                    00DF    417 G$CF$0$0 == 0x00df
+                    00DF    418 _CF	=	0x00df
+                    00DE    419 G$CR$0$0 == 0x00de
+                    00DE    420 _CR	=	0x00de
+                    00DC    421 G$CCF4$0$0 == 0x00dc
+                    00DC    422 _CCF4	=	0x00dc
+                    00DB    423 G$CCF3$0$0 == 0x00db
+                    00DB    424 _CCF3	=	0x00db
+                    00DA    425 G$CCF2$0$0 == 0x00da
+                    00DA    426 _CCF2	=	0x00da
+                    00D9    427 G$CCF1$0$0 == 0x00d9
+                    00D9    428 _CCF1	=	0x00d9
+                    00D8    429 G$CCF0$0$0 == 0x00d8
+                    00D8    430 _CCF0	=	0x00d8
+                    00AE    431 G$EC$0$0 == 0x00ae
+                    00AE    432 _EC	=	0x00ae
+                    00BE    433 G$PPCL$0$0 == 0x00be
+                    00BE    434 _PPCL	=	0x00be
+                    00BD    435 G$PT2L$0$0 == 0x00bd
+                    00BD    436 _PT2L	=	0x00bd
+                    00BC    437 G$PLS$0$0 == 0x00bc
+                    00BC    438 _PLS	=	0x00bc
+                    00BB    439 G$PT1L$0$0 == 0x00bb
+                    00BB    440 _PT1L	=	0x00bb
+                    00BA    441 G$PX1L$0$0 == 0x00ba
+                    00BA    442 _PX1L	=	0x00ba
+                    00B9    443 G$PT0L$0$0 == 0x00b9
+                    00B9    444 _PT0L	=	0x00b9
+                    00B8    445 G$PX0L$0$0 == 0x00b8
+                    00B8    446 _PX0L	=	0x00b8
+                    00C0    447 G$P4_0$0$0 == 0x00c0
+                    00C0    448 _P4_0	=	0x00c0
+                    00C1    449 G$P4_1$0$0 == 0x00c1
+                    00C1    450 _P4_1	=	0x00c1
+                    00C2    451 G$P4_2$0$0 == 0x00c2
+                    00C2    452 _P4_2	=	0x00c2
+                    00C3    453 G$P4_3$0$0 == 0x00c3
+                    00C3    454 _P4_3	=	0x00c3
+                    00C4    455 G$P4_4$0$0 == 0x00c4
+                    00C4    456 _P4_4	=	0x00c4
+                    00C5    457 G$P4_5$0$0 == 0x00c5
+                    00C5    458 _P4_5	=	0x00c5
+                    00C6    459 G$P4_6$0$0 == 0x00c6
+                    00C6    460 _P4_6	=	0x00c6
+                    00C7    461 G$P4_7$0$0 == 0x00c7
+                    00C7    462 _P4_7	=	0x00c7
+                    00E8    463 G$P5_0$0$0 == 0x00e8
+                    00E8    464 _P5_0	=	0x00e8
+                    00E9    465 G$P5_1$0$0 == 0x00e9
+                    00E9    466 _P5_1	=	0x00e9
+                    00EA    467 G$P5_2$0$0 == 0x00ea
+                    00EA    468 _P5_2	=	0x00ea
+                    00EB    469 G$P5_3$0$0 == 0x00eb
+                    00EB    470 _P5_3	=	0x00eb
+                    00EC    471 G$P5_4$0$0 == 0x00ec
+                    00EC    472 _P5_4	=	0x00ec
+                    00ED    473 G$P5_5$0$0 == 0x00ed
+                    00ED    474 _P5_5	=	0x00ed
+                    00EE    475 G$P5_6$0$0 == 0x00ee
+                    00EE    476 _P5_6	=	0x00ee
+                    00EF    477 G$P5_7$0$0 == 0x00ef
+                    00EF    478 _P5_7	=	0x00ef
+                    00F0    479 G$BREG_F0$0$0 == 0x00f0
+                    00F0    480 _BREG_F0	=	0x00f0
+                    00F1    481 G$BREG_F1$0$0 == 0x00f1
+                    00F1    482 _BREG_F1	=	0x00f1
+                    00F2    483 G$BREG_F2$0$0 == 0x00f2
+                    00F2    484 _BREG_F2	=	0x00f2
+                    00F3    485 G$BREG_F3$0$0 == 0x00f3
+                    00F3    486 _BREG_F3	=	0x00f3
+                    00F4    487 G$BREG_F4$0$0 == 0x00f4
+                    00F4    488 _BREG_F4	=	0x00f4
+                    00F5    489 G$BREG_F5$0$0 == 0x00f5
+                    00F5    490 _BREG_F5	=	0x00f5
+                    00F6    491 G$BREG_F6$0$0 == 0x00f6
+                    00F6    492 _BREG_F6	=	0x00f6
+                    00F7    493 G$BREG_F7$0$0 == 0x00f7
+                    00F7    494 _BREG_F7	=	0x00f7
+                    00A8    495 G$EX0$0$0 == 0x00a8
+                    00A8    496 _EX0	=	0x00a8
+                    00A9    497 G$ET0$0$0 == 0x00a9
+                    00A9    498 _ET0	=	0x00a9
+                    00AA    499 G$EX1$0$0 == 0x00aa
+                    00AA    500 _EX1	=	0x00aa
+                    00AB    501 G$ET1$0$0 == 0x00ab
+                    00AB    502 _ET1	=	0x00ab
+                    00AC    503 G$ES$0$0 == 0x00ac
+                    00AC    504 _ES	=	0x00ac
+                    00AF    505 G$EA$0$0 == 0x00af
+                    00AF    506 _EA	=	0x00af
+                    00B8    507 G$PX0$0$0 == 0x00b8
+                    00B8    508 _PX0	=	0x00b8
+                    00B9    509 G$PT0$0$0 == 0x00b9
+                    00B9    510 _PT0	=	0x00b9
+                    00BA    511 G$PX1$0$0 == 0x00ba
+                    00BA    512 _PX1	=	0x00ba
+                    00BB    513 G$PT1$0$0 == 0x00bb
+                    00BB    514 _PT1	=	0x00bb
+                    00BC    515 G$PS$0$0 == 0x00bc
+                    00BC    516 _PS	=	0x00bc
+                    0080    517 G$P0_0$0$0 == 0x0080
+                    0080    518 _P0_0	=	0x0080
+                    0081    519 G$P0_1$0$0 == 0x0081
+                    0081    520 _P0_1	=	0x0081
+                    0082    521 G$P0_2$0$0 == 0x0082
+                    0082    522 _P0_2	=	0x0082
+                    0083    523 G$P0_3$0$0 == 0x0083
+                    0083    524 _P0_3	=	0x0083
+                    0084    525 G$P0_4$0$0 == 0x0084
+                    0084    526 _P0_4	=	0x0084
+                    0085    527 G$P0_5$0$0 == 0x0085
+                    0085    528 _P0_5	=	0x0085
+                    0086    529 G$P0_6$0$0 == 0x0086
+                    0086    530 _P0_6	=	0x0086
+                    0087    531 G$P0_7$0$0 == 0x0087
+                    0087    532 _P0_7	=	0x0087
+                    0090    533 G$P1_0$0$0 == 0x0090
+                    0090    534 _P1_0	=	0x0090
+                    0091    535 G$P1_1$0$0 == 0x0091
+                    0091    536 _P1_1	=	0x0091
+                    0092    537 G$P1_2$0$0 == 0x0092
+                    0092    538 _P1_2	=	0x0092
+                    0093    539 G$P1_3$0$0 == 0x0093
+                    0093    540 _P1_3	=	0x0093
+                    0094    541 G$P1_4$0$0 == 0x0094
+                    0094    542 _P1_4	=	0x0094
+                    0095    543 G$P1_5$0$0 == 0x0095
+                    0095    544 _P1_5	=	0x0095
+                    0096    545 G$P1_6$0$0 == 0x0096
+                    0096    546 _P1_6	=	0x0096
+                    0097    547 G$P1_7$0$0 == 0x0097
+                    0097    548 _P1_7	=	0x0097
+                    00A0    549 G$P2_0$0$0 == 0x00a0
+                    00A0    550 _P2_0	=	0x00a0
+                    00A1    551 G$P2_1$0$0 == 0x00a1
+                    00A1    552 _P2_1	=	0x00a1
+                    00A2    553 G$P2_2$0$0 == 0x00a2
+                    00A2    554 _P2_2	=	0x00a2
+                    00A3    555 G$P2_3$0$0 == 0x00a3
+                    00A3    556 _P2_3	=	0x00a3
+                    00A4    557 G$P2_4$0$0 == 0x00a4
+                    00A4    558 _P2_4	=	0x00a4
+                    00A5    559 G$P2_5$0$0 == 0x00a5
+                    00A5    560 _P2_5	=	0x00a5
+                    00A6    561 G$P2_6$0$0 == 0x00a6
+                    00A6    562 _P2_6	=	0x00a6
+                    00A7    563 G$P2_7$0$0 == 0x00a7
+                    00A7    564 _P2_7	=	0x00a7
+                    00B0    565 G$P3_0$0$0 == 0x00b0
+                    00B0    566 _P3_0	=	0x00b0
+                    00B1    567 G$P3_1$0$0 == 0x00b1
+                    00B1    568 _P3_1	=	0x00b1
+                    00B2    569 G$P3_2$0$0 == 0x00b2
+                    00B2    570 _P3_2	=	0x00b2
+                    00B3    571 G$P3_3$0$0 == 0x00b3
+                    00B3    572 _P3_3	=	0x00b3
+                    00B4    573 G$P3_4$0$0 == 0x00b4
+                    00B4    574 _P3_4	=	0x00b4
+                    00B5    575 G$P3_5$0$0 == 0x00b5
+                    00B5    576 _P3_5	=	0x00b5
+                    00B6    577 G$P3_6$0$0 == 0x00b6
+                    00B6    578 _P3_6	=	0x00b6
+                    00B7    579 G$P3_7$0$0 == 0x00b7
+                    00B7    580 _P3_7	=	0x00b7
+                    00B0    581 G$RXD$0$0 == 0x00b0
+                    00B0    582 _RXD	=	0x00b0
+                    00B0    583 G$RXD0$0$0 == 0x00b0
+                    00B0    584 _RXD0	=	0x00b0
+                    00B1    585 G$TXD$0$0 == 0x00b1
+                    00B1    586 _TXD	=	0x00b1
+                    00B1    587 G$TXD0$0$0 == 0x00b1
+                    00B1    588 _TXD0	=	0x00b1
+                    00B2    589 G$INT0$0$0 == 0x00b2
+                    00B2    590 _INT0	=	0x00b2
+                    00B3    591 G$INT1$0$0 == 0x00b3
+                    00B3    592 _INT1	=	0x00b3
+                    00B4    593 G$T0$0$0 == 0x00b4
+                    00B4    594 _T0	=	0x00b4
+                    00B5    595 G$T1$0$0 == 0x00b5
+                    00B5    596 _T1	=	0x00b5
+                    00B6    597 G$WR$0$0 == 0x00b6
+                    00B6    598 _WR	=	0x00b6
+                    00B7    599 G$RD$0$0 == 0x00b7
+                    00B7    600 _RD	=	0x00b7
+                    00D0    601 G$P$0$0 == 0x00d0
+                    00D0    602 _P	=	0x00d0
+                    00D1    603 G$F1$0$0 == 0x00d1
+                    00D1    604 _F1	=	0x00d1
+                    00D2    605 G$OV$0$0 == 0x00d2
+                    00D2    606 _OV	=	0x00d2
+                    00D3    607 G$RS0$0$0 == 0x00d3
+                    00D3    608 _RS0	=	0x00d3
+                    00D4    609 G$RS1$0$0 == 0x00d4
+                    00D4    610 _RS1	=	0x00d4
+                    00D5    611 G$F0$0$0 == 0x00d5
+                    00D5    612 _F0	=	0x00d5
+                    00D6    613 G$AC$0$0 == 0x00d6
+                    00D6    614 _AC	=	0x00d6
+                    00D7    615 G$CY$0$0 == 0x00d7
+                    00D7    616 _CY	=	0x00d7
+                    0098    617 G$RI$0$0 == 0x0098
+                    0098    618 _RI	=	0x0098
+                    0099    619 G$TI$0$0 == 0x0099
+                    0099    620 _TI	=	0x0099
+                    009A    621 G$RB8$0$0 == 0x009a
+                    009A    622 _RB8	=	0x009a
+                    009B    623 G$TB8$0$0 == 0x009b
+                    009B    624 _TB8	=	0x009b
+                    009C    625 G$REN$0$0 == 0x009c
+                    009C    626 _REN	=	0x009c
+                    009D    627 G$SM2$0$0 == 0x009d
+                    009D    628 _SM2	=	0x009d
+                    009E    629 G$SM1$0$0 == 0x009e
+                    009E    630 _SM1	=	0x009e
+                    009F    631 G$SM0$0$0 == 0x009f
+                    009F    632 _SM0	=	0x009f
+                    0088    633 G$IT0$0$0 == 0x0088
+                    0088    634 _IT0	=	0x0088
+                    0089    635 G$IE0$0$0 == 0x0089
+                    0089    636 _IE0	=	0x0089
+                    008A    637 G$IT1$0$0 == 0x008a
+                    008A    638 _IT1	=	0x008a
+                    008B    639 G$IE1$0$0 == 0x008b
+                    008B    640 _IE1	=	0x008b
+                    008C    641 G$TR0$0$0 == 0x008c
+                    008C    642 _TR0	=	0x008c
+                    008D    643 G$TF0$0$0 == 0x008d
+                    008D    644 _TF0	=	0x008d
+                    008E    645 G$TR1$0$0 == 0x008e
+                    008E    646 _TR1	=	0x008e
+                    008F    647 G$TF1$0$0 == 0x008f
+                    008F    648 _TF1	=	0x008f
+                            649 ;--------------------------------------------------------
+                            650 ; overlayable register banks
+                            651 ;--------------------------------------------------------
+                            652 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     653 	.ds 8
+                            654 ;--------------------------------------------------------
+                            655 ; internal ram data
+                            656 ;--------------------------------------------------------
+                            657 	.area DSEG    (DATA)
+                            658 ;--------------------------------------------------------
+                            659 ; overlayable items in internal ram 
+                            660 ;--------------------------------------------------------
+                            661 	.area OSEG    (OVR,DATA)
+                            662 ;--------------------------------------------------------
+                            663 ; Stack segment in internal ram 
+                            664 ;--------------------------------------------------------
+                            665 	.area	SSEG	(DATA)
+   0000                     666 __start__stack:
+   0000                     667 	.ds	1
+                            668 
+                            669 ;--------------------------------------------------------
+                            670 ; indirectly addressable internal ram data
+                            671 ;--------------------------------------------------------
+                            672 	.area ISEG    (DATA)
+                            673 ;--------------------------------------------------------
+                            674 ; bit data
+                            675 ;--------------------------------------------------------
+                            676 	.area BSEG    (BIT)
+                            677 ;--------------------------------------------------------
+                            678 ; paged external ram data
+                            679 ;--------------------------------------------------------
+                            680 	.area PSEG    (PAG,XDATA)
+                            681 ;--------------------------------------------------------
+                            682 ; external ram data
+                            683 ;--------------------------------------------------------
+                            684 	.area XSEG    (XDATA)
+                    0000    685 G$loop$0$0==.
+   0000                     686 _loop::
+   0000                     687 	.ds 1
+                    0001    688 G$wave$0$0==.
+   0001                     689 _wave::
+   0001                     690 	.ds 1
+                    0002    691 G$gain$0$0==.
+   0002                     692 _gain::
+   0002                     693 	.ds 1
+                    0003    694 G$mode$0$0==.
+   0003                     695 _mode::
+   0003                     696 	.ds 1
+                    0004    697 Lmain$Welcome_txt$1$1==.
+   0004                     698 _main_Welcome_txt_1_1:
+   0004                     699 	.ds 49
+                    0035    700 Lmain$Welcome_lcd_txt$1$1==.
+   0035                     701 _main_Welcome_lcd_txt_1_1:
+   0035                     702 	.ds 32
+                    0055    703 Lmain$Instructions_txt$1$1==.
+   0055                     704 _main_Instructions_txt_1_1:
+   0055                     705 	.ds 135
+                    00DC    706 Lmain$DAC_on_txt$1$1==.
+   00DC                     707 _main_DAC_on_txt_1_1:
+   00DC                     708 	.ds 6
+                    00E2    709 Lmain$DAC_off_txt$1$1==.
+   00E2                     710 _main_DAC_off_txt_1_1:
+   00E2                     711 	.ds 7
+                    00E9    712 Lmain$Enter_data_txt$1$1==.
+   00E9                     713 _main_Enter_data_txt_1_1:
+   00E9                     714 	.ds 14
+                    00F7    715 Lmain$DAC_a_txt$1$1==.
+   00F7                     716 _main_DAC_a_txt_1_1:
+   00F7                     717 	.ds 24
+                    010F    718 Lmain$DAC_b_txt$1$1==.
+   010F                     719 _main_DAC_b_txt_1_1:
+   010F                     720 	.ds 24
+                    0127    721 Lmain$DAC_gain_inc_txt$1$1==.
+   0127                     722 _main_DAC_gain_inc_txt_1_1:
+   0127                     723 	.ds 17
+                    0138    724 Lmain$DAC_gain_dec_txt$1$1==.
+   0138                     725 _main_DAC_gain_dec_txt_1_1:
+   0138                     726 	.ds 17
+                    0149    727 Lmain$DAC_mode_txt$1$1==.
+   0149                     728 _main_DAC_mode_txt_1_1:
+   0149                     729 	.ds 15
+                    0158    730 Lmain$DAC_next_wave_txt$1$1==.
+   0158                     731 _main_DAC_next_wave_txt_1_1:
+   0158                     732 	.ds 13
+                            733 ;--------------------------------------------------------
+                            734 ; external initialized ram data
+                            735 ;--------------------------------------------------------
+                            736 	.area XISEG   (XDATA)
+                            737 	.area HOME    (CODE)
+                            738 	.area GSINIT0 (CODE)
+                            739 	.area GSINIT1 (CODE)
+                            740 	.area GSINIT2 (CODE)
+                            741 	.area GSINIT3 (CODE)
+                            742 	.area GSINIT4 (CODE)
+                            743 	.area GSINIT5 (CODE)
+                            744 	.area GSINIT  (CODE)
+                            745 	.area GSFINAL (CODE)
+                            746 	.area CSEG    (CODE)
+                            747 ;--------------------------------------------------------
+                            748 ; interrupt vector 
+                            749 ;--------------------------------------------------------
+                            750 	.area HOME    (CODE)
+   0000                     751 __interrupt_vect:
+   0000 02s00r00            752 	ljmp	__sdcc_gsinit_startup
+   0003 32                  753 	reti
+   0004                     754 	.ds	7
+   000B 02s00r0C            755 	ljmp	_wave_interrupt_handler
+   000E                     756 	.ds	5
+   0013 32                  757 	reti
+   0014                     758 	.ds	7
+   001B 32                  759 	reti
+   001C                     760 	.ds	7
+   0023 02s00r00            761 	ljmp	_wake_up
+                            762 ;--------------------------------------------------------
+                            763 ; global & static initialisations
+                            764 ;--------------------------------------------------------
+                            765 	.area HOME    (CODE)
+                            766 	.area GSINIT  (CODE)
+                            767 	.area GSFINAL (CODE)
+                            768 	.area GSINIT  (CODE)
+                            769 	.globl __sdcc_gsinit_startup
+                            770 	.globl __sdcc_program_startup
+                            771 	.globl __start__stack
+                            772 	.globl __mcs51_genXINIT
+                            773 	.globl __mcs51_genXRAMCLEAR
+                            774 	.globl __mcs51_genRAMCLEAR
+                            775 	.area GSFINAL (CODE)
+   0000 02s00r00            776 	ljmp	__sdcc_program_startup
+                            777 ;--------------------------------------------------------
+                            778 ; Home
+                            779 ;--------------------------------------------------------
+                            780 	.area HOME    (CODE)
+                            781 	.area CSEG    (CODE)
+   0000                     782 __sdcc_program_startup:
+   0000 12s00r61            783 	lcall	_main
+                            784 ;	return from main will lock up
+   0003 80 FE               785 	sjmp .
+                            786 ;--------------------------------------------------------
+                            787 ; code
+                            788 ;--------------------------------------------------------
+                            789 	.area CSEG    (CODE)
+                            790 ;------------------------------------------------------------
+                            791 ;Allocation info for local variables in function '_sdcc_external_startup'
+                            792 ;------------------------------------------------------------
+                            793 ;------------------------------------------------------------
+                    0005    794 	G$_sdcc_external_startup$0$0 ==.
+                    0005    795 	C$main.c$16$0$0 ==.
+                            796 ;	main.c:16: _sdcc_external_startup()
+                            797 ;	-----------------------------------------
+                            798 ;	 function _sdcc_external_startup
+                            799 ;	-----------------------------------------
+   0005                     800 __sdcc_external_startup:
+                    0002    801 	ar2 = 0x02
+                    0003    802 	ar3 = 0x03
+                    0004    803 	ar4 = 0x04
+                    0005    804 	ar5 = 0x05
+                    0006    805 	ar6 = 0x06
+                    0007    806 	ar7 = 0x07
+                    0000    807 	ar0 = 0x00
+                    0001    808 	ar1 = 0x01
+                    0005    809 	C$main.c$18$1$1 ==.
+                            810 ;	main.c:18: AUXR |= 0x0C;
+                            811 ;	genOr
+   0005 43 8E 0C            812 	orl	_AUXR,#0x0C
+                    0008    813 	C$main.c$19$1$1 ==.
+                            814 ;	main.c:19: return 0;
+                            815 ;	genRet
+                            816 ;	Peephole 182.b	used 16 bit load of dptr
+   0008 90 00 00            817 	mov	dptr,#0x0000
+                            818 ;	Peephole 300	removed redundant label 00101$
+                    000B    819 	C$main.c$20$1$1 ==.
+                    000B    820 	XG$_sdcc_external_startup$0$0 ==.
+   000B 22                  821 	ret
+                            822 ;------------------------------------------------------------
+                            823 ;Allocation info for local variables in function 'wave_interrupt_handler'
+                            824 ;------------------------------------------------------------
+                            825 ;------------------------------------------------------------
+                    000C    826 	G$wave_interrupt_handler$0$0 ==.
+                    000C    827 	C$main.c$27$1$1 ==.
+                            828 ;	main.c:27: void wave_interrupt_handler(void) interrupt 1
+                            829 ;	-----------------------------------------
+                            830 ;	 function wave_interrupt_handler
+                            831 ;	-----------------------------------------
+   000C                     832 _wave_interrupt_handler:
+   000C C0 E0               833 	push	acc
+   000E C0 F0               834 	push	b
+   0010 C0 82               835 	push	dpl
+   0012 C0 83               836 	push	dph
+   0014 C0 02               837 	push	(0+2)
+   0016 C0 03               838 	push	(0+3)
+   0018 C0 04               839 	push	(0+4)
+   001A C0 05               840 	push	(0+5)
+   001C C0 06               841 	push	(0+6)
+   001E C0 07               842 	push	(0+7)
+   0020 C0 00               843 	push	(0+0)
+   0022 C0 01               844 	push	(0+1)
+   0024 C0 D0               845 	push	psw
+   0026 75 D0 00            846 	mov	psw,#0x00
+                    0029    847 	C$main.c$29$1$1 ==.
+                            848 ;	main.c:29: TF0 = 0;
+                            849 ;	genAssign
+   0029 C2 8D               850 	clr	_TF0
+                    002B    851 	C$main.c$30$1$1 ==.
+                            852 ;	main.c:30: TL0 = 0x00;
+                            853 ;	genAssign
+   002B 75 8A 00            854 	mov	_TL0,#0x00
+                    002E    855 	C$main.c$31$1$1 ==.
+                            856 ;	main.c:31: TH0 = 0xFC;
+                            857 ;	genAssign
+   002E 75 8C FC            858 	mov	_TH0,#0xFC
+                    0031    859 	C$main.c$32$1$1 ==.
+                            860 ;	main.c:32: dac_update_output();
+                            861 ;	genCall
+   0031 12s00r00            862 	lcall	_dac_update_output
+                            863 ;	Peephole 300	removed redundant label 00101$
+   0034 D0 D0               864 	pop	psw
+   0036 D0 01               865 	pop	(0+1)
+   0038 D0 00               866 	pop	(0+0)
+   003A D0 07               867 	pop	(0+7)
+   003C D0 06               868 	pop	(0+6)
+   003E D0 05               869 	pop	(0+5)
+   0040 D0 04               870 	pop	(0+4)
+   0042 D0 03               871 	pop	(0+3)
+   0044 D0 02               872 	pop	(0+2)
+   0046 D0 83               873 	pop	dph
+   0048 D0 82               874 	pop	dpl
+   004A D0 F0               875 	pop	b
+   004C D0 E0               876 	pop	acc
+                    004E    877 	C$main.c$33$1$1 ==.
+                    004E    878 	XG$wave_interrupt_handler$0$0 ==.
+   004E 32                  879 	reti
+                            880 ;------------------------------------------------------------
+                            881 ;Allocation info for local variables in function 'waves_init'
+                            882 ;------------------------------------------------------------
+                            883 ;------------------------------------------------------------
+                    004F    884 	G$waves_init$0$0 ==.
+                    004F    885 	C$main.c$39$1$1 ==.
+                            886 ;	main.c:39: void waves_init(void)
+                            887 ;	-----------------------------------------
+                            888 ;	 function waves_init
+                            889 ;	-----------------------------------------
+   004F                     890 _waves_init:
+                    004F    891 	C$main.c$41$1$1 ==.
+                            892 ;	main.c:41: IEN0 |= 0x82;
+                            893 ;	genOr
+   004F 43 A8 82            894 	orl	_IEN0,#0x82
+                    0052    895 	C$main.c$42$1$1 ==.
+                            896 ;	main.c:42: TMOD |= 0x01;
+                            897 ;	genOr
+   0052 43 89 01            898 	orl	_TMOD,#0x01
+                    0055    899 	C$main.c$43$1$1 ==.
+                            900 ;	main.c:43: TMOD &= 0xF1;
+                            901 ;	genAnd
+   0055 53 89 F1            902 	anl	_TMOD,#0xF1
+                    0058    903 	C$main.c$44$1$1 ==.
+                            904 ;	main.c:44: TL0 = 0x00;
+                            905 ;	genAssign
+   0058 75 8A 00            906 	mov	_TL0,#0x00
+                    005B    907 	C$main.c$45$1$1 ==.
+                            908 ;	main.c:45: TH0 = 0xFC;
+                            909 ;	genAssign
+   005B 75 8C FC            910 	mov	_TH0,#0xFC
+                    005E    911 	C$main.c$46$1$1 ==.
+                            912 ;	main.c:46: TR0 = 1;
+                            913 ;	genAssign
+   005E D2 8C               914 	setb	_TR0
+                    0060    915 	C$main.c$47$1$1 ==.
+                            916 ;	main.c:47: return;
+                            917 ;	genRet
+                            918 ;	Peephole 300	removed redundant label 00101$
+                    0060    919 	C$main.c$48$1$1 ==.
+                    0060    920 	XG$waves_init$0$0 ==.
+   0060 22                  921 	ret
+                            922 ;------------------------------------------------------------
+                            923 ;Allocation info for local variables in function 'main'
+                            924 ;------------------------------------------------------------
+                            925 ;key_pressed               Allocated with name '_main_key_pressed_1_1'
+                            926 ;data_byte                 Allocated with name '_main_data_byte_1_1'
+                            927 ;address                   Allocated with name '_main_address_1_1'
+                            928 ;Welcome_txt               Allocated with name '_main_Welcome_txt_1_1'
+                            929 ;Welcome_lcd_txt           Allocated with name '_main_Welcome_lcd_txt_1_1'
+                            930 ;Instructions_txt          Allocated with name '_main_Instructions_txt_1_1'
+                            931 ;DAC_on_txt                Allocated with name '_main_DAC_on_txt_1_1'
+                            932 ;DAC_off_txt               Allocated with name '_main_DAC_off_txt_1_1'
+                            933 ;Enter_data_txt            Allocated with name '_main_Enter_data_txt_1_1'
+                            934 ;DAC_a_txt                 Allocated with name '_main_DAC_a_txt_1_1'
+                            935 ;DAC_b_txt                 Allocated with name '_main_DAC_b_txt_1_1'
+                            936 ;DAC_gain_inc_txt          Allocated with name '_main_DAC_gain_inc_txt_1_1'
+                            937 ;DAC_gain_dec_txt          Allocated with name '_main_DAC_gain_dec_txt_1_1'
+                            938 ;DAC_mode_txt              Allocated with name '_main_DAC_mode_txt_1_1'
+                            939 ;DAC_next_wave_txt         Allocated with name '_main_DAC_next_wave_txt_1_1'
+                            940 ;------------------------------------------------------------
+                    0061    941 	G$main$0$0 ==.
+                    0061    942 	C$main.c$57$1$1 ==.
+                            943 ;	main.c:57: void main(void)
+                            944 ;	-----------------------------------------
+                            945 ;	 function main
+                            946 ;	-----------------------------------------
+   0061                     947 _main:
+                    0061    948 	C$main.c$63$1$1 ==.
+                            949 ;	main.c:63: __xdata uint8_t Welcome_txt[] = "\n\rMonish Nene ESD Spring 2018 Lab 4 Supplemental";
+                            950 ;	genPointerSet
+                            951 ;     genFarPointerSet
+   0061 90s00r04            952 	mov	dptr,#_main_Welcome_txt_1_1
+   0064 74 0A               953 	mov	a,#0x0A
+   0066 F0                  954 	movx	@dptr,a
+                            955 ;	genPointerSet
+                            956 ;     genFarPointerSet
+   0067 90s00r05            957 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0001)
+   006A 74 0D               958 	mov	a,#0x0D
+   006C F0                  959 	movx	@dptr,a
+                            960 ;	genPointerSet
+                            961 ;     genFarPointerSet
+   006D 90s00r06            962 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0002)
+   0070 74 4D               963 	mov	a,#0x4D
+   0072 F0                  964 	movx	@dptr,a
+                            965 ;	genPointerSet
+                            966 ;     genFarPointerSet
+   0073 90s00r07            967 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0003)
+   0076 74 6F               968 	mov	a,#0x6F
+   0078 F0                  969 	movx	@dptr,a
+                            970 ;	genPointerSet
+                            971 ;     genFarPointerSet
+   0079 90s00r08            972 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0004)
+   007C 74 6E               973 	mov	a,#0x6E
+   007E F0                  974 	movx	@dptr,a
+                            975 ;	genPointerSet
+                            976 ;     genFarPointerSet
+   007F 90s00r09            977 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0005)
+   0082 74 69               978 	mov	a,#0x69
+   0084 F0                  979 	movx	@dptr,a
+                            980 ;	genPointerSet
+                            981 ;     genFarPointerSet
+   0085 90s00r0A            982 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0006)
+   0088 74 73               983 	mov	a,#0x73
+   008A F0                  984 	movx	@dptr,a
+                            985 ;	genPointerSet
+                            986 ;     genFarPointerSet
+   008B 90s00r0B            987 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0007)
+   008E 74 68               988 	mov	a,#0x68
+   0090 F0                  989 	movx	@dptr,a
+                            990 ;	genPointerSet
+                            991 ;     genFarPointerSet
+   0091 90s00r0C            992 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0008)
+   0094 74 20               993 	mov	a,#0x20
+   0096 F0                  994 	movx	@dptr,a
+                            995 ;	genPointerSet
+                            996 ;     genFarPointerSet
+   0097 90s00r0D            997 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0009)
+   009A 74 4E               998 	mov	a,#0x4E
+   009C F0                  999 	movx	@dptr,a
+                           1000 ;	genPointerSet
+                           1001 ;     genFarPointerSet
+   009D 90s00r0E           1002 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x000a)
+   00A0 74 65              1003 	mov	a,#0x65
+   00A2 F0                 1004 	movx	@dptr,a
+                           1005 ;	genPointerSet
+                           1006 ;     genFarPointerSet
+   00A3 90s00r0F           1007 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x000b)
+   00A6 74 6E              1008 	mov	a,#0x6E
+   00A8 F0                 1009 	movx	@dptr,a
+                           1010 ;	genPointerSet
+                           1011 ;     genFarPointerSet
+   00A9 90s00r10           1012 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x000c)
+   00AC 74 65              1013 	mov	a,#0x65
+   00AE F0                 1014 	movx	@dptr,a
+                           1015 ;	genPointerSet
+                           1016 ;     genFarPointerSet
+   00AF 90s00r11           1017 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x000d)
+   00B2 74 20              1018 	mov	a,#0x20
+   00B4 F0                 1019 	movx	@dptr,a
+                           1020 ;	genPointerSet
+                           1021 ;     genFarPointerSet
+   00B5 90s00r12           1022 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x000e)
+   00B8 74 45              1023 	mov	a,#0x45
+   00BA F0                 1024 	movx	@dptr,a
+                           1025 ;	genPointerSet
+                           1026 ;     genFarPointerSet
+   00BB 90s00r13           1027 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x000f)
+   00BE 74 53              1028 	mov	a,#0x53
+   00C0 F0                 1029 	movx	@dptr,a
+                           1030 ;	genPointerSet
+                           1031 ;     genFarPointerSet
+   00C1 90s00r14           1032 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0010)
+   00C4 74 44              1033 	mov	a,#0x44
+   00C6 F0                 1034 	movx	@dptr,a
+                           1035 ;	genPointerSet
+                           1036 ;     genFarPointerSet
+   00C7 90s00r15           1037 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0011)
+   00CA 74 20              1038 	mov	a,#0x20
+   00CC F0                 1039 	movx	@dptr,a
+                           1040 ;	genPointerSet
+                           1041 ;     genFarPointerSet
+   00CD 90s00r16           1042 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0012)
+   00D0 74 53              1043 	mov	a,#0x53
+   00D2 F0                 1044 	movx	@dptr,a
+                           1045 ;	genPointerSet
+                           1046 ;     genFarPointerSet
+   00D3 90s00r17           1047 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0013)
+   00D6 74 70              1048 	mov	a,#0x70
+   00D8 F0                 1049 	movx	@dptr,a
+                           1050 ;	genPointerSet
+                           1051 ;     genFarPointerSet
+   00D9 90s00r18           1052 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0014)
+   00DC 74 72              1053 	mov	a,#0x72
+   00DE F0                 1054 	movx	@dptr,a
+                           1055 ;	genPointerSet
+                           1056 ;     genFarPointerSet
+   00DF 90s00r19           1057 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0015)
+   00E2 74 69              1058 	mov	a,#0x69
+   00E4 F0                 1059 	movx	@dptr,a
+                           1060 ;	genPointerSet
+                           1061 ;     genFarPointerSet
+   00E5 90s00r1A           1062 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0016)
+   00E8 74 6E              1063 	mov	a,#0x6E
+   00EA F0                 1064 	movx	@dptr,a
+                           1065 ;	genPointerSet
+                           1066 ;     genFarPointerSet
+   00EB 90s00r1B           1067 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0017)
+   00EE 74 67              1068 	mov	a,#0x67
+   00F0 F0                 1069 	movx	@dptr,a
+                           1070 ;	genPointerSet
+                           1071 ;     genFarPointerSet
+   00F1 90s00r1C           1072 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0018)
+   00F4 74 20              1073 	mov	a,#0x20
+   00F6 F0                 1074 	movx	@dptr,a
+                           1075 ;	genPointerSet
+                           1076 ;     genFarPointerSet
+   00F7 90s00r1D           1077 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0019)
+   00FA 74 32              1078 	mov	a,#0x32
+   00FC F0                 1079 	movx	@dptr,a
+                           1080 ;	genPointerSet
+                           1081 ;     genFarPointerSet
+   00FD 90s00r1E           1082 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x001a)
+   0100 74 30              1083 	mov	a,#0x30
+   0102 F0                 1084 	movx	@dptr,a
+                           1085 ;	genPointerSet
+                           1086 ;     genFarPointerSet
+   0103 90s00r1F           1087 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x001b)
+   0106 74 31              1088 	mov	a,#0x31
+   0108 F0                 1089 	movx	@dptr,a
+                           1090 ;	genPointerSet
+                           1091 ;     genFarPointerSet
+   0109 90s00r20           1092 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x001c)
+   010C 74 38              1093 	mov	a,#0x38
+   010E F0                 1094 	movx	@dptr,a
+                           1095 ;	genPointerSet
+                           1096 ;     genFarPointerSet
+   010F 90s00r21           1097 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x001d)
+   0112 74 20              1098 	mov	a,#0x20
+   0114 F0                 1099 	movx	@dptr,a
+                           1100 ;	genPointerSet
+                           1101 ;     genFarPointerSet
+   0115 90s00r22           1102 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x001e)
+   0118 74 4C              1103 	mov	a,#0x4C
+   011A F0                 1104 	movx	@dptr,a
+                           1105 ;	genPointerSet
+                           1106 ;     genFarPointerSet
+   011B 90s00r23           1107 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x001f)
+   011E 74 61              1108 	mov	a,#0x61
+   0120 F0                 1109 	movx	@dptr,a
+                           1110 ;	genPointerSet
+                           1111 ;     genFarPointerSet
+   0121 90s00r24           1112 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0020)
+   0124 74 62              1113 	mov	a,#0x62
+   0126 F0                 1114 	movx	@dptr,a
+                           1115 ;	genPointerSet
+                           1116 ;     genFarPointerSet
+   0127 90s00r25           1117 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0021)
+   012A 74 20              1118 	mov	a,#0x20
+   012C F0                 1119 	movx	@dptr,a
+                           1120 ;	genPointerSet
+                           1121 ;     genFarPointerSet
+   012D 90s00r26           1122 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0022)
+   0130 74 34              1123 	mov	a,#0x34
+   0132 F0                 1124 	movx	@dptr,a
+                           1125 ;	genPointerSet
+                           1126 ;     genFarPointerSet
+   0133 90s00r27           1127 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0023)
+   0136 74 20              1128 	mov	a,#0x20
+   0138 F0                 1129 	movx	@dptr,a
+                           1130 ;	genPointerSet
+                           1131 ;     genFarPointerSet
+   0139 90s00r28           1132 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0024)
+   013C 74 53              1133 	mov	a,#0x53
+   013E F0                 1134 	movx	@dptr,a
+                           1135 ;	genPointerSet
+                           1136 ;     genFarPointerSet
+   013F 90s00r29           1137 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0025)
+   0142 74 75              1138 	mov	a,#0x75
+   0144 F0                 1139 	movx	@dptr,a
+                           1140 ;	genPointerSet
+                           1141 ;     genFarPointerSet
+   0145 90s00r2A           1142 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0026)
+   0148 74 70              1143 	mov	a,#0x70
+   014A F0                 1144 	movx	@dptr,a
+                           1145 ;	genPointerSet
+                           1146 ;     genFarPointerSet
+   014B 90s00r2B           1147 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0027)
+   014E 74 70              1148 	mov	a,#0x70
+   0150 F0                 1149 	movx	@dptr,a
+                           1150 ;	genPointerSet
+                           1151 ;     genFarPointerSet
+   0151 90s00r2C           1152 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0028)
+   0154 74 6C              1153 	mov	a,#0x6C
+   0156 F0                 1154 	movx	@dptr,a
+                           1155 ;	genPointerSet
+                           1156 ;     genFarPointerSet
+   0157 90s00r2D           1157 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0029)
+   015A 74 65              1158 	mov	a,#0x65
+   015C F0                 1159 	movx	@dptr,a
+                           1160 ;	genPointerSet
+                           1161 ;     genFarPointerSet
+   015D 90s00r2E           1162 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x002a)
+   0160 74 6D              1163 	mov	a,#0x6D
+   0162 F0                 1164 	movx	@dptr,a
+                           1165 ;	genPointerSet
+                           1166 ;     genFarPointerSet
+   0163 90s00r2F           1167 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x002b)
+   0166 74 65              1168 	mov	a,#0x65
+   0168 F0                 1169 	movx	@dptr,a
+                           1170 ;	genPointerSet
+                           1171 ;     genFarPointerSet
+   0169 90s00r30           1172 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x002c)
+   016C 74 6E              1173 	mov	a,#0x6E
+   016E F0                 1174 	movx	@dptr,a
+                           1175 ;	genPointerSet
+                           1176 ;     genFarPointerSet
+   016F 90s00r31           1177 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x002d)
+   0172 74 74              1178 	mov	a,#0x74
+   0174 F0                 1179 	movx	@dptr,a
+                           1180 ;	genPointerSet
+                           1181 ;     genFarPointerSet
+   0175 90s00r32           1182 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x002e)
+   0178 74 61              1183 	mov	a,#0x61
+   017A F0                 1184 	movx	@dptr,a
+                           1185 ;	genPointerSet
+                           1186 ;     genFarPointerSet
+   017B 90s00r33           1187 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x002f)
+   017E 74 6C              1188 	mov	a,#0x6C
+   0180 F0                 1189 	movx	@dptr,a
+                           1190 ;	genPointerSet
+                           1191 ;     genFarPointerSet
+   0181 90s00r34           1192 	mov	dptr,#(_main_Welcome_txt_1_1 + 0x0030)
+                           1193 ;	Peephole 181	changed mov to clr
+   0184 E4                 1194 	clr	a
+   0185 F0                 1195 	movx	@dptr,a
+                    0186   1196 	C$main.c$64$1$1 ==.
+                           1197 ;	main.c:64: __xdata uint8_t Welcome_lcd_txt[] = "Monish Nene ESD Spring'18 Lab 4";
+                           1198 ;	genPointerSet
+                           1199 ;     genFarPointerSet
+   0186 90s00r35           1200 	mov	dptr,#_main_Welcome_lcd_txt_1_1
+   0189 74 4D              1201 	mov	a,#0x4D
+   018B F0                 1202 	movx	@dptr,a
+                           1203 ;	genPointerSet
+                           1204 ;     genFarPointerSet
+   018C 90s00r36           1205 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0001)
+   018F 74 6F              1206 	mov	a,#0x6F
+   0191 F0                 1207 	movx	@dptr,a
+                           1208 ;	genPointerSet
+                           1209 ;     genFarPointerSet
+   0192 90s00r37           1210 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0002)
+   0195 74 6E              1211 	mov	a,#0x6E
+   0197 F0                 1212 	movx	@dptr,a
+                           1213 ;	genPointerSet
+                           1214 ;     genFarPointerSet
+   0198 90s00r38           1215 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0003)
+   019B 74 69              1216 	mov	a,#0x69
+   019D F0                 1217 	movx	@dptr,a
+                           1218 ;	genPointerSet
+                           1219 ;     genFarPointerSet
+   019E 90s00r39           1220 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0004)
+   01A1 74 73              1221 	mov	a,#0x73
+   01A3 F0                 1222 	movx	@dptr,a
+                           1223 ;	genPointerSet
+                           1224 ;     genFarPointerSet
+   01A4 90s00r3A           1225 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0005)
+   01A7 74 68              1226 	mov	a,#0x68
+   01A9 F0                 1227 	movx	@dptr,a
+                           1228 ;	genPointerSet
+                           1229 ;     genFarPointerSet
+   01AA 90s00r3B           1230 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0006)
+   01AD 74 20              1231 	mov	a,#0x20
+   01AF F0                 1232 	movx	@dptr,a
+                           1233 ;	genPointerSet
+                           1234 ;     genFarPointerSet
+   01B0 90s00r3C           1235 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0007)
+   01B3 74 4E              1236 	mov	a,#0x4E
+   01B5 F0                 1237 	movx	@dptr,a
+                           1238 ;	genPointerSet
+                           1239 ;     genFarPointerSet
+   01B6 90s00r3D           1240 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0008)
+   01B9 74 65              1241 	mov	a,#0x65
+   01BB F0                 1242 	movx	@dptr,a
+                           1243 ;	genPointerSet
+                           1244 ;     genFarPointerSet
+   01BC 90s00r3E           1245 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0009)
+   01BF 74 6E              1246 	mov	a,#0x6E
+   01C1 F0                 1247 	movx	@dptr,a
+                           1248 ;	genPointerSet
+                           1249 ;     genFarPointerSet
+   01C2 90s00r3F           1250 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x000a)
+   01C5 74 65              1251 	mov	a,#0x65
+   01C7 F0                 1252 	movx	@dptr,a
+                           1253 ;	genPointerSet
+                           1254 ;     genFarPointerSet
+   01C8 90s00r40           1255 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x000b)
+   01CB 74 20              1256 	mov	a,#0x20
+   01CD F0                 1257 	movx	@dptr,a
+                           1258 ;	genPointerSet
+                           1259 ;     genFarPointerSet
+   01CE 90s00r41           1260 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x000c)
+   01D1 74 45              1261 	mov	a,#0x45
+   01D3 F0                 1262 	movx	@dptr,a
+                           1263 ;	genPointerSet
+                           1264 ;     genFarPointerSet
+   01D4 90s00r42           1265 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x000d)
+   01D7 74 53              1266 	mov	a,#0x53
+   01D9 F0                 1267 	movx	@dptr,a
+                           1268 ;	genPointerSet
+                           1269 ;     genFarPointerSet
+   01DA 90s00r43           1270 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x000e)
+   01DD 74 44              1271 	mov	a,#0x44
+   01DF F0                 1272 	movx	@dptr,a
+                           1273 ;	genPointerSet
+                           1274 ;     genFarPointerSet
+   01E0 90s00r44           1275 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x000f)
+   01E3 74 20              1276 	mov	a,#0x20
+   01E5 F0                 1277 	movx	@dptr,a
+                           1278 ;	genPointerSet
+                           1279 ;     genFarPointerSet
+   01E6 90s00r45           1280 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0010)
+   01E9 74 53              1281 	mov	a,#0x53
+   01EB F0                 1282 	movx	@dptr,a
+                           1283 ;	genPointerSet
+                           1284 ;     genFarPointerSet
+   01EC 90s00r46           1285 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0011)
+   01EF 74 70              1286 	mov	a,#0x70
+   01F1 F0                 1287 	movx	@dptr,a
+                           1288 ;	genPointerSet
+                           1289 ;     genFarPointerSet
+   01F2 90s00r47           1290 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0012)
+   01F5 74 72              1291 	mov	a,#0x72
+   01F7 F0                 1292 	movx	@dptr,a
+                           1293 ;	genPointerSet
+                           1294 ;     genFarPointerSet
+   01F8 90s00r48           1295 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0013)
+   01FB 74 69              1296 	mov	a,#0x69
+   01FD F0                 1297 	movx	@dptr,a
+                           1298 ;	genPointerSet
+                           1299 ;     genFarPointerSet
+   01FE 90s00r49           1300 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0014)
+   0201 74 6E              1301 	mov	a,#0x6E
+   0203 F0                 1302 	movx	@dptr,a
+                           1303 ;	genPointerSet
+                           1304 ;     genFarPointerSet
+   0204 90s00r4A           1305 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0015)
+   0207 74 67              1306 	mov	a,#0x67
+   0209 F0                 1307 	movx	@dptr,a
+                           1308 ;	genPointerSet
+                           1309 ;     genFarPointerSet
+   020A 90s00r4B           1310 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0016)
+   020D 74 27              1311 	mov	a,#0x27
+   020F F0                 1312 	movx	@dptr,a
+                           1313 ;	genPointerSet
+                           1314 ;     genFarPointerSet
+   0210 90s00r4C           1315 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0017)
+   0213 74 31              1316 	mov	a,#0x31
+   0215 F0                 1317 	movx	@dptr,a
+                           1318 ;	genPointerSet
+                           1319 ;     genFarPointerSet
+   0216 90s00r4D           1320 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0018)
+   0219 74 38              1321 	mov	a,#0x38
+   021B F0                 1322 	movx	@dptr,a
+                           1323 ;	genPointerSet
+                           1324 ;     genFarPointerSet
+   021C 90s00r4E           1325 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x0019)
+   021F 74 20              1326 	mov	a,#0x20
+   0221 F0                 1327 	movx	@dptr,a
+                           1328 ;	genPointerSet
+                           1329 ;     genFarPointerSet
+   0222 90s00r4F           1330 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x001a)
+   0225 74 4C              1331 	mov	a,#0x4C
+   0227 F0                 1332 	movx	@dptr,a
+                           1333 ;	genPointerSet
+                           1334 ;     genFarPointerSet
+   0228 90s00r50           1335 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x001b)
+   022B 74 61              1336 	mov	a,#0x61
+   022D F0                 1337 	movx	@dptr,a
+                           1338 ;	genPointerSet
+                           1339 ;     genFarPointerSet
+   022E 90s00r51           1340 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x001c)
+   0231 74 62              1341 	mov	a,#0x62
+   0233 F0                 1342 	movx	@dptr,a
+                           1343 ;	genPointerSet
+                           1344 ;     genFarPointerSet
+   0234 90s00r52           1345 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x001d)
+   0237 74 20              1346 	mov	a,#0x20
+   0239 F0                 1347 	movx	@dptr,a
+                           1348 ;	genPointerSet
+                           1349 ;     genFarPointerSet
+   023A 90s00r53           1350 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x001e)
+   023D 74 34              1351 	mov	a,#0x34
+   023F F0                 1352 	movx	@dptr,a
+                           1353 ;	genPointerSet
+                           1354 ;     genFarPointerSet
+   0240 90s00r54           1355 	mov	dptr,#(_main_Welcome_lcd_txt_1_1 + 0x001f)
+                           1356 ;	Peephole 181	changed mov to clr
+   0243 E4                 1357 	clr	a
+   0244 F0                 1358 	movx	@dptr,a
+                    0245   1359 	C$main.c$65$1$1 ==.
+                           1360 ;	main.c:65: __xdata uint8_t Instructions_txt[] = "\n\r'D'->DAC Data Input, 'Z'-> mode change, 'N'-> Next wave, '+'-> Increase DAC voltage, '-'-> Decrease DAC voltage,\n\r'?'-> Display Menu";
+                           1361 ;	genPointerSet
+                           1362 ;     genFarPointerSet
+   0245 90s00r55           1363 	mov	dptr,#_main_Instructions_txt_1_1
+   0248 74 0A              1364 	mov	a,#0x0A
+   024A F0                 1365 	movx	@dptr,a
+                           1366 ;	genPointerSet
+                           1367 ;     genFarPointerSet
+   024B 90s00r56           1368 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0001)
+   024E 74 0D              1369 	mov	a,#0x0D
+   0250 F0                 1370 	movx	@dptr,a
+                           1371 ;	genPointerSet
+                           1372 ;     genFarPointerSet
+   0251 90s00r57           1373 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0002)
+   0254 74 27              1374 	mov	a,#0x27
+   0256 F0                 1375 	movx	@dptr,a
+                           1376 ;	genPointerSet
+                           1377 ;     genFarPointerSet
+   0257 90s00r58           1378 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0003)
+   025A 74 44              1379 	mov	a,#0x44
+   025C F0                 1380 	movx	@dptr,a
+                           1381 ;	genPointerSet
+                           1382 ;     genFarPointerSet
+   025D 90s00r59           1383 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0004)
+   0260 74 27              1384 	mov	a,#0x27
+   0262 F0                 1385 	movx	@dptr,a
+                           1386 ;	genPointerSet
+                           1387 ;     genFarPointerSet
+   0263 90s00r5A           1388 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0005)
+   0266 74 2D              1389 	mov	a,#0x2D
+   0268 F0                 1390 	movx	@dptr,a
+                           1391 ;	genPointerSet
+                           1392 ;     genFarPointerSet
+   0269 90s00r5B           1393 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0006)
+   026C 74 3E              1394 	mov	a,#0x3E
+   026E F0                 1395 	movx	@dptr,a
+                           1396 ;	genPointerSet
+                           1397 ;     genFarPointerSet
+   026F 90s00r5C           1398 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0007)
+   0272 74 44              1399 	mov	a,#0x44
+   0274 F0                 1400 	movx	@dptr,a
+                           1401 ;	genPointerSet
+                           1402 ;     genFarPointerSet
+   0275 90s00r5D           1403 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0008)
+   0278 74 41              1404 	mov	a,#0x41
+   027A F0                 1405 	movx	@dptr,a
+                           1406 ;	genPointerSet
+                           1407 ;     genFarPointerSet
+   027B 90s00r5E           1408 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0009)
+   027E 74 43              1409 	mov	a,#0x43
+   0280 F0                 1410 	movx	@dptr,a
+                           1411 ;	genPointerSet
+                           1412 ;     genFarPointerSet
+   0281 90s00r5F           1413 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x000a)
+   0284 74 20              1414 	mov	a,#0x20
+   0286 F0                 1415 	movx	@dptr,a
+                           1416 ;	genPointerSet
+                           1417 ;     genFarPointerSet
+   0287 90s00r60           1418 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x000b)
+   028A 74 44              1419 	mov	a,#0x44
+   028C F0                 1420 	movx	@dptr,a
+                           1421 ;	genPointerSet
+                           1422 ;     genFarPointerSet
+   028D 90s00r61           1423 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x000c)
+   0290 74 61              1424 	mov	a,#0x61
+   0292 F0                 1425 	movx	@dptr,a
+                           1426 ;	genPointerSet
+                           1427 ;     genFarPointerSet
+   0293 90s00r62           1428 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x000d)
+   0296 74 74              1429 	mov	a,#0x74
+   0298 F0                 1430 	movx	@dptr,a
+                           1431 ;	genPointerSet
+                           1432 ;     genFarPointerSet
+   0299 90s00r63           1433 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x000e)
+   029C 74 61              1434 	mov	a,#0x61
+   029E F0                 1435 	movx	@dptr,a
+                           1436 ;	genPointerSet
+                           1437 ;     genFarPointerSet
+   029F 90s00r64           1438 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x000f)
+   02A2 74 20              1439 	mov	a,#0x20
+   02A4 F0                 1440 	movx	@dptr,a
+                           1441 ;	genPointerSet
+                           1442 ;     genFarPointerSet
+   02A5 90s00r65           1443 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0010)
+   02A8 74 49              1444 	mov	a,#0x49
+   02AA F0                 1445 	movx	@dptr,a
+                           1446 ;	genPointerSet
+                           1447 ;     genFarPointerSet
+   02AB 90s00r66           1448 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0011)
+   02AE 74 6E              1449 	mov	a,#0x6E
+   02B0 F0                 1450 	movx	@dptr,a
+                           1451 ;	genPointerSet
+                           1452 ;     genFarPointerSet
+   02B1 90s00r67           1453 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0012)
+   02B4 74 70              1454 	mov	a,#0x70
+   02B6 F0                 1455 	movx	@dptr,a
+                           1456 ;	genPointerSet
+                           1457 ;     genFarPointerSet
+   02B7 90s00r68           1458 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0013)
+   02BA 74 75              1459 	mov	a,#0x75
+   02BC F0                 1460 	movx	@dptr,a
+                           1461 ;	genPointerSet
+                           1462 ;     genFarPointerSet
+   02BD 90s00r69           1463 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0014)
+   02C0 74 74              1464 	mov	a,#0x74
+   02C2 F0                 1465 	movx	@dptr,a
+                           1466 ;	genPointerSet
+                           1467 ;     genFarPointerSet
+   02C3 90s00r6A           1468 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0015)
+   02C6 74 2C              1469 	mov	a,#0x2C
+   02C8 F0                 1470 	movx	@dptr,a
+                           1471 ;	genPointerSet
+                           1472 ;     genFarPointerSet
+   02C9 90s00r6B           1473 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0016)
+   02CC 74 20              1474 	mov	a,#0x20
+   02CE F0                 1475 	movx	@dptr,a
+                           1476 ;	genPointerSet
+                           1477 ;     genFarPointerSet
+   02CF 90s00r6C           1478 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0017)
+   02D2 74 27              1479 	mov	a,#0x27
+   02D4 F0                 1480 	movx	@dptr,a
+                           1481 ;	genPointerSet
+                           1482 ;     genFarPointerSet
+   02D5 90s00r6D           1483 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0018)
+   02D8 74 5A              1484 	mov	a,#0x5A
+   02DA F0                 1485 	movx	@dptr,a
+                           1486 ;	genPointerSet
+                           1487 ;     genFarPointerSet
+   02DB 90s00r6E           1488 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0019)
+   02DE 74 27              1489 	mov	a,#0x27
+   02E0 F0                 1490 	movx	@dptr,a
+                           1491 ;	genPointerSet
+                           1492 ;     genFarPointerSet
+   02E1 90s00r6F           1493 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x001a)
+   02E4 74 2D              1494 	mov	a,#0x2D
+   02E6 F0                 1495 	movx	@dptr,a
+                           1496 ;	genPointerSet
+                           1497 ;     genFarPointerSet
+   02E7 90s00r70           1498 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x001b)
+   02EA 74 3E              1499 	mov	a,#0x3E
+   02EC F0                 1500 	movx	@dptr,a
+                           1501 ;	genPointerSet
+                           1502 ;     genFarPointerSet
+   02ED 90s00r71           1503 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x001c)
+   02F0 74 20              1504 	mov	a,#0x20
+   02F2 F0                 1505 	movx	@dptr,a
+                           1506 ;	genPointerSet
+                           1507 ;     genFarPointerSet
+   02F3 90s00r72           1508 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x001d)
+   02F6 74 6D              1509 	mov	a,#0x6D
+   02F8 F0                 1510 	movx	@dptr,a
+                           1511 ;	genPointerSet
+                           1512 ;     genFarPointerSet
+   02F9 90s00r73           1513 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x001e)
+   02FC 74 6F              1514 	mov	a,#0x6F
+   02FE F0                 1515 	movx	@dptr,a
+                           1516 ;	genPointerSet
+                           1517 ;     genFarPointerSet
+   02FF 90s00r74           1518 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x001f)
+   0302 74 64              1519 	mov	a,#0x64
+   0304 F0                 1520 	movx	@dptr,a
+                           1521 ;	genPointerSet
+                           1522 ;     genFarPointerSet
+   0305 90s00r75           1523 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0020)
+   0308 74 65              1524 	mov	a,#0x65
+   030A F0                 1525 	movx	@dptr,a
+                           1526 ;	genPointerSet
+                           1527 ;     genFarPointerSet
+   030B 90s00r76           1528 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0021)
+   030E 74 20              1529 	mov	a,#0x20
+   0310 F0                 1530 	movx	@dptr,a
+                           1531 ;	genPointerSet
+                           1532 ;     genFarPointerSet
+   0311 90s00r77           1533 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0022)
+   0314 74 63              1534 	mov	a,#0x63
+   0316 F0                 1535 	movx	@dptr,a
+                           1536 ;	genPointerSet
+                           1537 ;     genFarPointerSet
+   0317 90s00r78           1538 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0023)
+   031A 74 68              1539 	mov	a,#0x68
+   031C F0                 1540 	movx	@dptr,a
+                           1541 ;	genPointerSet
+                           1542 ;     genFarPointerSet
+   031D 90s00r79           1543 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0024)
+   0320 74 61              1544 	mov	a,#0x61
+   0322 F0                 1545 	movx	@dptr,a
+                           1546 ;	genPointerSet
+                           1547 ;     genFarPointerSet
+   0323 90s00r7A           1548 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0025)
+   0326 74 6E              1549 	mov	a,#0x6E
+   0328 F0                 1550 	movx	@dptr,a
+                           1551 ;	genPointerSet
+                           1552 ;     genFarPointerSet
+   0329 90s00r7B           1553 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0026)
+   032C 74 67              1554 	mov	a,#0x67
+   032E F0                 1555 	movx	@dptr,a
+                           1556 ;	genPointerSet
+                           1557 ;     genFarPointerSet
+   032F 90s00r7C           1558 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0027)
+   0332 74 65              1559 	mov	a,#0x65
+   0334 F0                 1560 	movx	@dptr,a
+                           1561 ;	genPointerSet
+                           1562 ;     genFarPointerSet
+   0335 90s00r7D           1563 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0028)
+   0338 74 2C              1564 	mov	a,#0x2C
+   033A F0                 1565 	movx	@dptr,a
+                           1566 ;	genPointerSet
+                           1567 ;     genFarPointerSet
+   033B 90s00r7E           1568 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0029)
+   033E 74 20              1569 	mov	a,#0x20
+   0340 F0                 1570 	movx	@dptr,a
+                           1571 ;	genPointerSet
+                           1572 ;     genFarPointerSet
+   0341 90s00r7F           1573 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x002a)
+   0344 74 27              1574 	mov	a,#0x27
+   0346 F0                 1575 	movx	@dptr,a
+                           1576 ;	genPointerSet
+                           1577 ;     genFarPointerSet
+   0347 90s00r80           1578 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x002b)
+   034A 74 4E              1579 	mov	a,#0x4E
+   034C F0                 1580 	movx	@dptr,a
+                           1581 ;	genPointerSet
+                           1582 ;     genFarPointerSet
+   034D 90s00r81           1583 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x002c)
+   0350 74 27              1584 	mov	a,#0x27
+   0352 F0                 1585 	movx	@dptr,a
+                           1586 ;	genPointerSet
+                           1587 ;     genFarPointerSet
+   0353 90s00r82           1588 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x002d)
+   0356 74 2D              1589 	mov	a,#0x2D
+   0358 F0                 1590 	movx	@dptr,a
+                           1591 ;	genPointerSet
+                           1592 ;     genFarPointerSet
+   0359 90s00r83           1593 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x002e)
+   035C 74 3E              1594 	mov	a,#0x3E
+   035E F0                 1595 	movx	@dptr,a
+                           1596 ;	genPointerSet
+                           1597 ;     genFarPointerSet
+   035F 90s00r84           1598 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x002f)
+   0362 74 20              1599 	mov	a,#0x20
+   0364 F0                 1600 	movx	@dptr,a
+                           1601 ;	genPointerSet
+                           1602 ;     genFarPointerSet
+   0365 90s00r85           1603 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0030)
+   0368 74 4E              1604 	mov	a,#0x4E
+   036A F0                 1605 	movx	@dptr,a
+                           1606 ;	genPointerSet
+                           1607 ;     genFarPointerSet
+   036B 90s00r86           1608 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0031)
+   036E 74 65              1609 	mov	a,#0x65
+   0370 F0                 1610 	movx	@dptr,a
+                           1611 ;	genPointerSet
+                           1612 ;     genFarPointerSet
+   0371 90s00r87           1613 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0032)
+   0374 74 78              1614 	mov	a,#0x78
+   0376 F0                 1615 	movx	@dptr,a
+                           1616 ;	genPointerSet
+                           1617 ;     genFarPointerSet
+   0377 90s00r88           1618 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0033)
+   037A 74 74              1619 	mov	a,#0x74
+   037C F0                 1620 	movx	@dptr,a
+                           1621 ;	genPointerSet
+                           1622 ;     genFarPointerSet
+   037D 90s00r89           1623 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0034)
+   0380 74 20              1624 	mov	a,#0x20
+   0382 F0                 1625 	movx	@dptr,a
+                           1626 ;	genPointerSet
+                           1627 ;     genFarPointerSet
+   0383 90s00r8A           1628 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0035)
+   0386 74 77              1629 	mov	a,#0x77
+   0388 F0                 1630 	movx	@dptr,a
+                           1631 ;	genPointerSet
+                           1632 ;     genFarPointerSet
+   0389 90s00r8B           1633 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0036)
+   038C 74 61              1634 	mov	a,#0x61
+   038E F0                 1635 	movx	@dptr,a
+                           1636 ;	genPointerSet
+                           1637 ;     genFarPointerSet
+   038F 90s00r8C           1638 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0037)
+   0392 74 76              1639 	mov	a,#0x76
+   0394 F0                 1640 	movx	@dptr,a
+                           1641 ;	genPointerSet
+                           1642 ;     genFarPointerSet
+   0395 90s00r8D           1643 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0038)
+   0398 74 65              1644 	mov	a,#0x65
+   039A F0                 1645 	movx	@dptr,a
+                           1646 ;	genPointerSet
+                           1647 ;     genFarPointerSet
+   039B 90s00r8E           1648 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0039)
+   039E 74 2C              1649 	mov	a,#0x2C
+   03A0 F0                 1650 	movx	@dptr,a
+                           1651 ;	genPointerSet
+                           1652 ;     genFarPointerSet
+   03A1 90s00r8F           1653 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x003a)
+   03A4 74 20              1654 	mov	a,#0x20
+   03A6 F0                 1655 	movx	@dptr,a
+                           1656 ;	genPointerSet
+                           1657 ;     genFarPointerSet
+   03A7 90s00r90           1658 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x003b)
+   03AA 74 27              1659 	mov	a,#0x27
+   03AC F0                 1660 	movx	@dptr,a
+                           1661 ;	genPointerSet
+                           1662 ;     genFarPointerSet
+   03AD 90s00r91           1663 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x003c)
+   03B0 74 2B              1664 	mov	a,#0x2B
+   03B2 F0                 1665 	movx	@dptr,a
+                           1666 ;	genPointerSet
+                           1667 ;     genFarPointerSet
+   03B3 90s00r92           1668 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x003d)
+   03B6 74 27              1669 	mov	a,#0x27
+   03B8 F0                 1670 	movx	@dptr,a
+                           1671 ;	genPointerSet
+                           1672 ;     genFarPointerSet
+   03B9 90s00r93           1673 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x003e)
+   03BC 74 2D              1674 	mov	a,#0x2D
+   03BE F0                 1675 	movx	@dptr,a
+                           1676 ;	genPointerSet
+                           1677 ;     genFarPointerSet
+   03BF 90s00r94           1678 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x003f)
+   03C2 74 3E              1679 	mov	a,#0x3E
+   03C4 F0                 1680 	movx	@dptr,a
+                           1681 ;	genPointerSet
+                           1682 ;     genFarPointerSet
+   03C5 90s00r95           1683 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0040)
+   03C8 74 20              1684 	mov	a,#0x20
+   03CA F0                 1685 	movx	@dptr,a
+                           1686 ;	genPointerSet
+                           1687 ;     genFarPointerSet
+   03CB 90s00r96           1688 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0041)
+   03CE 74 49              1689 	mov	a,#0x49
+   03D0 F0                 1690 	movx	@dptr,a
+                           1691 ;	genPointerSet
+                           1692 ;     genFarPointerSet
+   03D1 90s00r97           1693 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0042)
+   03D4 74 6E              1694 	mov	a,#0x6E
+   03D6 F0                 1695 	movx	@dptr,a
+                           1696 ;	genPointerSet
+                           1697 ;     genFarPointerSet
+   03D7 90s00r98           1698 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0043)
+   03DA 74 63              1699 	mov	a,#0x63
+   03DC F0                 1700 	movx	@dptr,a
+                           1701 ;	genPointerSet
+                           1702 ;     genFarPointerSet
+   03DD 90s00r99           1703 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0044)
+   03E0 74 72              1704 	mov	a,#0x72
+   03E2 F0                 1705 	movx	@dptr,a
+                           1706 ;	genPointerSet
+                           1707 ;     genFarPointerSet
+   03E3 90s00r9A           1708 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0045)
+   03E6 74 65              1709 	mov	a,#0x65
+   03E8 F0                 1710 	movx	@dptr,a
+                           1711 ;	genPointerSet
+                           1712 ;     genFarPointerSet
+   03E9 90s00r9B           1713 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0046)
+   03EC 74 61              1714 	mov	a,#0x61
+   03EE F0                 1715 	movx	@dptr,a
+                           1716 ;	genPointerSet
+                           1717 ;     genFarPointerSet
+   03EF 90s00r9C           1718 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0047)
+   03F2 74 73              1719 	mov	a,#0x73
+   03F4 F0                 1720 	movx	@dptr,a
+                           1721 ;	genPointerSet
+                           1722 ;     genFarPointerSet
+   03F5 90s00r9D           1723 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0048)
+   03F8 74 65              1724 	mov	a,#0x65
+   03FA F0                 1725 	movx	@dptr,a
+                           1726 ;	genPointerSet
+                           1727 ;     genFarPointerSet
+   03FB 90s00r9E           1728 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0049)
+   03FE 74 20              1729 	mov	a,#0x20
+   0400 F0                 1730 	movx	@dptr,a
+                           1731 ;	genPointerSet
+                           1732 ;     genFarPointerSet
+   0401 90s00r9F           1733 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x004a)
+   0404 74 44              1734 	mov	a,#0x44
+   0406 F0                 1735 	movx	@dptr,a
+                           1736 ;	genPointerSet
+                           1737 ;     genFarPointerSet
+   0407 90s00rA0           1738 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x004b)
+   040A 74 41              1739 	mov	a,#0x41
+   040C F0                 1740 	movx	@dptr,a
+                           1741 ;	genPointerSet
+                           1742 ;     genFarPointerSet
+   040D 90s00rA1           1743 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x004c)
+   0410 74 43              1744 	mov	a,#0x43
+   0412 F0                 1745 	movx	@dptr,a
+                           1746 ;	genPointerSet
+                           1747 ;     genFarPointerSet
+   0413 90s00rA2           1748 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x004d)
+   0416 74 20              1749 	mov	a,#0x20
+   0418 F0                 1750 	movx	@dptr,a
+                           1751 ;	genPointerSet
+                           1752 ;     genFarPointerSet
+   0419 90s00rA3           1753 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x004e)
+   041C 74 76              1754 	mov	a,#0x76
+   041E F0                 1755 	movx	@dptr,a
+                           1756 ;	genPointerSet
+                           1757 ;     genFarPointerSet
+   041F 90s00rA4           1758 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x004f)
+   0422 74 6F              1759 	mov	a,#0x6F
+   0424 F0                 1760 	movx	@dptr,a
+                           1761 ;	genPointerSet
+                           1762 ;     genFarPointerSet
+   0425 90s00rA5           1763 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0050)
+   0428 74 6C              1764 	mov	a,#0x6C
+   042A F0                 1765 	movx	@dptr,a
+                           1766 ;	genPointerSet
+                           1767 ;     genFarPointerSet
+   042B 90s00rA6           1768 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0051)
+   042E 74 74              1769 	mov	a,#0x74
+   0430 F0                 1770 	movx	@dptr,a
+                           1771 ;	genPointerSet
+                           1772 ;     genFarPointerSet
+   0431 90s00rA7           1773 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0052)
+   0434 74 61              1774 	mov	a,#0x61
+   0436 F0                 1775 	movx	@dptr,a
+                           1776 ;	genPointerSet
+                           1777 ;     genFarPointerSet
+   0437 90s00rA8           1778 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0053)
+   043A 74 67              1779 	mov	a,#0x67
+   043C F0                 1780 	movx	@dptr,a
+                           1781 ;	genPointerSet
+                           1782 ;     genFarPointerSet
+   043D 90s00rA9           1783 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0054)
+   0440 74 65              1784 	mov	a,#0x65
+   0442 F0                 1785 	movx	@dptr,a
+                           1786 ;	genPointerSet
+                           1787 ;     genFarPointerSet
+   0443 90s00rAA           1788 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0055)
+   0446 74 2C              1789 	mov	a,#0x2C
+   0448 F0                 1790 	movx	@dptr,a
+                           1791 ;	genPointerSet
+                           1792 ;     genFarPointerSet
+   0449 90s00rAB           1793 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0056)
+   044C 74 20              1794 	mov	a,#0x20
+   044E F0                 1795 	movx	@dptr,a
+                           1796 ;	genPointerSet
+                           1797 ;     genFarPointerSet
+   044F 90s00rAC           1798 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0057)
+   0452 74 27              1799 	mov	a,#0x27
+   0454 F0                 1800 	movx	@dptr,a
+                           1801 ;	genPointerSet
+                           1802 ;     genFarPointerSet
+   0455 90s00rAD           1803 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0058)
+   0458 74 2D              1804 	mov	a,#0x2D
+   045A F0                 1805 	movx	@dptr,a
+                           1806 ;	genPointerSet
+                           1807 ;     genFarPointerSet
+   045B 90s00rAE           1808 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0059)
+   045E 74 27              1809 	mov	a,#0x27
+   0460 F0                 1810 	movx	@dptr,a
+                           1811 ;	genPointerSet
+                           1812 ;     genFarPointerSet
+   0461 90s00rAF           1813 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x005a)
+   0464 74 2D              1814 	mov	a,#0x2D
+   0466 F0                 1815 	movx	@dptr,a
+                           1816 ;	genPointerSet
+                           1817 ;     genFarPointerSet
+   0467 90s00rB0           1818 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x005b)
+   046A 74 3E              1819 	mov	a,#0x3E
+   046C F0                 1820 	movx	@dptr,a
+                           1821 ;	genPointerSet
+                           1822 ;     genFarPointerSet
+   046D 90s00rB1           1823 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x005c)
+   0470 74 20              1824 	mov	a,#0x20
+   0472 F0                 1825 	movx	@dptr,a
+                           1826 ;	genPointerSet
+                           1827 ;     genFarPointerSet
+   0473 90s00rB2           1828 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x005d)
+   0476 74 44              1829 	mov	a,#0x44
+   0478 F0                 1830 	movx	@dptr,a
+                           1831 ;	genPointerSet
+                           1832 ;     genFarPointerSet
+   0479 90s00rB3           1833 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x005e)
+   047C 74 65              1834 	mov	a,#0x65
+   047E F0                 1835 	movx	@dptr,a
+                           1836 ;	genPointerSet
+                           1837 ;     genFarPointerSet
+   047F 90s00rB4           1838 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x005f)
+   0482 74 63              1839 	mov	a,#0x63
+   0484 F0                 1840 	movx	@dptr,a
+                           1841 ;	genPointerSet
+                           1842 ;     genFarPointerSet
+   0485 90s00rB5           1843 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0060)
+   0488 74 72              1844 	mov	a,#0x72
+   048A F0                 1845 	movx	@dptr,a
+                           1846 ;	genPointerSet
+                           1847 ;     genFarPointerSet
+   048B 90s00rB6           1848 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0061)
+   048E 74 65              1849 	mov	a,#0x65
+   0490 F0                 1850 	movx	@dptr,a
+                           1851 ;	genPointerSet
+                           1852 ;     genFarPointerSet
+   0491 90s00rB7           1853 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0062)
+   0494 74 61              1854 	mov	a,#0x61
+   0496 F0                 1855 	movx	@dptr,a
+                           1856 ;	genPointerSet
+                           1857 ;     genFarPointerSet
+   0497 90s00rB8           1858 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0063)
+   049A 74 73              1859 	mov	a,#0x73
+   049C F0                 1860 	movx	@dptr,a
+                           1861 ;	genPointerSet
+                           1862 ;     genFarPointerSet
+   049D 90s00rB9           1863 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0064)
+   04A0 74 65              1864 	mov	a,#0x65
+   04A2 F0                 1865 	movx	@dptr,a
+                           1866 ;	genPointerSet
+                           1867 ;     genFarPointerSet
+   04A3 90s00rBA           1868 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0065)
+   04A6 74 20              1869 	mov	a,#0x20
+   04A8 F0                 1870 	movx	@dptr,a
+                           1871 ;	genPointerSet
+                           1872 ;     genFarPointerSet
+   04A9 90s00rBB           1873 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0066)
+   04AC 74 44              1874 	mov	a,#0x44
+   04AE F0                 1875 	movx	@dptr,a
+                           1876 ;	genPointerSet
+                           1877 ;     genFarPointerSet
+   04AF 90s00rBC           1878 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0067)
+   04B2 74 41              1879 	mov	a,#0x41
+   04B4 F0                 1880 	movx	@dptr,a
+                           1881 ;	genPointerSet
+                           1882 ;     genFarPointerSet
+   04B5 90s00rBD           1883 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0068)
+   04B8 74 43              1884 	mov	a,#0x43
+   04BA F0                 1885 	movx	@dptr,a
+                           1886 ;	genPointerSet
+                           1887 ;     genFarPointerSet
+   04BB 90s00rBE           1888 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0069)
+   04BE 74 20              1889 	mov	a,#0x20
+   04C0 F0                 1890 	movx	@dptr,a
+                           1891 ;	genPointerSet
+                           1892 ;     genFarPointerSet
+   04C1 90s00rBF           1893 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x006a)
+   04C4 74 76              1894 	mov	a,#0x76
+   04C6 F0                 1895 	movx	@dptr,a
+                           1896 ;	genPointerSet
+                           1897 ;     genFarPointerSet
+   04C7 90s00rC0           1898 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x006b)
+   04CA 74 6F              1899 	mov	a,#0x6F
+   04CC F0                 1900 	movx	@dptr,a
+                           1901 ;	genPointerSet
+                           1902 ;     genFarPointerSet
+   04CD 90s00rC1           1903 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x006c)
+   04D0 74 6C              1904 	mov	a,#0x6C
+   04D2 F0                 1905 	movx	@dptr,a
+                           1906 ;	genPointerSet
+                           1907 ;     genFarPointerSet
+   04D3 90s00rC2           1908 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x006d)
+   04D6 74 74              1909 	mov	a,#0x74
+   04D8 F0                 1910 	movx	@dptr,a
+                           1911 ;	genPointerSet
+                           1912 ;     genFarPointerSet
+   04D9 90s00rC3           1913 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x006e)
+   04DC 74 61              1914 	mov	a,#0x61
+   04DE F0                 1915 	movx	@dptr,a
+                           1916 ;	genPointerSet
+                           1917 ;     genFarPointerSet
+   04DF 90s00rC4           1918 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x006f)
+   04E2 74 67              1919 	mov	a,#0x67
+   04E4 F0                 1920 	movx	@dptr,a
+                           1921 ;	genPointerSet
+                           1922 ;     genFarPointerSet
+   04E5 90s00rC5           1923 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0070)
+   04E8 74 65              1924 	mov	a,#0x65
+   04EA F0                 1925 	movx	@dptr,a
+                           1926 ;	genPointerSet
+                           1927 ;     genFarPointerSet
+   04EB 90s00rC6           1928 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0071)
+   04EE 74 2C              1929 	mov	a,#0x2C
+   04F0 F0                 1930 	movx	@dptr,a
+                           1931 ;	genPointerSet
+                           1932 ;     genFarPointerSet
+   04F1 90s00rC7           1933 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0072)
+   04F4 74 0A              1934 	mov	a,#0x0A
+   04F6 F0                 1935 	movx	@dptr,a
+                           1936 ;	genPointerSet
+                           1937 ;     genFarPointerSet
+   04F7 90s00rC8           1938 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0073)
+   04FA 74 0D              1939 	mov	a,#0x0D
+   04FC F0                 1940 	movx	@dptr,a
+                           1941 ;	genPointerSet
+                           1942 ;     genFarPointerSet
+   04FD 90s00rC9           1943 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0074)
+   0500 74 27              1944 	mov	a,#0x27
+   0502 F0                 1945 	movx	@dptr,a
+                           1946 ;	genPointerSet
+                           1947 ;     genFarPointerSet
+   0503 90s00rCA           1948 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0075)
+   0506 74 3F              1949 	mov	a,#0x3F
+   0508 F0                 1950 	movx	@dptr,a
+                           1951 ;	genPointerSet
+                           1952 ;     genFarPointerSet
+   0509 90s00rCB           1953 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0076)
+   050C 74 27              1954 	mov	a,#0x27
+   050E F0                 1955 	movx	@dptr,a
+                           1956 ;	genPointerSet
+                           1957 ;     genFarPointerSet
+   050F 90s00rCC           1958 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0077)
+   0512 74 2D              1959 	mov	a,#0x2D
+   0514 F0                 1960 	movx	@dptr,a
+                           1961 ;	genPointerSet
+                           1962 ;     genFarPointerSet
+   0515 90s00rCD           1963 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0078)
+   0518 74 3E              1964 	mov	a,#0x3E
+   051A F0                 1965 	movx	@dptr,a
+                           1966 ;	genPointerSet
+                           1967 ;     genFarPointerSet
+   051B 90s00rCE           1968 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0079)
+   051E 74 20              1969 	mov	a,#0x20
+   0520 F0                 1970 	movx	@dptr,a
+                           1971 ;	genPointerSet
+                           1972 ;     genFarPointerSet
+   0521 90s00rCF           1973 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x007a)
+   0524 74 44              1974 	mov	a,#0x44
+   0526 F0                 1975 	movx	@dptr,a
+                           1976 ;	genPointerSet
+                           1977 ;     genFarPointerSet
+   0527 90s00rD0           1978 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x007b)
+   052A 74 69              1979 	mov	a,#0x69
+   052C F0                 1980 	movx	@dptr,a
+                           1981 ;	genPointerSet
+                           1982 ;     genFarPointerSet
+   052D 90s00rD1           1983 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x007c)
+   0530 74 73              1984 	mov	a,#0x73
+   0532 F0                 1985 	movx	@dptr,a
+                           1986 ;	genPointerSet
+                           1987 ;     genFarPointerSet
+   0533 90s00rD2           1988 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x007d)
+   0536 74 70              1989 	mov	a,#0x70
+   0538 F0                 1990 	movx	@dptr,a
+                           1991 ;	genPointerSet
+                           1992 ;     genFarPointerSet
+   0539 90s00rD3           1993 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x007e)
+   053C 74 6C              1994 	mov	a,#0x6C
+   053E F0                 1995 	movx	@dptr,a
+                           1996 ;	genPointerSet
+                           1997 ;     genFarPointerSet
+   053F 90s00rD4           1998 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x007f)
+   0542 74 61              1999 	mov	a,#0x61
+   0544 F0                 2000 	movx	@dptr,a
+                           2001 ;	genPointerSet
+                           2002 ;     genFarPointerSet
+   0545 90s00rD5           2003 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0080)
+   0548 74 79              2004 	mov	a,#0x79
+   054A F0                 2005 	movx	@dptr,a
+                           2006 ;	genPointerSet
+                           2007 ;     genFarPointerSet
+   054B 90s00rD6           2008 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0081)
+   054E 74 20              2009 	mov	a,#0x20
+   0550 F0                 2010 	movx	@dptr,a
+                           2011 ;	genPointerSet
+                           2012 ;     genFarPointerSet
+   0551 90s00rD7           2013 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0082)
+   0554 74 4D              2014 	mov	a,#0x4D
+   0556 F0                 2015 	movx	@dptr,a
+                           2016 ;	genPointerSet
+                           2017 ;     genFarPointerSet
+   0557 90s00rD8           2018 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0083)
+   055A 74 65              2019 	mov	a,#0x65
+   055C F0                 2020 	movx	@dptr,a
+                           2021 ;	genPointerSet
+                           2022 ;     genFarPointerSet
+   055D 90s00rD9           2023 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0084)
+   0560 74 6E              2024 	mov	a,#0x6E
+   0562 F0                 2025 	movx	@dptr,a
+                           2026 ;	genPointerSet
+                           2027 ;     genFarPointerSet
+   0563 90s00rDA           2028 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0085)
+   0566 74 75              2029 	mov	a,#0x75
+   0568 F0                 2030 	movx	@dptr,a
+                           2031 ;	genPointerSet
+                           2032 ;     genFarPointerSet
+   0569 90s00rDB           2033 	mov	dptr,#(_main_Instructions_txt_1_1 + 0x0086)
+                           2034 ;	Peephole 181	changed mov to clr
+   056C E4                 2035 	clr	a
+   056D F0                 2036 	movx	@dptr,a
+                    056E   2037 	C$main.c$66$1$1 ==.
+                           2038 ;	main.c:66: __xdata uint8_t DAC_on_txt[]="is On";
+                           2039 ;	genPointerSet
+                           2040 ;     genFarPointerSet
+   056E 90s00rDC           2041 	mov	dptr,#_main_DAC_on_txt_1_1
+   0571 74 69              2042 	mov	a,#0x69
+   0573 F0                 2043 	movx	@dptr,a
+                           2044 ;	genPointerSet
+                           2045 ;     genFarPointerSet
+   0574 90s00rDD           2046 	mov	dptr,#(_main_DAC_on_txt_1_1 + 0x0001)
+   0577 74 73              2047 	mov	a,#0x73
+   0579 F0                 2048 	movx	@dptr,a
+                           2049 ;	genPointerSet
+                           2050 ;     genFarPointerSet
+   057A 90s00rDE           2051 	mov	dptr,#(_main_DAC_on_txt_1_1 + 0x0002)
+   057D 74 20              2052 	mov	a,#0x20
+   057F F0                 2053 	movx	@dptr,a
+                           2054 ;	genPointerSet
+                           2055 ;     genFarPointerSet
+   0580 90s00rDF           2056 	mov	dptr,#(_main_DAC_on_txt_1_1 + 0x0003)
+   0583 74 4F              2057 	mov	a,#0x4F
+   0585 F0                 2058 	movx	@dptr,a
+                           2059 ;	genPointerSet
+                           2060 ;     genFarPointerSet
+   0586 90s00rE0           2061 	mov	dptr,#(_main_DAC_on_txt_1_1 + 0x0004)
+   0589 74 6E              2062 	mov	a,#0x6E
+   058B F0                 2063 	movx	@dptr,a
+                           2064 ;	genPointerSet
+                           2065 ;     genFarPointerSet
+   058C 90s00rE1           2066 	mov	dptr,#(_main_DAC_on_txt_1_1 + 0x0005)
+                           2067 ;	Peephole 181	changed mov to clr
+   058F E4                 2068 	clr	a
+   0590 F0                 2069 	movx	@dptr,a
+                    0591   2070 	C$main.c$67$1$1 ==.
+                           2071 ;	main.c:67: __xdata uint8_t DAC_off_txt[]="is Off";
+                           2072 ;	genPointerSet
+                           2073 ;     genFarPointerSet
+   0591 90s00rE2           2074 	mov	dptr,#_main_DAC_off_txt_1_1
+   0594 74 69              2075 	mov	a,#0x69
+   0596 F0                 2076 	movx	@dptr,a
+                           2077 ;	genPointerSet
+                           2078 ;     genFarPointerSet
+   0597 90s00rE3           2079 	mov	dptr,#(_main_DAC_off_txt_1_1 + 0x0001)
+   059A 74 73              2080 	mov	a,#0x73
+   059C F0                 2081 	movx	@dptr,a
+                           2082 ;	genPointerSet
+                           2083 ;     genFarPointerSet
+   059D 90s00rE4           2084 	mov	dptr,#(_main_DAC_off_txt_1_1 + 0x0002)
+   05A0 74 20              2085 	mov	a,#0x20
+   05A2 F0                 2086 	movx	@dptr,a
+                           2087 ;	genPointerSet
+                           2088 ;     genFarPointerSet
+   05A3 90s00rE5           2089 	mov	dptr,#(_main_DAC_off_txt_1_1 + 0x0003)
+   05A6 74 4F              2090 	mov	a,#0x4F
+   05A8 F0                 2091 	movx	@dptr,a
+                           2092 ;	genPointerSet
+                           2093 ;     genFarPointerSet
+   05A9 90s00rE6           2094 	mov	dptr,#(_main_DAC_off_txt_1_1 + 0x0004)
+   05AC 74 66              2095 	mov	a,#0x66
+   05AE F0                 2096 	movx	@dptr,a
+                           2097 ;	genPointerSet
+                           2098 ;     genFarPointerSet
+   05AF 90s00rE7           2099 	mov	dptr,#(_main_DAC_off_txt_1_1 + 0x0005)
+   05B2 74 66              2100 	mov	a,#0x66
+   05B4 F0                 2101 	movx	@dptr,a
+                           2102 ;	genPointerSet
+                           2103 ;     genFarPointerSet
+   05B5 90s00rE8           2104 	mov	dptr,#(_main_DAC_off_txt_1_1 + 0x0006)
+                           2105 ;	Peephole 181	changed mov to clr
+   05B8 E4                 2106 	clr	a
+   05B9 F0                 2107 	movx	@dptr,a
+                    05BA   2108 	C$main.c$68$1$1 ==.
+                           2109 ;	main.c:68: __xdata uint8_t Enter_data_txt[] = "\n\rEnter Data ";
+                           2110 ;	genPointerSet
+                           2111 ;     genFarPointerSet
+   05BA 90s00rE9           2112 	mov	dptr,#_main_Enter_data_txt_1_1
+   05BD 74 0A              2113 	mov	a,#0x0A
+   05BF F0                 2114 	movx	@dptr,a
+                           2115 ;	genPointerSet
+                           2116 ;     genFarPointerSet
+   05C0 90s00rEA           2117 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0001)
+   05C3 74 0D              2118 	mov	a,#0x0D
+   05C5 F0                 2119 	movx	@dptr,a
+                           2120 ;	genPointerSet
+                           2121 ;     genFarPointerSet
+   05C6 90s00rEB           2122 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0002)
+   05C9 74 45              2123 	mov	a,#0x45
+   05CB F0                 2124 	movx	@dptr,a
+                           2125 ;	genPointerSet
+                           2126 ;     genFarPointerSet
+   05CC 90s00rEC           2127 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0003)
+   05CF 74 6E              2128 	mov	a,#0x6E
+   05D1 F0                 2129 	movx	@dptr,a
+                           2130 ;	genPointerSet
+                           2131 ;     genFarPointerSet
+   05D2 90s00rED           2132 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0004)
+   05D5 74 74              2133 	mov	a,#0x74
+   05D7 F0                 2134 	movx	@dptr,a
+                           2135 ;	genPointerSet
+                           2136 ;     genFarPointerSet
+   05D8 90s00rEE           2137 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0005)
+   05DB 74 65              2138 	mov	a,#0x65
+   05DD F0                 2139 	movx	@dptr,a
+                           2140 ;	genPointerSet
+                           2141 ;     genFarPointerSet
+   05DE 90s00rEF           2142 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0006)
+   05E1 74 72              2143 	mov	a,#0x72
+   05E3 F0                 2144 	movx	@dptr,a
+                           2145 ;	genPointerSet
+                           2146 ;     genFarPointerSet
+   05E4 90s00rF0           2147 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0007)
+   05E7 74 20              2148 	mov	a,#0x20
+   05E9 F0                 2149 	movx	@dptr,a
+                           2150 ;	genPointerSet
+                           2151 ;     genFarPointerSet
+   05EA 90s00rF1           2152 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0008)
+   05ED 74 44              2153 	mov	a,#0x44
+   05EF F0                 2154 	movx	@dptr,a
+                           2155 ;	genPointerSet
+                           2156 ;     genFarPointerSet
+   05F0 90s00rF2           2157 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x0009)
+   05F3 74 61              2158 	mov	a,#0x61
+   05F5 F0                 2159 	movx	@dptr,a
+                           2160 ;	genPointerSet
+                           2161 ;     genFarPointerSet
+   05F6 90s00rF3           2162 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x000a)
+   05F9 74 74              2163 	mov	a,#0x74
+   05FB F0                 2164 	movx	@dptr,a
+                           2165 ;	genPointerSet
+                           2166 ;     genFarPointerSet
+   05FC 90s00rF4           2167 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x000b)
+   05FF 74 61              2168 	mov	a,#0x61
+   0601 F0                 2169 	movx	@dptr,a
+                           2170 ;	genPointerSet
+                           2171 ;     genFarPointerSet
+   0602 90s00rF5           2172 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x000c)
+   0605 74 20              2173 	mov	a,#0x20
+   0607 F0                 2174 	movx	@dptr,a
+                           2175 ;	genPointerSet
+                           2176 ;     genFarPointerSet
+   0608 90s00rF6           2177 	mov	dptr,#(_main_Enter_data_txt_1_1 + 0x000d)
+                           2178 ;	Peephole 181	changed mov to clr
+   060B E4                 2179 	clr	a
+   060C F0                 2180 	movx	@dptr,a
+                    060D   2181 	C$main.c$69$1$1 ==.
+                           2182 ;	main.c:69: __xdata uint8_t DAC_a_txt[]="\n\rDAC output channel A ";
+                           2183 ;	genPointerSet
+                           2184 ;     genFarPointerSet
+   060D 90s00rF7           2185 	mov	dptr,#_main_DAC_a_txt_1_1
+   0610 74 0A              2186 	mov	a,#0x0A
+   0612 F0                 2187 	movx	@dptr,a
+                           2188 ;	genPointerSet
+                           2189 ;     genFarPointerSet
+   0613 90s00rF8           2190 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0001)
+   0616 74 0D              2191 	mov	a,#0x0D
+   0618 F0                 2192 	movx	@dptr,a
+                           2193 ;	genPointerSet
+                           2194 ;     genFarPointerSet
+   0619 90s00rF9           2195 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0002)
+   061C 74 44              2196 	mov	a,#0x44
+   061E F0                 2197 	movx	@dptr,a
+                           2198 ;	genPointerSet
+                           2199 ;     genFarPointerSet
+   061F 90s00rFA           2200 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0003)
+   0622 74 41              2201 	mov	a,#0x41
+   0624 F0                 2202 	movx	@dptr,a
+                           2203 ;	genPointerSet
+                           2204 ;     genFarPointerSet
+   0625 90s00rFB           2205 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0004)
+   0628 74 43              2206 	mov	a,#0x43
+   062A F0                 2207 	movx	@dptr,a
+                           2208 ;	genPointerSet
+                           2209 ;     genFarPointerSet
+   062B 90s00rFC           2210 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0005)
+   062E 74 20              2211 	mov	a,#0x20
+   0630 F0                 2212 	movx	@dptr,a
+                           2213 ;	genPointerSet
+                           2214 ;     genFarPointerSet
+   0631 90s00rFD           2215 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0006)
+   0634 74 6F              2216 	mov	a,#0x6F
+   0636 F0                 2217 	movx	@dptr,a
+                           2218 ;	genPointerSet
+                           2219 ;     genFarPointerSet
+   0637 90s00rFE           2220 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0007)
+   063A 74 75              2221 	mov	a,#0x75
+   063C F0                 2222 	movx	@dptr,a
+                           2223 ;	genPointerSet
+                           2224 ;     genFarPointerSet
+   063D 90s00rFF           2225 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0008)
+   0640 74 74              2226 	mov	a,#0x74
+   0642 F0                 2227 	movx	@dptr,a
+                           2228 ;	genPointerSet
+                           2229 ;     genFarPointerSet
+   0643 90s01r00           2230 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0009)
+   0646 74 70              2231 	mov	a,#0x70
+   0648 F0                 2232 	movx	@dptr,a
+                           2233 ;	genPointerSet
+                           2234 ;     genFarPointerSet
+   0649 90s01r01           2235 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x000a)
+   064C 74 75              2236 	mov	a,#0x75
+   064E F0                 2237 	movx	@dptr,a
+                           2238 ;	genPointerSet
+                           2239 ;     genFarPointerSet
+   064F 90s01r02           2240 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x000b)
+   0652 74 74              2241 	mov	a,#0x74
+   0654 F0                 2242 	movx	@dptr,a
+                           2243 ;	genPointerSet
+                           2244 ;     genFarPointerSet
+   0655 90s01r03           2245 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x000c)
+   0658 74 20              2246 	mov	a,#0x20
+   065A F0                 2247 	movx	@dptr,a
+                           2248 ;	genPointerSet
+                           2249 ;     genFarPointerSet
+   065B 90s01r04           2250 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x000d)
+   065E 74 63              2251 	mov	a,#0x63
+   0660 F0                 2252 	movx	@dptr,a
+                           2253 ;	genPointerSet
+                           2254 ;     genFarPointerSet
+   0661 90s01r05           2255 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x000e)
+   0664 74 68              2256 	mov	a,#0x68
+   0666 F0                 2257 	movx	@dptr,a
+                           2258 ;	genPointerSet
+                           2259 ;     genFarPointerSet
+   0667 90s01r06           2260 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x000f)
+   066A 74 61              2261 	mov	a,#0x61
+   066C F0                 2262 	movx	@dptr,a
+                           2263 ;	genPointerSet
+                           2264 ;     genFarPointerSet
+   066D 90s01r07           2265 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0010)
+   0670 74 6E              2266 	mov	a,#0x6E
+   0672 F0                 2267 	movx	@dptr,a
+                           2268 ;	genPointerSet
+                           2269 ;     genFarPointerSet
+   0673 90s01r08           2270 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0011)
+   0676 74 6E              2271 	mov	a,#0x6E
+   0678 F0                 2272 	movx	@dptr,a
+                           2273 ;	genPointerSet
+                           2274 ;     genFarPointerSet
+   0679 90s01r09           2275 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0012)
+   067C 74 65              2276 	mov	a,#0x65
+   067E F0                 2277 	movx	@dptr,a
+                           2278 ;	genPointerSet
+                           2279 ;     genFarPointerSet
+   067F 90s01r0A           2280 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0013)
+   0682 74 6C              2281 	mov	a,#0x6C
+   0684 F0                 2282 	movx	@dptr,a
+                           2283 ;	genPointerSet
+                           2284 ;     genFarPointerSet
+   0685 90s01r0B           2285 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0014)
+   0688 74 20              2286 	mov	a,#0x20
+   068A F0                 2287 	movx	@dptr,a
+                           2288 ;	genPointerSet
+                           2289 ;     genFarPointerSet
+   068B 90s01r0C           2290 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0015)
+   068E 74 41              2291 	mov	a,#0x41
+   0690 F0                 2292 	movx	@dptr,a
+                           2293 ;	genPointerSet
+                           2294 ;     genFarPointerSet
+   0691 90s01r0D           2295 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0016)
+   0694 74 20              2296 	mov	a,#0x20
+   0696 F0                 2297 	movx	@dptr,a
+                           2298 ;	genPointerSet
+                           2299 ;     genFarPointerSet
+   0697 90s01r0E           2300 	mov	dptr,#(_main_DAC_a_txt_1_1 + 0x0017)
+                           2301 ;	Peephole 181	changed mov to clr
+   069A E4                 2302 	clr	a
+   069B F0                 2303 	movx	@dptr,a
+                    069C   2304 	C$main.c$70$1$1 ==.
+                           2305 ;	main.c:70: __xdata uint8_t DAC_b_txt[]="\n\rDAC output channel B ";
+                           2306 ;	genPointerSet
+                           2307 ;     genFarPointerSet
+   069C 90s01r0F           2308 	mov	dptr,#_main_DAC_b_txt_1_1
+   069F 74 0A              2309 	mov	a,#0x0A
+   06A1 F0                 2310 	movx	@dptr,a
+                           2311 ;	genPointerSet
+                           2312 ;     genFarPointerSet
+   06A2 90s01r10           2313 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0001)
+   06A5 74 0D              2314 	mov	a,#0x0D
+   06A7 F0                 2315 	movx	@dptr,a
+                           2316 ;	genPointerSet
+                           2317 ;     genFarPointerSet
+   06A8 90s01r11           2318 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0002)
+   06AB 74 44              2319 	mov	a,#0x44
+   06AD F0                 2320 	movx	@dptr,a
+                           2321 ;	genPointerSet
+                           2322 ;     genFarPointerSet
+   06AE 90s01r12           2323 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0003)
+   06B1 74 41              2324 	mov	a,#0x41
+   06B3 F0                 2325 	movx	@dptr,a
+                           2326 ;	genPointerSet
+                           2327 ;     genFarPointerSet
+   06B4 90s01r13           2328 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0004)
+   06B7 74 43              2329 	mov	a,#0x43
+   06B9 F0                 2330 	movx	@dptr,a
+                           2331 ;	genPointerSet
+                           2332 ;     genFarPointerSet
+   06BA 90s01r14           2333 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0005)
+   06BD 74 20              2334 	mov	a,#0x20
+   06BF F0                 2335 	movx	@dptr,a
+                           2336 ;	genPointerSet
+                           2337 ;     genFarPointerSet
+   06C0 90s01r15           2338 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0006)
+   06C3 74 6F              2339 	mov	a,#0x6F
+   06C5 F0                 2340 	movx	@dptr,a
+                           2341 ;	genPointerSet
+                           2342 ;     genFarPointerSet
+   06C6 90s01r16           2343 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0007)
+   06C9 74 75              2344 	mov	a,#0x75
+   06CB F0                 2345 	movx	@dptr,a
+                           2346 ;	genPointerSet
+                           2347 ;     genFarPointerSet
+   06CC 90s01r17           2348 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0008)
+   06CF 74 74              2349 	mov	a,#0x74
+   06D1 F0                 2350 	movx	@dptr,a
+                           2351 ;	genPointerSet
+                           2352 ;     genFarPointerSet
+   06D2 90s01r18           2353 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0009)
+   06D5 74 70              2354 	mov	a,#0x70
+   06D7 F0                 2355 	movx	@dptr,a
+                           2356 ;	genPointerSet
+                           2357 ;     genFarPointerSet
+   06D8 90s01r19           2358 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x000a)
+   06DB 74 75              2359 	mov	a,#0x75
+   06DD F0                 2360 	movx	@dptr,a
+                           2361 ;	genPointerSet
+                           2362 ;     genFarPointerSet
+   06DE 90s01r1A           2363 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x000b)
+   06E1 74 74              2364 	mov	a,#0x74
+   06E3 F0                 2365 	movx	@dptr,a
+                           2366 ;	genPointerSet
+                           2367 ;     genFarPointerSet
+   06E4 90s01r1B           2368 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x000c)
+   06E7 74 20              2369 	mov	a,#0x20
+   06E9 F0                 2370 	movx	@dptr,a
+                           2371 ;	genPointerSet
+                           2372 ;     genFarPointerSet
+   06EA 90s01r1C           2373 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x000d)
+   06ED 74 63              2374 	mov	a,#0x63
+   06EF F0                 2375 	movx	@dptr,a
+                           2376 ;	genPointerSet
+                           2377 ;     genFarPointerSet
+   06F0 90s01r1D           2378 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x000e)
+   06F3 74 68              2379 	mov	a,#0x68
+   06F5 F0                 2380 	movx	@dptr,a
+                           2381 ;	genPointerSet
+                           2382 ;     genFarPointerSet
+   06F6 90s01r1E           2383 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x000f)
+   06F9 74 61              2384 	mov	a,#0x61
+   06FB F0                 2385 	movx	@dptr,a
+                           2386 ;	genPointerSet
+                           2387 ;     genFarPointerSet
+   06FC 90s01r1F           2388 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0010)
+   06FF 74 6E              2389 	mov	a,#0x6E
+   0701 F0                 2390 	movx	@dptr,a
+                           2391 ;	genPointerSet
+                           2392 ;     genFarPointerSet
+   0702 90s01r20           2393 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0011)
+   0705 74 6E              2394 	mov	a,#0x6E
+   0707 F0                 2395 	movx	@dptr,a
+                           2396 ;	genPointerSet
+                           2397 ;     genFarPointerSet
+   0708 90s01r21           2398 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0012)
+   070B 74 65              2399 	mov	a,#0x65
+   070D F0                 2400 	movx	@dptr,a
+                           2401 ;	genPointerSet
+                           2402 ;     genFarPointerSet
+   070E 90s01r22           2403 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0013)
+   0711 74 6C              2404 	mov	a,#0x6C
+   0713 F0                 2405 	movx	@dptr,a
+                           2406 ;	genPointerSet
+                           2407 ;     genFarPointerSet
+   0714 90s01r23           2408 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0014)
+   0717 74 20              2409 	mov	a,#0x20
+   0719 F0                 2410 	movx	@dptr,a
+                           2411 ;	genPointerSet
+                           2412 ;     genFarPointerSet
+   071A 90s01r24           2413 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0015)
+   071D 74 42              2414 	mov	a,#0x42
+   071F F0                 2415 	movx	@dptr,a
+                           2416 ;	genPointerSet
+                           2417 ;     genFarPointerSet
+   0720 90s01r25           2418 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0016)
+   0723 74 20              2419 	mov	a,#0x20
+   0725 F0                 2420 	movx	@dptr,a
+                           2421 ;	genPointerSet
+                           2422 ;     genFarPointerSet
+   0726 90s01r26           2423 	mov	dptr,#(_main_DAC_b_txt_1_1 + 0x0017)
+                           2424 ;	Peephole 181	changed mov to clr
+   0729 E4                 2425 	clr	a
+   072A F0                 2426 	movx	@dptr,a
+                    072B   2427 	C$main.c$71$1$1 ==.
+                           2428 ;	main.c:71: __xdata uint8_t DAC_gain_inc_txt[]="\n\rgain increased";
+                           2429 ;	genPointerSet
+                           2430 ;     genFarPointerSet
+   072B 90s01r27           2431 	mov	dptr,#_main_DAC_gain_inc_txt_1_1
+   072E 74 0A              2432 	mov	a,#0x0A
+   0730 F0                 2433 	movx	@dptr,a
+                           2434 ;	genPointerSet
+                           2435 ;     genFarPointerSet
+   0731 90s01r28           2436 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0001)
+   0734 74 0D              2437 	mov	a,#0x0D
+   0736 F0                 2438 	movx	@dptr,a
+                           2439 ;	genPointerSet
+                           2440 ;     genFarPointerSet
+   0737 90s01r29           2441 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0002)
+   073A 74 67              2442 	mov	a,#0x67
+   073C F0                 2443 	movx	@dptr,a
+                           2444 ;	genPointerSet
+                           2445 ;     genFarPointerSet
+   073D 90s01r2A           2446 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0003)
+   0740 74 61              2447 	mov	a,#0x61
+   0742 F0                 2448 	movx	@dptr,a
+                           2449 ;	genPointerSet
+                           2450 ;     genFarPointerSet
+   0743 90s01r2B           2451 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0004)
+   0746 74 69              2452 	mov	a,#0x69
+   0748 F0                 2453 	movx	@dptr,a
+                           2454 ;	genPointerSet
+                           2455 ;     genFarPointerSet
+   0749 90s01r2C           2456 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0005)
+   074C 74 6E              2457 	mov	a,#0x6E
+   074E F0                 2458 	movx	@dptr,a
+                           2459 ;	genPointerSet
+                           2460 ;     genFarPointerSet
+   074F 90s01r2D           2461 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0006)
+   0752 74 20              2462 	mov	a,#0x20
+   0754 F0                 2463 	movx	@dptr,a
+                           2464 ;	genPointerSet
+                           2465 ;     genFarPointerSet
+   0755 90s01r2E           2466 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0007)
+   0758 74 69              2467 	mov	a,#0x69
+   075A F0                 2468 	movx	@dptr,a
+                           2469 ;	genPointerSet
+                           2470 ;     genFarPointerSet
+   075B 90s01r2F           2471 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0008)
+   075E 74 6E              2472 	mov	a,#0x6E
+   0760 F0                 2473 	movx	@dptr,a
+                           2474 ;	genPointerSet
+                           2475 ;     genFarPointerSet
+   0761 90s01r30           2476 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0009)
+   0764 74 63              2477 	mov	a,#0x63
+   0766 F0                 2478 	movx	@dptr,a
+                           2479 ;	genPointerSet
+                           2480 ;     genFarPointerSet
+   0767 90s01r31           2481 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x000a)
+   076A 74 72              2482 	mov	a,#0x72
+   076C F0                 2483 	movx	@dptr,a
+                           2484 ;	genPointerSet
+                           2485 ;     genFarPointerSet
+   076D 90s01r32           2486 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x000b)
+   0770 74 65              2487 	mov	a,#0x65
+   0772 F0                 2488 	movx	@dptr,a
+                           2489 ;	genPointerSet
+                           2490 ;     genFarPointerSet
+   0773 90s01r33           2491 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x000c)
+   0776 74 61              2492 	mov	a,#0x61
+   0778 F0                 2493 	movx	@dptr,a
+                           2494 ;	genPointerSet
+                           2495 ;     genFarPointerSet
+   0779 90s01r34           2496 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x000d)
+   077C 74 73              2497 	mov	a,#0x73
+   077E F0                 2498 	movx	@dptr,a
+                           2499 ;	genPointerSet
+                           2500 ;     genFarPointerSet
+   077F 90s01r35           2501 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x000e)
+   0782 74 65              2502 	mov	a,#0x65
+   0784 F0                 2503 	movx	@dptr,a
+                           2504 ;	genPointerSet
+                           2505 ;     genFarPointerSet
+   0785 90s01r36           2506 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x000f)
+   0788 74 64              2507 	mov	a,#0x64
+   078A F0                 2508 	movx	@dptr,a
+                           2509 ;	genPointerSet
+                           2510 ;     genFarPointerSet
+   078B 90s01r37           2511 	mov	dptr,#(_main_DAC_gain_inc_txt_1_1 + 0x0010)
+                           2512 ;	Peephole 181	changed mov to clr
+   078E E4                 2513 	clr	a
+   078F F0                 2514 	movx	@dptr,a
+                    0790   2515 	C$main.c$72$1$1 ==.
+                           2516 ;	main.c:72: __xdata uint8_t DAC_gain_dec_txt[]="\n\rgain decreased";
+                           2517 ;	genPointerSet
+                           2518 ;     genFarPointerSet
+   0790 90s01r38           2519 	mov	dptr,#_main_DAC_gain_dec_txt_1_1
+   0793 74 0A              2520 	mov	a,#0x0A
+   0795 F0                 2521 	movx	@dptr,a
+                           2522 ;	genPointerSet
+                           2523 ;     genFarPointerSet
+   0796 90s01r39           2524 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0001)
+   0799 74 0D              2525 	mov	a,#0x0D
+   079B F0                 2526 	movx	@dptr,a
+                           2527 ;	genPointerSet
+                           2528 ;     genFarPointerSet
+   079C 90s01r3A           2529 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0002)
+   079F 74 67              2530 	mov	a,#0x67
+   07A1 F0                 2531 	movx	@dptr,a
+                           2532 ;	genPointerSet
+                           2533 ;     genFarPointerSet
+   07A2 90s01r3B           2534 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0003)
+   07A5 74 61              2535 	mov	a,#0x61
+   07A7 F0                 2536 	movx	@dptr,a
+                           2537 ;	genPointerSet
+                           2538 ;     genFarPointerSet
+   07A8 90s01r3C           2539 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0004)
+   07AB 74 69              2540 	mov	a,#0x69
+   07AD F0                 2541 	movx	@dptr,a
+                           2542 ;	genPointerSet
+                           2543 ;     genFarPointerSet
+   07AE 90s01r3D           2544 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0005)
+   07B1 74 6E              2545 	mov	a,#0x6E
+   07B3 F0                 2546 	movx	@dptr,a
+                           2547 ;	genPointerSet
+                           2548 ;     genFarPointerSet
+   07B4 90s01r3E           2549 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0006)
+   07B7 74 20              2550 	mov	a,#0x20
+   07B9 F0                 2551 	movx	@dptr,a
+                           2552 ;	genPointerSet
+                           2553 ;     genFarPointerSet
+   07BA 90s01r3F           2554 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0007)
+   07BD 74 64              2555 	mov	a,#0x64
+   07BF F0                 2556 	movx	@dptr,a
+                           2557 ;	genPointerSet
+                           2558 ;     genFarPointerSet
+   07C0 90s01r40           2559 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0008)
+   07C3 74 65              2560 	mov	a,#0x65
+   07C5 F0                 2561 	movx	@dptr,a
+                           2562 ;	genPointerSet
+                           2563 ;     genFarPointerSet
+   07C6 90s01r41           2564 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0009)
+   07C9 74 63              2565 	mov	a,#0x63
+   07CB F0                 2566 	movx	@dptr,a
+                           2567 ;	genPointerSet
+                           2568 ;     genFarPointerSet
+   07CC 90s01r42           2569 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x000a)
+   07CF 74 72              2570 	mov	a,#0x72
+   07D1 F0                 2571 	movx	@dptr,a
+                           2572 ;	genPointerSet
+                           2573 ;     genFarPointerSet
+   07D2 90s01r43           2574 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x000b)
+   07D5 74 65              2575 	mov	a,#0x65
+   07D7 F0                 2576 	movx	@dptr,a
+                           2577 ;	genPointerSet
+                           2578 ;     genFarPointerSet
+   07D8 90s01r44           2579 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x000c)
+   07DB 74 61              2580 	mov	a,#0x61
+   07DD F0                 2581 	movx	@dptr,a
+                           2582 ;	genPointerSet
+                           2583 ;     genFarPointerSet
+   07DE 90s01r45           2584 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x000d)
+   07E1 74 73              2585 	mov	a,#0x73
+   07E3 F0                 2586 	movx	@dptr,a
+                           2587 ;	genPointerSet
+                           2588 ;     genFarPointerSet
+   07E4 90s01r46           2589 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x000e)
+   07E7 74 65              2590 	mov	a,#0x65
+   07E9 F0                 2591 	movx	@dptr,a
+                           2592 ;	genPointerSet
+                           2593 ;     genFarPointerSet
+   07EA 90s01r47           2594 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x000f)
+   07ED 74 64              2595 	mov	a,#0x64
+   07EF F0                 2596 	movx	@dptr,a
+                           2597 ;	genPointerSet
+                           2598 ;     genFarPointerSet
+   07F0 90s01r48           2599 	mov	dptr,#(_main_DAC_gain_dec_txt_1_1 + 0x0010)
+                           2600 ;	Peephole 181	changed mov to clr
+   07F3 E4                 2601 	clr	a
+   07F4 F0                 2602 	movx	@dptr,a
+                    07F5   2603 	C$main.c$73$1$1 ==.
+                           2604 ;	main.c:73: __xdata uint8_t DAC_mode_txt[]="\n\rmode changed";
+                           2605 ;	genPointerSet
+                           2606 ;     genFarPointerSet
+   07F5 90s01r49           2607 	mov	dptr,#_main_DAC_mode_txt_1_1
+   07F8 74 0A              2608 	mov	a,#0x0A
+   07FA F0                 2609 	movx	@dptr,a
+                           2610 ;	genPointerSet
+                           2611 ;     genFarPointerSet
+   07FB 90s01r4A           2612 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0001)
+   07FE 74 0D              2613 	mov	a,#0x0D
+   0800 F0                 2614 	movx	@dptr,a
+                           2615 ;	genPointerSet
+                           2616 ;     genFarPointerSet
+   0801 90s01r4B           2617 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0002)
+   0804 74 6D              2618 	mov	a,#0x6D
+   0806 F0                 2619 	movx	@dptr,a
+                           2620 ;	genPointerSet
+                           2621 ;     genFarPointerSet
+   0807 90s01r4C           2622 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0003)
+   080A 74 6F              2623 	mov	a,#0x6F
+   080C F0                 2624 	movx	@dptr,a
+                           2625 ;	genPointerSet
+                           2626 ;     genFarPointerSet
+   080D 90s01r4D           2627 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0004)
+   0810 74 64              2628 	mov	a,#0x64
+   0812 F0                 2629 	movx	@dptr,a
+                           2630 ;	genPointerSet
+                           2631 ;     genFarPointerSet
+   0813 90s01r4E           2632 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0005)
+   0816 74 65              2633 	mov	a,#0x65
+   0818 F0                 2634 	movx	@dptr,a
+                           2635 ;	genPointerSet
+                           2636 ;     genFarPointerSet
+   0819 90s01r4F           2637 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0006)
+   081C 74 20              2638 	mov	a,#0x20
+   081E F0                 2639 	movx	@dptr,a
+                           2640 ;	genPointerSet
+                           2641 ;     genFarPointerSet
+   081F 90s01r50           2642 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0007)
+   0822 74 63              2643 	mov	a,#0x63
+   0824 F0                 2644 	movx	@dptr,a
+                           2645 ;	genPointerSet
+                           2646 ;     genFarPointerSet
+   0825 90s01r51           2647 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0008)
+   0828 74 68              2648 	mov	a,#0x68
+   082A F0                 2649 	movx	@dptr,a
+                           2650 ;	genPointerSet
+                           2651 ;     genFarPointerSet
+   082B 90s01r52           2652 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x0009)
+   082E 74 61              2653 	mov	a,#0x61
+   0830 F0                 2654 	movx	@dptr,a
+                           2655 ;	genPointerSet
+                           2656 ;     genFarPointerSet
+   0831 90s01r53           2657 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x000a)
+   0834 74 6E              2658 	mov	a,#0x6E
+   0836 F0                 2659 	movx	@dptr,a
+                           2660 ;	genPointerSet
+                           2661 ;     genFarPointerSet
+   0837 90s01r54           2662 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x000b)
+   083A 74 67              2663 	mov	a,#0x67
+   083C F0                 2664 	movx	@dptr,a
+                           2665 ;	genPointerSet
+                           2666 ;     genFarPointerSet
+   083D 90s01r55           2667 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x000c)
+   0840 74 65              2668 	mov	a,#0x65
+   0842 F0                 2669 	movx	@dptr,a
+                           2670 ;	genPointerSet
+                           2671 ;     genFarPointerSet
+   0843 90s01r56           2672 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x000d)
+   0846 74 64              2673 	mov	a,#0x64
+   0848 F0                 2674 	movx	@dptr,a
+                           2675 ;	genPointerSet
+                           2676 ;     genFarPointerSet
+   0849 90s01r57           2677 	mov	dptr,#(_main_DAC_mode_txt_1_1 + 0x000e)
+                           2678 ;	Peephole 181	changed mov to clr
+   084C E4                 2679 	clr	a
+   084D F0                 2680 	movx	@dptr,a
+                    084E   2681 	C$main.c$74$1$1 ==.
+                           2682 ;	main.c:74: __xdata uint8_t DAC_next_wave_txt[]="\n\rnext wave ";
+                           2683 ;	genPointerSet
+                           2684 ;     genFarPointerSet
+   084E 90s01r58           2685 	mov	dptr,#_main_DAC_next_wave_txt_1_1
+   0851 74 0A              2686 	mov	a,#0x0A
+   0853 F0                 2687 	movx	@dptr,a
+                           2688 ;	genPointerSet
+                           2689 ;     genFarPointerSet
+   0854 90s01r59           2690 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0001)
+   0857 74 0D              2691 	mov	a,#0x0D
+   0859 F0                 2692 	movx	@dptr,a
+                           2693 ;	genPointerSet
+                           2694 ;     genFarPointerSet
+   085A 90s01r5A           2695 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0002)
+   085D 74 6E              2696 	mov	a,#0x6E
+   085F F0                 2697 	movx	@dptr,a
+                           2698 ;	genPointerSet
+                           2699 ;     genFarPointerSet
+   0860 90s01r5B           2700 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0003)
+   0863 74 65              2701 	mov	a,#0x65
+   0865 F0                 2702 	movx	@dptr,a
+                           2703 ;	genPointerSet
+                           2704 ;     genFarPointerSet
+   0866 90s01r5C           2705 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0004)
+   0869 74 78              2706 	mov	a,#0x78
+   086B F0                 2707 	movx	@dptr,a
+                           2708 ;	genPointerSet
+                           2709 ;     genFarPointerSet
+   086C 90s01r5D           2710 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0005)
+   086F 74 74              2711 	mov	a,#0x74
+   0871 F0                 2712 	movx	@dptr,a
+                           2713 ;	genPointerSet
+                           2714 ;     genFarPointerSet
+   0872 90s01r5E           2715 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0006)
+   0875 74 20              2716 	mov	a,#0x20
+   0877 F0                 2717 	movx	@dptr,a
+                           2718 ;	genPointerSet
+                           2719 ;     genFarPointerSet
+   0878 90s01r5F           2720 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0007)
+   087B 74 77              2721 	mov	a,#0x77
+   087D F0                 2722 	movx	@dptr,a
+                           2723 ;	genPointerSet
+                           2724 ;     genFarPointerSet
+   087E 90s01r60           2725 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0008)
+   0881 74 61              2726 	mov	a,#0x61
+   0883 F0                 2727 	movx	@dptr,a
+                           2728 ;	genPointerSet
+                           2729 ;     genFarPointerSet
+   0884 90s01r61           2730 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x0009)
+   0887 74 76              2731 	mov	a,#0x76
+   0889 F0                 2732 	movx	@dptr,a
+                           2733 ;	genPointerSet
+                           2734 ;     genFarPointerSet
+   088A 90s01r62           2735 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x000a)
+   088D 74 65              2736 	mov	a,#0x65
+   088F F0                 2737 	movx	@dptr,a
+                           2738 ;	genPointerSet
+                           2739 ;     genFarPointerSet
+   0890 90s01r63           2740 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x000b)
+   0893 74 20              2741 	mov	a,#0x20
+   0895 F0                 2742 	movx	@dptr,a
+                           2743 ;	genPointerSet
+                           2744 ;     genFarPointerSet
+   0896 90s01r64           2745 	mov	dptr,#(_main_DAC_next_wave_txt_1_1 + 0x000c)
+                           2746 ;	Peephole 181	changed mov to clr
+   0899 E4                 2747 	clr	a
+   089A F0                 2748 	movx	@dptr,a
+                    089B   2749 	C$main.c$75$1$1 ==.
+                           2750 ;	main.c:75: init_hardware();
+                           2751 ;	genCall
+   089B 12s00r00           2752 	lcall	_init_hardware
+                    089E   2753 	C$main.c$76$1$1 ==.
+                           2754 ;	main.c:76: my_printf(Welcome_txt);
+                           2755 ;	genCall
+                           2756 ;	Peephole 182.a	used 16 bit load of DPTR
+   089E 90s00r04           2757 	mov	dptr,#_main_Welcome_txt_1_1
+   08A1 12s00r00           2758 	lcall	_my_printf
+                    08A4   2759 	C$main.c$77$1$1 ==.
+                           2760 ;	main.c:77: my_printf(Instructions_txt);
+                           2761 ;	genCall
+                           2762 ;	Peephole 182.a	used 16 bit load of DPTR
+   08A4 90s00r55           2763 	mov	dptr,#_main_Instructions_txt_1_1
+   08A7 12s00r00           2764 	lcall	_my_printf
+                    08AA   2765 	C$main.c$78$1$1 ==.
+                           2766 ;	main.c:78: waves_init();
+                           2767 ;	genCall
+   08AA 12s00r4F           2768 	lcall	_waves_init
+                    08AD   2769 	C$main.c$80$1$1 ==.
+                           2770 ;	main.c:80: while(1)
+   08AD                    2771 00114$:
+                    08AD   2772 	C$main.c$82$2$2 ==.
+                           2773 ;	main.c:82: key_pressed=getchar();
+                           2774 ;	genCall
+   08AD 12s00r00           2775 	lcall	_getchar
+   08B0 AA 82              2776 	mov	r2,dpl
+                    08B2   2777 	C$main.c$83$2$2 ==.
+                           2778 ;	main.c:83: if(mode==0)
+                           2779 ;	genAssign
+   08B2 90s00r03           2780 	mov	dptr,#_mode
+   08B5 E0                 2781 	movx	a,@dptr
+                           2782 ;	genIfx
+   08B6 FB                 2783 	mov	r3,a
+                           2784 ;	Peephole 105	removed redundant mov
+                           2785 ;	genIfxJump
+                           2786 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   08B7 70 02              2787 	jnz	00102$
+                           2788 ;	Peephole 300	removed redundant label 00127$
+                    08B9   2789 	C$main.c$85$3$3 ==.
+                           2790 ;	main.c:85: TR0 = 0;
+                           2791 ;	genAssign
+   08B9 C2 8C              2792 	clr	_TR0
+   08BB                    2793 00102$:
+                    08BB   2794 	C$main.c$87$2$2 ==.
+                           2795 ;	main.c:87: switch(key_pressed)
+                           2796 ;	genCmpEq
+                           2797 ;	gencjneshort
+   08BB BA 2B 02           2798 	cjne	r2,#0x2B,00128$
+                           2799 ;	Peephole 112.b	changed ljmp to sjmp
+   08BE 80 4E              2800 	sjmp	00107$
+   08C0                    2801 00128$:
+                           2802 ;	genCmpEq
+                           2803 ;	gencjneshort
+   08C0 BA 2D 02           2804 	cjne	r2,#0x2D,00129$
+                           2805 ;	Peephole 112.b	changed ljmp to sjmp
+   08C3 80 54              2806 	sjmp	00108$
+   08C5                    2807 00129$:
+                           2808 ;	genCmpEq
+                           2809 ;	gencjneshort
+   08C5 BA 3F 02           2810 	cjne	r2,#0x3F,00130$
+                           2811 ;	Peephole 112.b	changed ljmp to sjmp
+   08C8 80 0F              2812 	sjmp	00103$
+   08CA                    2813 00130$:
+                           2814 ;	genCmpEq
+                           2815 ;	gencjneshort
+   08CA BA 44 02           2816 	cjne	r2,#0x44,00131$
+                           2817 ;	Peephole 112.b	changed ljmp to sjmp
+   08CD 80 28              2818 	sjmp	00106$
+   08CF                    2819 00131$:
+                           2820 ;	genCmpEq
+                           2821 ;	gencjneshort
+   08CF BA 4E 02           2822 	cjne	r2,#0x4E,00132$
+                           2823 ;	Peephole 112.b	changed ljmp to sjmp
+   08D2 80 18              2824 	sjmp	00105$
+   08D4                    2825 00132$:
+                           2826 ;	genCmpEq
+                           2827 ;	gencjneshort
+                           2828 ;	Peephole 112.b	changed ljmp to sjmp
+                    08D4   2829 	C$main.c$89$3$4 ==.
+                           2830 ;	main.c:89: case '?':
+                           2831 ;	Peephole 112.b	changed ljmp to sjmp
+                           2832 ;	Peephole 198.b	optimized misc jump sequence
+   08D4 BA 5A 4D           2833 	cjne	r2,#0x5A,00109$
+   08D7 80 08              2834 	sjmp	00104$
+                           2835 ;	Peephole 300	removed redundant label 00133$
+   08D9                    2836 00103$:
+                    08D9   2837 	C$main.c$91$4$5 ==.
+                           2838 ;	main.c:91: my_printf(Instructions_txt);
+                           2839 ;	genCall
+                           2840 ;	Peephole 182.a	used 16 bit load of DPTR
+   08D9 90s00r55           2841 	mov	dptr,#_main_Instructions_txt_1_1
+   08DC 12s00r00           2842 	lcall	_my_printf
+                    08DF   2843 	C$main.c$92$4$5 ==.
+                           2844 ;	main.c:92: break;
+                    08DF   2845 	C$main.c$95$3$4 ==.
+                           2846 ;	main.c:95: case 'Z':
+                           2847 ;	Peephole 112.b	changed ljmp to sjmp
+   08DF 80 48              2848 	sjmp	00110$
+   08E1                    2849 00104$:
+                    08E1   2850 	C$main.c$97$4$6 ==.
+                           2851 ;	main.c:97: dac_output_control_change();
+                           2852 ;	genCall
+   08E1 12s00r00           2853 	lcall	_dac_output_control_change
+                    08E4   2854 	C$main.c$98$4$6 ==.
+                           2855 ;	main.c:98: my_printf(DAC_mode_txt);
+                           2856 ;	genCall
+                           2857 ;	Peephole 182.a	used 16 bit load of DPTR
+   08E4 90s01r49           2858 	mov	dptr,#_main_DAC_mode_txt_1_1
+   08E7 12s00r00           2859 	lcall	_my_printf
+                    08EA   2860 	C$main.c$99$4$6 ==.
+                           2861 ;	main.c:99: break;
+                    08EA   2862 	C$main.c$102$3$4 ==.
+                           2863 ;	main.c:102: case 'N':
+                           2864 ;	Peephole 112.b	changed ljmp to sjmp
+   08EA 80 3D              2865 	sjmp	00110$
+   08EC                    2866 00105$:
+                    08EC   2867 	C$main.c$104$4$7 ==.
+                           2868 ;	main.c:104: my_printf(DAC_next_wave_txt);
+                           2869 ;	genCall
+                           2870 ;	Peephole 182.a	used 16 bit load of DPTR
+   08EC 90s01r58           2871 	mov	dptr,#_main_DAC_next_wave_txt_1_1
+   08EF 12s00r00           2872 	lcall	_my_printf
+                    08F2   2873 	C$main.c$105$4$7 ==.
+                           2874 ;	main.c:105: dac_next_wave();
+                           2875 ;	genCall
+   08F2 12s00r00           2876 	lcall	_dac_next_wave
+                    08F5   2877 	C$main.c$106$4$7 ==.
+                           2878 ;	main.c:106: break;
+                    08F5   2879 	C$main.c$109$3$4 ==.
+                           2880 ;	main.c:109: case 'D':
+                           2881 ;	Peephole 112.b	changed ljmp to sjmp
+   08F5 80 32              2882 	sjmp	00110$
+   08F7                    2883 00106$:
+                    08F7   2884 	C$main.c$111$4$8 ==.
+                           2885 ;	main.c:111: my_printf(Enter_data_txt);
+                           2886 ;	genCall
+                           2887 ;	Peephole 182.a	used 16 bit load of DPTR
+   08F7 90s00rE9           2888 	mov	dptr,#_main_Enter_data_txt_1_1
+   08FA 12s00r00           2889 	lcall	_my_printf
+                    08FD   2890 	C$main.c$112$4$8 ==.
+                           2891 ;	main.c:112: data_byte = fetch_number(16);
+                           2892 ;	genCall
+   08FD 75 82 10           2893 	mov	dpl,#0x10
+   0900 12s00r00           2894 	lcall	_fetch_number
+                           2895 ;	genCast
+                    0903   2896 	C$main.c$113$4$8 ==.
+                           2897 ;	main.c:113: dac_set(data_byte);
+                           2898 ;	genCast
+                           2899 ;	Peephole 177.c	removed redundant move
+                           2900 ;	genCall
+   0903 AB 82              2901 	mov	r3,dpl
+   0905 7C 00              2902 	mov	r4,#0x00
+                           2903 ;	Peephole 177.d	removed redundant move
+   0907 8C 83              2904 	mov	dph,r4
+   0909 12s00r00           2905 	lcall	_dac_set
+                    090C   2906 	C$main.c$114$4$8 ==.
+                           2907 ;	main.c:114: break;
+                    090C   2908 	C$main.c$117$3$4 ==.
+                           2909 ;	main.c:117: case '+':
+                           2910 ;	Peephole 112.b	changed ljmp to sjmp
+   090C 80 1B              2911 	sjmp	00110$
+   090E                    2912 00107$:
+                    090E   2913 	C$main.c$119$4$9 ==.
+                           2914 ;	main.c:119: dac_increase_voltage();
+                           2915 ;	genCall
+   090E 12s00r00           2916 	lcall	_dac_increase_voltage
+                    0911   2917 	C$main.c$120$4$9 ==.
+                           2918 ;	main.c:120: my_printf(DAC_gain_inc_txt);
+                           2919 ;	genCall
+                           2920 ;	Peephole 182.a	used 16 bit load of DPTR
+   0911 90s01r27           2921 	mov	dptr,#_main_DAC_gain_inc_txt_1_1
+   0914 12s00r00           2922 	lcall	_my_printf
+                    0917   2923 	C$main.c$121$4$9 ==.
+                           2924 ;	main.c:121: break;
+                    0917   2925 	C$main.c$124$3$4 ==.
+                           2926 ;	main.c:124: case '-':
+                           2927 ;	Peephole 112.b	changed ljmp to sjmp
+   0917 80 10              2928 	sjmp	00110$
+   0919                    2929 00108$:
+                    0919   2930 	C$main.c$126$4$10 ==.
+                           2931 ;	main.c:126: dac_decrease_voltage();
+                           2932 ;	genCall
+   0919 12s00r00           2933 	lcall	_dac_decrease_voltage
+                    091C   2934 	C$main.c$127$4$10 ==.
+                           2935 ;	main.c:127: my_printf(DAC_gain_dec_txt);
+                           2936 ;	genCall
+                           2937 ;	Peephole 182.a	used 16 bit load of DPTR
+   091C 90s01r38           2938 	mov	dptr,#_main_DAC_gain_dec_txt_1_1
+   091F 12s00r00           2939 	lcall	_my_printf
+                    0922   2940 	C$main.c$128$4$10 ==.
+                           2941 ;	main.c:128: break;
+                    0922   2942 	C$main.c$131$3$4 ==.
+                           2943 ;	main.c:131: default:
+                           2944 ;	Peephole 112.b	changed ljmp to sjmp
+   0922 80 05              2945 	sjmp	00110$
+   0924                    2946 00109$:
+                    0924   2947 	C$main.c$133$4$11 ==.
+                           2948 ;	main.c:133: putchar(key_pressed);
+                           2949 ;	genCall
+   0924 8A 82              2950 	mov	dpl,r2
+   0926 12s00r00           2951 	lcall	_putchar
+                    0929   2952 	C$main.c$136$2$2 ==.
+                           2953 ;	main.c:136: }
+   0929                    2954 00110$:
+                    0929   2955 	C$main.c$137$2$2 ==.
+                           2956 ;	main.c:137: if(mode==0)
+                           2957 ;	genAssign
+   0929 90s00r03           2958 	mov	dptr,#_mode
+   092C E0                 2959 	movx	a,@dptr
+                           2960 ;	genIfx
+   092D FA                 2961 	mov	r2,a
+                           2962 ;	Peephole 105	removed redundant mov
+                           2963 ;	genIfxJump
+   092E 60 03              2964 	jz	00134$
+   0930 02s08rAD           2965 	ljmp	00114$
+   0933                    2966 00134$:
+                    0933   2967 	C$main.c$139$3$12 ==.
+                           2968 ;	main.c:139: TR0 = 1;
+                           2969 ;	genAssign
+   0933 D2 8C              2970 	setb	_TR0
+                    0935   2971 	C$main.c$141$1$1 ==.
+                           2972 ;	main.c:141: key_pressed=0;
+                    0935   2973 	C$main.c$143$1$1 ==.
+                    0935   2974 	XG$main$0$0 ==.
+   0935 02s08rAD           2975 	ljmp	00114$
+                           2976 ;	Peephole 259.b	removed redundant label 00116$ and ret
+                           2977 ;
+                           2978 	.area CSEG    (CODE)
+                           2979 	.area CONST   (CODE)
+                           2980 	.area XINIT   (CODE)

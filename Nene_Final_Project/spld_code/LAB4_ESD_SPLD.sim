@@ -1,0 +1,46 @@
+%SIGNAL
+PIN  12 =  A10 
+PIN   4 =  A11 
+PIN   7 =  A12 
+PIN   8 =  A13 
+PIN   6 =  A14 
+PIN   5 =  A15 
+PIN  18 =  CE_BAR 
+PIN  15 =  LCD_ENABLE 
+PIN  13 =  LCD_RS 
+PIN  14 =  LCD_RW 
+PIN  19 =  OE_BAR 
+PIN   2 =  PSEN_BAR 
+PIN   3 =  RD_BAR 
+PIN  16 =  WE_BAR 
+PIN   9 =  WR_BAR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CE_BAR =>
+    A14 & !A15
+  # A13 & !A15
+  # A12 & !A15
+  # A11 & !A15
+  # A10 & !A15
+
+LCD_ENABLE =>
+    A15 & !WR_BAR
+  # A15 & !RD_BAR
+
+LCD_RS =>
+    A13
+
+LCD_RW =>
+    A12
+
+OE_BAR =>
+    RD_BAR
+
+WE_BAR =>
+    WR_BAR
+
+%END

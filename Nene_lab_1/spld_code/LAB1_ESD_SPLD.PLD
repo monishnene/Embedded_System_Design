@@ -1,0 +1,27 @@
+Name     LAB1_ESD ;
+PartNo   00 ;
+Date     2/1/2018 ;
+Revision 01 ;
+Designer Monish Nene ;
+Company  University of Colorado ;
+Assembly None ;
+Location Boulder ;
+Device   g16v8a ;
+
+/* *************** INPUT PINS *********************/
+Pin 2 = RD;
+Pin 3 = PSEN;
+Pin 5 = A15;
+Pin 6 = A14;
+Pin 7 = A13;
+Pin 8 = A12;
+
+/* Output definitions */
+
+Pin 18 = READ;
+Pin 19 = CSPERIPH;
+
+/* Logic */
+
+READ = RD & PSEN;
+CSPERIPH = !(A12 & A13 & A14 & A15);

@@ -1,0 +1,34 @@
+Name     LAB3_ESD ;
+PartNo   00 ;
+Date     3/2/2018 ;
+Revision 01 ;
+Designer Monish Nene ;
+Company  University of Colorado ;
+Assembly None ;
+Location Boulder ;
+Device   g16v8a ;
+
+/* *************** INPUT PINS *********************/
+Pin 2 = PSEN_BAR;
+Pin 3 = RD_BAR;
+Pin 4 = A11;	
+Pin 5 = A15;
+Pin 6 = A14;
+Pin 7 = A13;
+Pin 8 = A12;
+Pin 9 = WR_BAR;
+Pin 12 = A10;
+
+/* Output definitions */
+
+Pin 19 = OE_BAR;
+Pin 18 = CE_BAR;
+Pin 17 = DEBUG_LATCH_CLOCK;
+Pin 16 = WE_BAR;
+
+/* Logic */
+
+OE_BAR = RD_BAR; /*For Reading data from sram*/
+CE_BAR = !(!(A15)&(A14 # A13 # A12 # A11 # A10)); /* For Addresses 0400 to 7FFF in the SRAM*/
+DEBUG_LATCH_CLOCK = !WR_BAR & A15; /*To activate debug latch above the address 7FFF*/
+WE_BAR = WR_BAR; /*For Writing data to sram*/

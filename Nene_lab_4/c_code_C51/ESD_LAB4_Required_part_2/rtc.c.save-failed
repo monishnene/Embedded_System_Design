@@ -1,0 +1,72 @@
+/*
+ * ESD_LAB4_Required.c
+ *
+ *  Created on: april 10 , 2018
+ *      Author: monish
+ */
+#include "rtc.h"
+
+void rtc_interrupt_handler(void) interrupt 1
+{
+    TF0 = 0;
+    TL0 = timer_0_low;
+    TH0 = timer_0_high;
+    if(counter_flag == 0)
+    {
+        counter_flag = 1;
+    }
+    else
+    {
+        time++;
+        P1_0 ^= 1;
+        rtc_diplay();
+        counter_flag=0;
+    }
+}
+
+void rtc_init(void)
+{
+    time = 0;
+    IEN0 |= 0x82;
+    TMOD |= 0x01;
+    TMOD &= 0xF1;
+    TL0 = timer_0_low;
+    TH0 = timer_0_high;
+    TR0 = 1;
+    return;
+}
+
+void rtc_diplay(void)
+{
+    __xdata uint8_t tenth_of_second = 0, seconds = 0, minutes = 0, temp_lcd_row=0,temp_lcd_column=0;
+    temp_lcd_column = lcd_current_column;
+    temp_lcd_row = lcd_current_row;
+    tenth_of_second = time % 10;
+    seconds = (time/10) % 60;
+    minutes = time/600;
+    lcd_go_to_x_y(3,8);
+    lcd_print_number(minutes,2);
+    lcd_put_ch(':');
+    lcd_print_number(seconds,2);
+    lcd_put_ch('.');
+    lcd_print_number(tenth_of_second,1);
+    lcd_go_to_x_y(temp_lcd_row,temp_lcd_column);
+    return;
+}
+
+void rtc_stop_time(void)
+{
+    TR0 = 0;
+}
+
+
+void rtc_start_time(void)
+{
+    TR0 = 1;
+}
+
+
+void rtc_reset_time(void)
+{
+    time = 0;
+}

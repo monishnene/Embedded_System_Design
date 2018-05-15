@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1521242669 source:c:\users\monis\documents\academics\esd\lab3\esd_lab3_supplemental_1.2\main.c
+	"at89c51ed2.h"
+	<mcs51reg.h>
+	<stdint.h>
+
+1521239237 c:\users\monis\documents\academics\esd\lab3\esd_lab3_supplemental_1.2\at89c51ed2.h
+	<8052.h>
+

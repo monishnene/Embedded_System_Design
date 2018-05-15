@@ -1,0 +1,2712 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.6.0 #4309 (Jul 28 2006)
+                              4 ; This file generated Fri Apr 13 12:07:33 2018
+                              5 ;--------------------------------------------------------
+                              6 	.module spi
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _TF1
+                             13 	.globl _TR1
+                             14 	.globl _TF0
+                             15 	.globl _TR0
+                             16 	.globl _IE1
+                             17 	.globl _IT1
+                             18 	.globl _IE0
+                             19 	.globl _IT0
+                             20 	.globl _SM0
+                             21 	.globl _SM1
+                             22 	.globl _SM2
+                             23 	.globl _REN
+                             24 	.globl _TB8
+                             25 	.globl _RB8
+                             26 	.globl _TI
+                             27 	.globl _RI
+                             28 	.globl _CY
+                             29 	.globl _AC
+                             30 	.globl _F0
+                             31 	.globl _RS1
+                             32 	.globl _RS0
+                             33 	.globl _OV
+                             34 	.globl _F1
+                             35 	.globl _P
+                             36 	.globl _RD
+                             37 	.globl _WR
+                             38 	.globl _T1
+                             39 	.globl _T0
+                             40 	.globl _INT1
+                             41 	.globl _INT0
+                             42 	.globl _TXD0
+                             43 	.globl _TXD
+                             44 	.globl _RXD0
+                             45 	.globl _RXD
+                             46 	.globl _P3_7
+                             47 	.globl _P3_6
+                             48 	.globl _P3_5
+                             49 	.globl _P3_4
+                             50 	.globl _P3_3
+                             51 	.globl _P3_2
+                             52 	.globl _P3_1
+                             53 	.globl _P3_0
+                             54 	.globl _P2_7
+                             55 	.globl _P2_6
+                             56 	.globl _P2_5
+                             57 	.globl _P2_4
+                             58 	.globl _P2_3
+                             59 	.globl _P2_2
+                             60 	.globl _P2_1
+                             61 	.globl _P2_0
+                             62 	.globl _P1_7
+                             63 	.globl _P1_6
+                             64 	.globl _P1_5
+                             65 	.globl _P1_4
+                             66 	.globl _P1_3
+                             67 	.globl _P1_2
+                             68 	.globl _P1_1
+                             69 	.globl _P1_0
+                             70 	.globl _P0_7
+                             71 	.globl _P0_6
+                             72 	.globl _P0_5
+                             73 	.globl _P0_4
+                             74 	.globl _P0_3
+                             75 	.globl _P0_2
+                             76 	.globl _P0_1
+                             77 	.globl _P0_0
+                             78 	.globl _PS
+                             79 	.globl _PT1
+                             80 	.globl _PX1
+                             81 	.globl _PT0
+                             82 	.globl _PX0
+                             83 	.globl _EA
+                             84 	.globl _ES
+                             85 	.globl _ET1
+                             86 	.globl _EX1
+                             87 	.globl _ET0
+                             88 	.globl _EX0
+                             89 	.globl _BREG_F7
+                             90 	.globl _BREG_F6
+                             91 	.globl _BREG_F5
+                             92 	.globl _BREG_F4
+                             93 	.globl _BREG_F3
+                             94 	.globl _BREG_F2
+                             95 	.globl _BREG_F1
+                             96 	.globl _BREG_F0
+                             97 	.globl _P5_7
+                             98 	.globl _P5_6
+                             99 	.globl _P5_5
+                            100 	.globl _P5_4
+                            101 	.globl _P5_3
+                            102 	.globl _P5_2
+                            103 	.globl _P5_1
+                            104 	.globl _P5_0
+                            105 	.globl _P4_7
+                            106 	.globl _P4_6
+                            107 	.globl _P4_5
+                            108 	.globl _P4_4
+                            109 	.globl _P4_3
+                            110 	.globl _P4_2
+                            111 	.globl _P4_1
+                            112 	.globl _P4_0
+                            113 	.globl _PX0L
+                            114 	.globl _PT0L
+                            115 	.globl _PX1L
+                            116 	.globl _PT1L
+                            117 	.globl _PLS
+                            118 	.globl _PT2L
+                            119 	.globl _PPCL
+                            120 	.globl _EC
+                            121 	.globl _CCF0
+                            122 	.globl _CCF1
+                            123 	.globl _CCF2
+                            124 	.globl _CCF3
+                            125 	.globl _CCF4
+                            126 	.globl _CR
+                            127 	.globl _CF
+                            128 	.globl _TF2
+                            129 	.globl _EXF2
+                            130 	.globl _RCLK
+                            131 	.globl _TCLK
+                            132 	.globl _EXEN2
+                            133 	.globl _TR2
+                            134 	.globl _C_T2
+                            135 	.globl _CP_RL2
+                            136 	.globl _T2CON_7
+                            137 	.globl _T2CON_6
+                            138 	.globl _T2CON_5
+                            139 	.globl _T2CON_4
+                            140 	.globl _T2CON_3
+                            141 	.globl _T2CON_2
+                            142 	.globl _T2CON_1
+                            143 	.globl _T2CON_0
+                            144 	.globl _PT2
+                            145 	.globl _ET2
+                            146 	.globl _TMOD
+                            147 	.globl _TL1
+                            148 	.globl _TL0
+                            149 	.globl _TH1
+                            150 	.globl _TH0
+                            151 	.globl _TCON
+                            152 	.globl _SP
+                            153 	.globl _SCON
+                            154 	.globl _SBUF0
+                            155 	.globl _SBUF
+                            156 	.globl _PSW
+                            157 	.globl _PCON
+                            158 	.globl _P3
+                            159 	.globl _P2
+                            160 	.globl _P1
+                            161 	.globl _P0
+                            162 	.globl _IP
+                            163 	.globl _IE
+                            164 	.globl _DP0L
+                            165 	.globl _DPL
+                            166 	.globl _DP0H
+                            167 	.globl _DPH
+                            168 	.globl _B
+                            169 	.globl _ACC
+                            170 	.globl _EECON
+                            171 	.globl _KBF
+                            172 	.globl _KBE
+                            173 	.globl _KBLS
+                            174 	.globl _BRL
+                            175 	.globl _BDRCON
+                            176 	.globl _T2MOD
+                            177 	.globl _SPDAT
+                            178 	.globl _SPSTA
+                            179 	.globl _SPCON
+                            180 	.globl _SADEN
+                            181 	.globl _SADDR
+                            182 	.globl _WDTPRG
+                            183 	.globl _WDTRST
+                            184 	.globl _P5
+                            185 	.globl _P4
+                            186 	.globl _IPH1
+                            187 	.globl _IPL1
+                            188 	.globl _IPH0
+                            189 	.globl _IPL0
+                            190 	.globl _IEN1
+                            191 	.globl _IEN0
+                            192 	.globl _CMOD
+                            193 	.globl _CL
+                            194 	.globl _CH
+                            195 	.globl _CCON
+                            196 	.globl _CCAPM4
+                            197 	.globl _CCAPM3
+                            198 	.globl _CCAPM2
+                            199 	.globl _CCAPM1
+                            200 	.globl _CCAPM0
+                            201 	.globl _CCAP4L
+                            202 	.globl _CCAP3L
+                            203 	.globl _CCAP2L
+                            204 	.globl _CCAP1L
+                            205 	.globl _CCAP0L
+                            206 	.globl _CCAP4H
+                            207 	.globl _CCAP3H
+                            208 	.globl _CCAP2H
+                            209 	.globl _CCAP1H
+                            210 	.globl _CCAP0H
+                            211 	.globl _CKRL
+                            212 	.globl _AUXR1
+                            213 	.globl _AUXR
+                            214 	.globl _TH2
+                            215 	.globl _TL2
+                            216 	.globl _RCAP2H
+                            217 	.globl _RCAP2L
+                            218 	.globl _T2CON
+                            219 	.globl _wave_ptr_array
+                            220 	.globl _saw_wave
+                            221 	.globl _triangular_value_wave
+                            222 	.globl _square_wave
+                            223 	.globl _sine_wave
+                            224 	.globl _output_channel_ptr
+                            225 	.globl _loop
+                            226 	.globl _spi_init
+                            227 	.globl _spi_clock_tick
+                            228 	.globl _spi_write_word
+                            229 	.globl _dac_update_output
+                            230 	.globl _dac_next_value
+                            231 	.globl _dac_start_output
+                            232 	.globl _dac_stop_output
+                            233 	.globl _dac_output_control_change
+                            234 	.globl _dac_next_wave
+                            235 	.globl _dac_increase_voltage
+                            236 	.globl _dac_decrease_voltage
+                            237 ;--------------------------------------------------------
+                            238 ; special function registers
+                            239 ;--------------------------------------------------------
+                            240 	.area RSEG    (DATA)
+                    00C8    241 G$T2CON$0$0 == 0x00c8
+                    00C8    242 _T2CON	=	0x00c8
+                    00CA    243 G$RCAP2L$0$0 == 0x00ca
+                    00CA    244 _RCAP2L	=	0x00ca
+                    00CB    245 G$RCAP2H$0$0 == 0x00cb
+                    00CB    246 _RCAP2H	=	0x00cb
+                    00CC    247 G$TL2$0$0 == 0x00cc
+                    00CC    248 _TL2	=	0x00cc
+                    00CD    249 G$TH2$0$0 == 0x00cd
+                    00CD    250 _TH2	=	0x00cd
+                    008E    251 G$AUXR$0$0 == 0x008e
+                    008E    252 _AUXR	=	0x008e
+                    00A2    253 G$AUXR1$0$0 == 0x00a2
+                    00A2    254 _AUXR1	=	0x00a2
+                    0097    255 G$CKRL$0$0 == 0x0097
+                    0097    256 _CKRL	=	0x0097
+                    00FA    257 G$CCAP0H$0$0 == 0x00fa
+                    00FA    258 _CCAP0H	=	0x00fa
+                    00FB    259 G$CCAP1H$0$0 == 0x00fb
+                    00FB    260 _CCAP1H	=	0x00fb
+                    00FC    261 G$CCAP2H$0$0 == 0x00fc
+                    00FC    262 _CCAP2H	=	0x00fc
+                    00FD    263 G$CCAP3H$0$0 == 0x00fd
+                    00FD    264 _CCAP3H	=	0x00fd
+                    00FE    265 G$CCAP4H$0$0 == 0x00fe
+                    00FE    266 _CCAP4H	=	0x00fe
+                    00EA    267 G$CCAP0L$0$0 == 0x00ea
+                    00EA    268 _CCAP0L	=	0x00ea
+                    00EB    269 G$CCAP1L$0$0 == 0x00eb
+                    00EB    270 _CCAP1L	=	0x00eb
+                    00EC    271 G$CCAP2L$0$0 == 0x00ec
+                    00EC    272 _CCAP2L	=	0x00ec
+                    00ED    273 G$CCAP3L$0$0 == 0x00ed
+                    00ED    274 _CCAP3L	=	0x00ed
+                    00EE    275 G$CCAP4L$0$0 == 0x00ee
+                    00EE    276 _CCAP4L	=	0x00ee
+                    00DA    277 G$CCAPM0$0$0 == 0x00da
+                    00DA    278 _CCAPM0	=	0x00da
+                    00DB    279 G$CCAPM1$0$0 == 0x00db
+                    00DB    280 _CCAPM1	=	0x00db
+                    00DC    281 G$CCAPM2$0$0 == 0x00dc
+                    00DC    282 _CCAPM2	=	0x00dc
+                    00DD    283 G$CCAPM3$0$0 == 0x00dd
+                    00DD    284 _CCAPM3	=	0x00dd
+                    00DE    285 G$CCAPM4$0$0 == 0x00de
+                    00DE    286 _CCAPM4	=	0x00de
+                    00D8    287 G$CCON$0$0 == 0x00d8
+                    00D8    288 _CCON	=	0x00d8
+                    00F9    289 G$CH$0$0 == 0x00f9
+                    00F9    290 _CH	=	0x00f9
+                    00E9    291 G$CL$0$0 == 0x00e9
+                    00E9    292 _CL	=	0x00e9
+                    00D9    293 G$CMOD$0$0 == 0x00d9
+                    00D9    294 _CMOD	=	0x00d9
+                    00A8    295 G$IEN0$0$0 == 0x00a8
+                    00A8    296 _IEN0	=	0x00a8
+                    00B1    297 G$IEN1$0$0 == 0x00b1
+                    00B1    298 _IEN1	=	0x00b1
+                    00B8    299 G$IPL0$0$0 == 0x00b8
+                    00B8    300 _IPL0	=	0x00b8
+                    00B7    301 G$IPH0$0$0 == 0x00b7
+                    00B7    302 _IPH0	=	0x00b7
+                    00B2    303 G$IPL1$0$0 == 0x00b2
+                    00B2    304 _IPL1	=	0x00b2
+                    00B3    305 G$IPH1$0$0 == 0x00b3
+                    00B3    306 _IPH1	=	0x00b3
+                    00C0    307 G$P4$0$0 == 0x00c0
+                    00C0    308 _P4	=	0x00c0
+                    00E8    309 G$P5$0$0 == 0x00e8
+                    00E8    310 _P5	=	0x00e8
+                    00A6    311 G$WDTRST$0$0 == 0x00a6
+                    00A6    312 _WDTRST	=	0x00a6
+                    00A7    313 G$WDTPRG$0$0 == 0x00a7
+                    00A7    314 _WDTPRG	=	0x00a7
+                    00A9    315 G$SADDR$0$0 == 0x00a9
+                    00A9    316 _SADDR	=	0x00a9
+                    00B9    317 G$SADEN$0$0 == 0x00b9
+                    00B9    318 _SADEN	=	0x00b9
+                    00C3    319 G$SPCON$0$0 == 0x00c3
+                    00C3    320 _SPCON	=	0x00c3
+                    00C4    321 G$SPSTA$0$0 == 0x00c4
+                    00C4    322 _SPSTA	=	0x00c4
+                    00C5    323 G$SPDAT$0$0 == 0x00c5
+                    00C5    324 _SPDAT	=	0x00c5
+                    00C9    325 G$T2MOD$0$0 == 0x00c9
+                    00C9    326 _T2MOD	=	0x00c9
+                    009B    327 G$BDRCON$0$0 == 0x009b
+                    009B    328 _BDRCON	=	0x009b
+                    009A    329 G$BRL$0$0 == 0x009a
+                    009A    330 _BRL	=	0x009a
+                    009C    331 G$KBLS$0$0 == 0x009c
+                    009C    332 _KBLS	=	0x009c
+                    009D    333 G$KBE$0$0 == 0x009d
+                    009D    334 _KBE	=	0x009d
+                    009E    335 G$KBF$0$0 == 0x009e
+                    009E    336 _KBF	=	0x009e
+                    00D2    337 G$EECON$0$0 == 0x00d2
+                    00D2    338 _EECON	=	0x00d2
+                    00E0    339 G$ACC$0$0 == 0x00e0
+                    00E0    340 _ACC	=	0x00e0
+                    00F0    341 G$B$0$0 == 0x00f0
+                    00F0    342 _B	=	0x00f0
+                    0083    343 G$DPH$0$0 == 0x0083
+                    0083    344 _DPH	=	0x0083
+                    0083    345 G$DP0H$0$0 == 0x0083
+                    0083    346 _DP0H	=	0x0083
+                    0082    347 G$DPL$0$0 == 0x0082
+                    0082    348 _DPL	=	0x0082
+                    0082    349 G$DP0L$0$0 == 0x0082
+                    0082    350 _DP0L	=	0x0082
+                    00A8    351 G$IE$0$0 == 0x00a8
+                    00A8    352 _IE	=	0x00a8
+                    00B8    353 G$IP$0$0 == 0x00b8
+                    00B8    354 _IP	=	0x00b8
+                    0080    355 G$P0$0$0 == 0x0080
+                    0080    356 _P0	=	0x0080
+                    0090    357 G$P1$0$0 == 0x0090
+                    0090    358 _P1	=	0x0090
+                    00A0    359 G$P2$0$0 == 0x00a0
+                    00A0    360 _P2	=	0x00a0
+                    00B0    361 G$P3$0$0 == 0x00b0
+                    00B0    362 _P3	=	0x00b0
+                    0087    363 G$PCON$0$0 == 0x0087
+                    0087    364 _PCON	=	0x0087
+                    00D0    365 G$PSW$0$0 == 0x00d0
+                    00D0    366 _PSW	=	0x00d0
+                    0099    367 G$SBUF$0$0 == 0x0099
+                    0099    368 _SBUF	=	0x0099
+                    0099    369 G$SBUF0$0$0 == 0x0099
+                    0099    370 _SBUF0	=	0x0099
+                    0098    371 G$SCON$0$0 == 0x0098
+                    0098    372 _SCON	=	0x0098
+                    0081    373 G$SP$0$0 == 0x0081
+                    0081    374 _SP	=	0x0081
+                    0088    375 G$TCON$0$0 == 0x0088
+                    0088    376 _TCON	=	0x0088
+                    008C    377 G$TH0$0$0 == 0x008c
+                    008C    378 _TH0	=	0x008c
+                    008D    379 G$TH1$0$0 == 0x008d
+                    008D    380 _TH1	=	0x008d
+                    008A    381 G$TL0$0$0 == 0x008a
+                    008A    382 _TL0	=	0x008a
+                    008B    383 G$TL1$0$0 == 0x008b
+                    008B    384 _TL1	=	0x008b
+                    0089    385 G$TMOD$0$0 == 0x0089
+                    0089    386 _TMOD	=	0x0089
+                            387 ;--------------------------------------------------------
+                            388 ; special function bits
+                            389 ;--------------------------------------------------------
+                            390 	.area RSEG    (DATA)
+                    00AD    391 G$ET2$0$0 == 0x00ad
+                    00AD    392 _ET2	=	0x00ad
+                    00BD    393 G$PT2$0$0 == 0x00bd
+                    00BD    394 _PT2	=	0x00bd
+                    00C8    395 G$T2CON_0$0$0 == 0x00c8
+                    00C8    396 _T2CON_0	=	0x00c8
+                    00C9    397 G$T2CON_1$0$0 == 0x00c9
+                    00C9    398 _T2CON_1	=	0x00c9
+                    00CA    399 G$T2CON_2$0$0 == 0x00ca
+                    00CA    400 _T2CON_2	=	0x00ca
+                    00CB    401 G$T2CON_3$0$0 == 0x00cb
+                    00CB    402 _T2CON_3	=	0x00cb
+                    00CC    403 G$T2CON_4$0$0 == 0x00cc
+                    00CC    404 _T2CON_4	=	0x00cc
+                    00CD    405 G$T2CON_5$0$0 == 0x00cd
+                    00CD    406 _T2CON_5	=	0x00cd
+                    00CE    407 G$T2CON_6$0$0 == 0x00ce
+                    00CE    408 _T2CON_6	=	0x00ce
+                    00CF    409 G$T2CON_7$0$0 == 0x00cf
+                    00CF    410 _T2CON_7	=	0x00cf
+                    00C8    411 G$CP_RL2$0$0 == 0x00c8
+                    00C8    412 _CP_RL2	=	0x00c8
+                    00C9    413 G$C_T2$0$0 == 0x00c9
+                    00C9    414 _C_T2	=	0x00c9
+                    00CA    415 G$TR2$0$0 == 0x00ca
+                    00CA    416 _TR2	=	0x00ca
+                    00CB    417 G$EXEN2$0$0 == 0x00cb
+                    00CB    418 _EXEN2	=	0x00cb
+                    00CC    419 G$TCLK$0$0 == 0x00cc
+                    00CC    420 _TCLK	=	0x00cc
+                    00CD    421 G$RCLK$0$0 == 0x00cd
+                    00CD    422 _RCLK	=	0x00cd
+                    00CE    423 G$EXF2$0$0 == 0x00ce
+                    00CE    424 _EXF2	=	0x00ce
+                    00CF    425 G$TF2$0$0 == 0x00cf
+                    00CF    426 _TF2	=	0x00cf
+                    00DF    427 G$CF$0$0 == 0x00df
+                    00DF    428 _CF	=	0x00df
+                    00DE    429 G$CR$0$0 == 0x00de
+                    00DE    430 _CR	=	0x00de
+                    00DC    431 G$CCF4$0$0 == 0x00dc
+                    00DC    432 _CCF4	=	0x00dc
+                    00DB    433 G$CCF3$0$0 == 0x00db
+                    00DB    434 _CCF3	=	0x00db
+                    00DA    435 G$CCF2$0$0 == 0x00da
+                    00DA    436 _CCF2	=	0x00da
+                    00D9    437 G$CCF1$0$0 == 0x00d9
+                    00D9    438 _CCF1	=	0x00d9
+                    00D8    439 G$CCF0$0$0 == 0x00d8
+                    00D8    440 _CCF0	=	0x00d8
+                    00AE    441 G$EC$0$0 == 0x00ae
+                    00AE    442 _EC	=	0x00ae
+                    00BE    443 G$PPCL$0$0 == 0x00be
+                    00BE    444 _PPCL	=	0x00be
+                    00BD    445 G$PT2L$0$0 == 0x00bd
+                    00BD    446 _PT2L	=	0x00bd
+                    00BC    447 G$PLS$0$0 == 0x00bc
+                    00BC    448 _PLS	=	0x00bc
+                    00BB    449 G$PT1L$0$0 == 0x00bb
+                    00BB    450 _PT1L	=	0x00bb
+                    00BA    451 G$PX1L$0$0 == 0x00ba
+                    00BA    452 _PX1L	=	0x00ba
+                    00B9    453 G$PT0L$0$0 == 0x00b9
+                    00B9    454 _PT0L	=	0x00b9
+                    00B8    455 G$PX0L$0$0 == 0x00b8
+                    00B8    456 _PX0L	=	0x00b8
+                    00C0    457 G$P4_0$0$0 == 0x00c0
+                    00C0    458 _P4_0	=	0x00c0
+                    00C1    459 G$P4_1$0$0 == 0x00c1
+                    00C1    460 _P4_1	=	0x00c1
+                    00C2    461 G$P4_2$0$0 == 0x00c2
+                    00C2    462 _P4_2	=	0x00c2
+                    00C3    463 G$P4_3$0$0 == 0x00c3
+                    00C3    464 _P4_3	=	0x00c3
+                    00C4    465 G$P4_4$0$0 == 0x00c4
+                    00C4    466 _P4_4	=	0x00c4
+                    00C5    467 G$P4_5$0$0 == 0x00c5
+                    00C5    468 _P4_5	=	0x00c5
+                    00C6    469 G$P4_6$0$0 == 0x00c6
+                    00C6    470 _P4_6	=	0x00c6
+                    00C7    471 G$P4_7$0$0 == 0x00c7
+                    00C7    472 _P4_7	=	0x00c7
+                    00E8    473 G$P5_0$0$0 == 0x00e8
+                    00E8    474 _P5_0	=	0x00e8
+                    00E9    475 G$P5_1$0$0 == 0x00e9
+                    00E9    476 _P5_1	=	0x00e9
+                    00EA    477 G$P5_2$0$0 == 0x00ea
+                    00EA    478 _P5_2	=	0x00ea
+                    00EB    479 G$P5_3$0$0 == 0x00eb
+                    00EB    480 _P5_3	=	0x00eb
+                    00EC    481 G$P5_4$0$0 == 0x00ec
+                    00EC    482 _P5_4	=	0x00ec
+                    00ED    483 G$P5_5$0$0 == 0x00ed
+                    00ED    484 _P5_5	=	0x00ed
+                    00EE    485 G$P5_6$0$0 == 0x00ee
+                    00EE    486 _P5_6	=	0x00ee
+                    00EF    487 G$P5_7$0$0 == 0x00ef
+                    00EF    488 _P5_7	=	0x00ef
+                    00F0    489 G$BREG_F0$0$0 == 0x00f0
+                    00F0    490 _BREG_F0	=	0x00f0
+                    00F1    491 G$BREG_F1$0$0 == 0x00f1
+                    00F1    492 _BREG_F1	=	0x00f1
+                    00F2    493 G$BREG_F2$0$0 == 0x00f2
+                    00F2    494 _BREG_F2	=	0x00f2
+                    00F3    495 G$BREG_F3$0$0 == 0x00f3
+                    00F3    496 _BREG_F3	=	0x00f3
+                    00F4    497 G$BREG_F4$0$0 == 0x00f4
+                    00F4    498 _BREG_F4	=	0x00f4
+                    00F5    499 G$BREG_F5$0$0 == 0x00f5
+                    00F5    500 _BREG_F5	=	0x00f5
+                    00F6    501 G$BREG_F6$0$0 == 0x00f6
+                    00F6    502 _BREG_F6	=	0x00f6
+                    00F7    503 G$BREG_F7$0$0 == 0x00f7
+                    00F7    504 _BREG_F7	=	0x00f7
+                    00A8    505 G$EX0$0$0 == 0x00a8
+                    00A8    506 _EX0	=	0x00a8
+                    00A9    507 G$ET0$0$0 == 0x00a9
+                    00A9    508 _ET0	=	0x00a9
+                    00AA    509 G$EX1$0$0 == 0x00aa
+                    00AA    510 _EX1	=	0x00aa
+                    00AB    511 G$ET1$0$0 == 0x00ab
+                    00AB    512 _ET1	=	0x00ab
+                    00AC    513 G$ES$0$0 == 0x00ac
+                    00AC    514 _ES	=	0x00ac
+                    00AF    515 G$EA$0$0 == 0x00af
+                    00AF    516 _EA	=	0x00af
+                    00B8    517 G$PX0$0$0 == 0x00b8
+                    00B8    518 _PX0	=	0x00b8
+                    00B9    519 G$PT0$0$0 == 0x00b9
+                    00B9    520 _PT0	=	0x00b9
+                    00BA    521 G$PX1$0$0 == 0x00ba
+                    00BA    522 _PX1	=	0x00ba
+                    00BB    523 G$PT1$0$0 == 0x00bb
+                    00BB    524 _PT1	=	0x00bb
+                    00BC    525 G$PS$0$0 == 0x00bc
+                    00BC    526 _PS	=	0x00bc
+                    0080    527 G$P0_0$0$0 == 0x0080
+                    0080    528 _P0_0	=	0x0080
+                    0081    529 G$P0_1$0$0 == 0x0081
+                    0081    530 _P0_1	=	0x0081
+                    0082    531 G$P0_2$0$0 == 0x0082
+                    0082    532 _P0_2	=	0x0082
+                    0083    533 G$P0_3$0$0 == 0x0083
+                    0083    534 _P0_3	=	0x0083
+                    0084    535 G$P0_4$0$0 == 0x0084
+                    0084    536 _P0_4	=	0x0084
+                    0085    537 G$P0_5$0$0 == 0x0085
+                    0085    538 _P0_5	=	0x0085
+                    0086    539 G$P0_6$0$0 == 0x0086
+                    0086    540 _P0_6	=	0x0086
+                    0087    541 G$P0_7$0$0 == 0x0087
+                    0087    542 _P0_7	=	0x0087
+                    0090    543 G$P1_0$0$0 == 0x0090
+                    0090    544 _P1_0	=	0x0090
+                    0091    545 G$P1_1$0$0 == 0x0091
+                    0091    546 _P1_1	=	0x0091
+                    0092    547 G$P1_2$0$0 == 0x0092
+                    0092    548 _P1_2	=	0x0092
+                    0093    549 G$P1_3$0$0 == 0x0093
+                    0093    550 _P1_3	=	0x0093
+                    0094    551 G$P1_4$0$0 == 0x0094
+                    0094    552 _P1_4	=	0x0094
+                    0095    553 G$P1_5$0$0 == 0x0095
+                    0095    554 _P1_5	=	0x0095
+                    0096    555 G$P1_6$0$0 == 0x0096
+                    0096    556 _P1_6	=	0x0096
+                    0097    557 G$P1_7$0$0 == 0x0097
+                    0097    558 _P1_7	=	0x0097
+                    00A0    559 G$P2_0$0$0 == 0x00a0
+                    00A0    560 _P2_0	=	0x00a0
+                    00A1    561 G$P2_1$0$0 == 0x00a1
+                    00A1    562 _P2_1	=	0x00a1
+                    00A2    563 G$P2_2$0$0 == 0x00a2
+                    00A2    564 _P2_2	=	0x00a2
+                    00A3    565 G$P2_3$0$0 == 0x00a3
+                    00A3    566 _P2_3	=	0x00a3
+                    00A4    567 G$P2_4$0$0 == 0x00a4
+                    00A4    568 _P2_4	=	0x00a4
+                    00A5    569 G$P2_5$0$0 == 0x00a5
+                    00A5    570 _P2_5	=	0x00a5
+                    00A6    571 G$P2_6$0$0 == 0x00a6
+                    00A6    572 _P2_6	=	0x00a6
+                    00A7    573 G$P2_7$0$0 == 0x00a7
+                    00A7    574 _P2_7	=	0x00a7
+                    00B0    575 G$P3_0$0$0 == 0x00b0
+                    00B0    576 _P3_0	=	0x00b0
+                    00B1    577 G$P3_1$0$0 == 0x00b1
+                    00B1    578 _P3_1	=	0x00b1
+                    00B2    579 G$P3_2$0$0 == 0x00b2
+                    00B2    580 _P3_2	=	0x00b2
+                    00B3    581 G$P3_3$0$0 == 0x00b3
+                    00B3    582 _P3_3	=	0x00b3
+                    00B4    583 G$P3_4$0$0 == 0x00b4
+                    00B4    584 _P3_4	=	0x00b4
+                    00B5    585 G$P3_5$0$0 == 0x00b5
+                    00B5    586 _P3_5	=	0x00b5
+                    00B6    587 G$P3_6$0$0 == 0x00b6
+                    00B6    588 _P3_6	=	0x00b6
+                    00B7    589 G$P3_7$0$0 == 0x00b7
+                    00B7    590 _P3_7	=	0x00b7
+                    00B0    591 G$RXD$0$0 == 0x00b0
+                    00B0    592 _RXD	=	0x00b0
+                    00B0    593 G$RXD0$0$0 == 0x00b0
+                    00B0    594 _RXD0	=	0x00b0
+                    00B1    595 G$TXD$0$0 == 0x00b1
+                    00B1    596 _TXD	=	0x00b1
+                    00B1    597 G$TXD0$0$0 == 0x00b1
+                    00B1    598 _TXD0	=	0x00b1
+                    00B2    599 G$INT0$0$0 == 0x00b2
+                    00B2    600 _INT0	=	0x00b2
+                    00B3    601 G$INT1$0$0 == 0x00b3
+                    00B3    602 _INT1	=	0x00b3
+                    00B4    603 G$T0$0$0 == 0x00b4
+                    00B4    604 _T0	=	0x00b4
+                    00B5    605 G$T1$0$0 == 0x00b5
+                    00B5    606 _T1	=	0x00b5
+                    00B6    607 G$WR$0$0 == 0x00b6
+                    00B6    608 _WR	=	0x00b6
+                    00B7    609 G$RD$0$0 == 0x00b7
+                    00B7    610 _RD	=	0x00b7
+                    00D0    611 G$P$0$0 == 0x00d0
+                    00D0    612 _P	=	0x00d0
+                    00D1    613 G$F1$0$0 == 0x00d1
+                    00D1    614 _F1	=	0x00d1
+                    00D2    615 G$OV$0$0 == 0x00d2
+                    00D2    616 _OV	=	0x00d2
+                    00D3    617 G$RS0$0$0 == 0x00d3
+                    00D3    618 _RS0	=	0x00d3
+                    00D4    619 G$RS1$0$0 == 0x00d4
+                    00D4    620 _RS1	=	0x00d4
+                    00D5    621 G$F0$0$0 == 0x00d5
+                    00D5    622 _F0	=	0x00d5
+                    00D6    623 G$AC$0$0 == 0x00d6
+                    00D6    624 _AC	=	0x00d6
+                    00D7    625 G$CY$0$0 == 0x00d7
+                    00D7    626 _CY	=	0x00d7
+                    0098    627 G$RI$0$0 == 0x0098
+                    0098    628 _RI	=	0x0098
+                    0099    629 G$TI$0$0 == 0x0099
+                    0099    630 _TI	=	0x0099
+                    009A    631 G$RB8$0$0 == 0x009a
+                    009A    632 _RB8	=	0x009a
+                    009B    633 G$TB8$0$0 == 0x009b
+                    009B    634 _TB8	=	0x009b
+                    009C    635 G$REN$0$0 == 0x009c
+                    009C    636 _REN	=	0x009c
+                    009D    637 G$SM2$0$0 == 0x009d
+                    009D    638 _SM2	=	0x009d
+                    009E    639 G$SM1$0$0 == 0x009e
+                    009E    640 _SM1	=	0x009e
+                    009F    641 G$SM0$0$0 == 0x009f
+                    009F    642 _SM0	=	0x009f
+                    0088    643 G$IT0$0$0 == 0x0088
+                    0088    644 _IT0	=	0x0088
+                    0089    645 G$IE0$0$0 == 0x0089
+                    0089    646 _IE0	=	0x0089
+                    008A    647 G$IT1$0$0 == 0x008a
+                    008A    648 _IT1	=	0x008a
+                    008B    649 G$IE1$0$0 == 0x008b
+                    008B    650 _IE1	=	0x008b
+                    008C    651 G$TR0$0$0 == 0x008c
+                    008C    652 _TR0	=	0x008c
+                    008D    653 G$TF0$0$0 == 0x008d
+                    008D    654 _TF0	=	0x008d
+                    008E    655 G$TR1$0$0 == 0x008e
+                    008E    656 _TR1	=	0x008e
+                    008F    657 G$TF1$0$0 == 0x008f
+                    008F    658 _TF1	=	0x008f
+                            659 ;--------------------------------------------------------
+                            660 ; overlayable register banks
+                            661 ;--------------------------------------------------------
+                            662 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     663 	.ds 8
+                            664 ;--------------------------------------------------------
+                            665 ; internal ram data
+                            666 ;--------------------------------------------------------
+                            667 	.area DSEG    (DATA)
+                            668 ;--------------------------------------------------------
+                            669 ; overlayable items in internal ram 
+                            670 ;--------------------------------------------------------
+                            671 	.area OSEG    (OVR,DATA)
+                            672 ;--------------------------------------------------------
+                            673 ; indirectly addressable internal ram data
+                            674 ;--------------------------------------------------------
+                            675 	.area ISEG    (DATA)
+                            676 ;--------------------------------------------------------
+                            677 ; bit data
+                            678 ;--------------------------------------------------------
+                            679 	.area BSEG    (BIT)
+                            680 ;--------------------------------------------------------
+                            681 ; paged external ram data
+                            682 ;--------------------------------------------------------
+                            683 	.area PSEG    (PAG,XDATA)
+                            684 ;--------------------------------------------------------
+                            685 ; external ram data
+                            686 ;--------------------------------------------------------
+                            687 	.area XSEG    (XDATA)
+                    0000    688 G$loop$0$0==.
+   0000                     689 _loop::
+   0000                     690 	.ds 1
+                    0001    691 Fspi$a$0$0==.
+   0001                     692 _a:
+   0001                     693 	.ds 6
+                    0007    694 Fspi$b$0$0==.
+   0007                     695 _b:
+   0007                     696 	.ds 6
+                    000D    697 G$output_channel_ptr$0$0==.
+   000D                     698 _output_channel_ptr::
+   000D                     699 	.ds 2
+                    000F    700 Lspi_write_word$data_word$1$1==.
+   000F                     701 _spi_write_word_data_word_1_1:
+   000F                     702 	.ds 2
+                    0011    703 Ldac_update_output$output_channel_local_ptr$1$1==.
+   0011                     704 _dac_update_output_output_channel_local_ptr_1_1:
+   0011                     705 	.ds 2
+                    0013    706 Ldac_next_value$wave$1$1==.
+   0013                     707 _dac_next_value_wave_1_1:
+   0013                     708 	.ds 1
+                    0014    709 Ldac_next_value$counter$1$1==.
+   0014                     710 _dac_next_value_counter_1_1:
+   0014                     711 	.ds 2
+                    0016    712 Ldac_next_value$data_value$1$1==.
+   0016                     713 _dac_next_value_data_value_1_1:
+   0016                     714 	.ds 2
+                    0018    715 Ldac_output_control_change$a_or_b$1$1==.
+   0018                     716 _dac_output_control_change_a_or_b_1_1:
+   0018                     717 	.ds 1
+                            718 ;--------------------------------------------------------
+                            719 ; external initialized ram data
+                            720 ;--------------------------------------------------------
+                            721 	.area XISEG   (XDATA)
+                    0000    722 G$sine_wave$0$0==.
+   0000                     723 _sine_wave::
+   0000                     724 	.ds 256
+                    0100    725 G$square_wave$0$0==.
+   0100                     726 _square_wave::
+   0100                     727 	.ds 256
+                    0200    728 G$triangular_value_wave$0$0==.
+   0200                     729 _triangular_value_wave::
+   0200                     730 	.ds 256
+                    0300    731 G$saw_wave$0$0==.
+   0300                     732 _saw_wave::
+   0300                     733 	.ds 256
+                    0400    734 G$wave_ptr_array$0$0==.
+   0400                     735 _wave_ptr_array::
+   0400                     736 	.ds 12
+                            737 	.area HOME    (CODE)
+                            738 	.area GSINIT0 (CODE)
+                            739 	.area GSINIT1 (CODE)
+                            740 	.area GSINIT2 (CODE)
+                            741 	.area GSINIT3 (CODE)
+                            742 	.area GSINIT4 (CODE)
+                            743 	.area GSINIT5 (CODE)
+                            744 	.area GSINIT  (CODE)
+                            745 	.area GSFINAL (CODE)
+                            746 	.area CSEG    (CODE)
+                            747 ;--------------------------------------------------------
+                            748 ; global & static initialisations
+                            749 ;--------------------------------------------------------
+                            750 	.area HOME    (CODE)
+                            751 	.area GSINIT  (CODE)
+                            752 	.area GSFINAL (CODE)
+                            753 	.area GSINIT  (CODE)
+                            754 ;------------------------------------------------------------
+                            755 ;Allocation info for local variables in function 'dac_next_value'
+                            756 ;------------------------------------------------------------
+                            757 ;wave                      Allocated with name '_dac_next_value_wave_1_1'
+                            758 ;counter                   Allocated with name '_dac_next_value_counter_1_1'
+                            759 ;data_value                Allocated with name '_dac_next_value_data_value_1_1'
+                            760 ;local_wave_ptr            Allocated with name '_dac_next_value_local_wave_ptr_1_1'
+                            761 ;------------------------------------------------------------
+                    0000    762 	G$dac_next_value$0$0 ==.
+                    0000    763 	C$spi.c$112$1$1 ==.
+                            764 ;	spi.c:112: static uint16_t counter = 0;
+                            765 ;	genAssign
+   0000 90s00r14            766 	mov	dptr,#_dac_next_value_counter_1_1
+   0003 E4                  767 	clr	a
+   0004 F0                  768 	movx	@dptr,a
+   0005 A3                  769 	inc	dptr
+   0006 F0                  770 	movx	@dptr,a
+                            771 ;------------------------------------------------------------
+                            772 ;Allocation info for local variables in function 'dac_output_control_change'
+                            773 ;------------------------------------------------------------
+                            774 ;a_or_b                    Allocated with name '_dac_output_control_change_a_or_b_1_1'
+                            775 ;------------------------------------------------------------
+                    0007    776 	G$dac_output_control_change$0$0 ==.
+                    0007    777 	C$spi.c$154$1$1 ==.
+                            778 ;	spi.c:154: static uint8_t a_or_b = 0 ;
+                            779 ;	genAssign
+   0007 90s00r18            780 	mov	dptr,#_dac_output_control_change_a_or_b_1_1
+                            781 ;	Peephole 181	changed mov to clr
+   000A E4                  782 	clr	a
+   000B F0                  783 	movx	@dptr,a
+                            784 ;--------------------------------------------------------
+                            785 ; Home
+                            786 ;--------------------------------------------------------
+                            787 	.area HOME    (CODE)
+                            788 	.area CSEG    (CODE)
+                            789 ;--------------------------------------------------------
+                            790 ; code
+                            791 ;--------------------------------------------------------
+                            792 	.area CSEG    (CODE)
+                            793 ;------------------------------------------------------------
+                            794 ;Allocation info for local variables in function 'spi_init'
+                            795 ;------------------------------------------------------------
+                            796 ;------------------------------------------------------------
+                    0000    797 	G$spi_init$0$0 ==.
+                    0000    798 	C$spi.c$17$0$0 ==.
+                            799 ;	spi.c:17: void spi_init(void)
+                            800 ;	-----------------------------------------
+                            801 ;	 function spi_init
+                            802 ;	-----------------------------------------
+   0000                     803 _spi_init:
+                    0002    804 	ar2 = 0x02
+                    0003    805 	ar3 = 0x03
+                    0004    806 	ar4 = 0x04
+                    0005    807 	ar5 = 0x05
+                    0006    808 	ar6 = 0x06
+                    0007    809 	ar7 = 0x07
+                    0000    810 	ar0 = 0x00
+                    0001    811 	ar1 = 0x01
+                    0000    812 	C$spi.c$19$1$1 ==.
+                            813 ;	spi.c:19: a.id = 0;
+                            814 ;	genPointerSet
+                            815 ;     genFarPointerSet
+   0000 90s00r01            816 	mov	dptr,#_a
+                            817 ;	Peephole 181	changed mov to clr
+                    0003    818 	C$spi.c$20$1$1 ==.
+                            819 ;	spi.c:20: a.gain = 0;
+                            820 ;	genPointerSet
+                            821 ;     genFarPointerSet
+                            822 ;	Peephole 181	changed mov to clr
+                            823 ;	Peephole 219.a	removed redundant clear
+                    0003    824 	C$spi.c$21$1$1 ==.
+                            825 ;	spi.c:21: a.on_off = 0;
+                            826 ;	genPointerSet
+                            827 ;     genFarPointerSet
+                            828 ;	Peephole 181	changed mov to clr
+   0003 E4                  829 	clr	a
+   0004 F0                  830 	movx	@dptr,a
+   0005 90s00r03            831 	mov	dptr,#(_a + 0x0002)
+   0008 F0                  832 	movx	@dptr,a
+   0009 90s00r02            833 	mov	dptr,#(_a + 0x0001)
+                            834 ;	Peephole 219.b	removed redundant clear
+   000C F0                  835 	movx	@dptr,a
+                    000D    836 	C$spi.c$22$1$1 ==.
+                            837 ;	spi.c:22: a.value = 0xFF;
+                            838 ;	genPointerSet
+                            839 ;     genFarPointerSet
+   000D 90s00r04            840 	mov	dptr,#(_a + 0x0003)
+   0010 74 FF               841 	mov	a,#0xFF
+   0012 F0                  842 	movx	@dptr,a
+   0013 A3                  843 	inc	dptr
+                            844 ;	Peephole 181	changed mov to clr
+                    0014    845 	C$spi.c$23$1$1 ==.
+                            846 ;	spi.c:23: a.wave = 0;
+                            847 ;	genPointerSet
+                            848 ;     genFarPointerSet
+                            849 ;	Peephole 181	changed mov to clr
+                            850 ;	Peephole 219.a	removed redundant clear
+   0014 E4                  851 	clr	a
+   0015 F0                  852 	movx	@dptr,a
+   0016 90s00r06            853 	mov	dptr,#(_a + 0x0005)
+   0019 F0                  854 	movx	@dptr,a
+                    001A    855 	C$spi.c$24$1$1 ==.
+                            856 ;	spi.c:24: b.id = 1;
+                            857 ;	genPointerSet
+                            858 ;     genFarPointerSet
+   001A 90s00r07            859 	mov	dptr,#_b
+   001D 74 01               860 	mov	a,#0x01
+   001F F0                  861 	movx	@dptr,a
+                    0020    862 	C$spi.c$25$1$1 ==.
+                            863 ;	spi.c:25: b.gain = 0;
+                            864 ;	genPointerSet
+                            865 ;     genFarPointerSet
+   0020 90s00r09            866 	mov	dptr,#(_b + 0x0002)
+                            867 ;	Peephole 181	changed mov to clr
+                    0023    868 	C$spi.c$26$1$1 ==.
+                            869 ;	spi.c:26: b.on_off = 0;
+                            870 ;	genPointerSet
+                            871 ;     genFarPointerSet
+                            872 ;	Peephole 181	changed mov to clr
+                            873 ;	Peephole 219.a	removed redundant clear
+   0023 E4                  874 	clr	a
+   0024 F0                  875 	movx	@dptr,a
+   0025 90s00r08            876 	mov	dptr,#(_b + 0x0001)
+   0028 F0                  877 	movx	@dptr,a
+                    0029    878 	C$spi.c$27$1$1 ==.
+                            879 ;	spi.c:27: b.value = 0xFF;
+                            880 ;	genPointerSet
+                            881 ;     genFarPointerSet
+   0029 90s00r0A            882 	mov	dptr,#(_b + 0x0003)
+   002C 74 FF               883 	mov	a,#0xFF
+   002E F0                  884 	movx	@dptr,a
+   002F A3                  885 	inc	dptr
+                            886 ;	Peephole 181	changed mov to clr
+                    0030    887 	C$spi.c$28$1$1 ==.
+                            888 ;	spi.c:28: b.wave = 0;
+                            889 ;	genPointerSet
+                            890 ;     genFarPointerSet
+                            891 ;	Peephole 181	changed mov to clr
+                            892 ;	Peephole 219.a	removed redundant clear
+   0030 E4                  893 	clr	a
+   0031 F0                  894 	movx	@dptr,a
+   0032 90s00r0C            895 	mov	dptr,#(_b + 0x0005)
+   0035 F0                  896 	movx	@dptr,a
+                    0036    897 	C$spi.c$29$1$1 ==.
+                            898 ;	spi.c:29: output_channel_ptr = &a;
+                            899 ;	genAssign
+   0036 90s00r0D            900 	mov	dptr,#_output_channel_ptr
+   0039 74r01               901 	mov	a,#_a
+   003B F0                  902 	movx	@dptr,a
+   003C A3                  903 	inc	dptr
+   003D 74s00               904 	mov	a,#(_a >> 8)
+   003F F0                  905 	movx	@dptr,a
+                            906 ;	Peephole 300	removed redundant label 00101$
+                    0040    907 	C$spi.c$30$1$1 ==.
+                    0040    908 	XG$spi_init$0$0 ==.
+   0040 22                  909 	ret
+                            910 ;------------------------------------------------------------
+                            911 ;Allocation info for local variables in function 'spi_clock_tick'
+                            912 ;------------------------------------------------------------
+                            913 ;------------------------------------------------------------
+                    0041    914 	G$spi_clock_tick$0$0 ==.
+                    0041    915 	C$spi.c$36$1$1 ==.
+                            916 ;	spi.c:36: void spi_clock_tick(void)
+                            917 ;	-----------------------------------------
+                            918 ;	 function spi_clock_tick
+                            919 ;	-----------------------------------------
+   0041                     920 _spi_clock_tick:
+                    0041    921 	C$spi.c$38$1$1 ==.
+                            922 ;	spi.c:38: sck = 1;
+                            923 ;	genAssign
+   0041 D2 95               924 	setb	_P1_5
+                    0043    925 	C$spi.c$39$1$1 ==.
+                            926 ;	spi.c:39: sck = 0;
+                            927 ;	genAssign
+   0043 C2 95               928 	clr	_P1_5
+                    0045    929 	C$spi.c$40$1$1 ==.
+                            930 ;	spi.c:40: return;
+                            931 ;	genRet
+                            932 ;	Peephole 300	removed redundant label 00101$
+                    0045    933 	C$spi.c$41$1$1 ==.
+                    0045    934 	XG$spi_clock_tick$0$0 ==.
+   0045 22                  935 	ret
+                            936 ;------------------------------------------------------------
+                            937 ;Allocation info for local variables in function 'spi_write_word'
+                            938 ;------------------------------------------------------------
+                            939 ;data_word                 Allocated with name '_spi_write_word_data_word_1_1'
+                            940 ;i                         Allocated with name '_spi_write_word_i_1_1'
+                            941 ;------------------------------------------------------------
+                    0046    942 	G$spi_write_word$0$0 ==.
+                    0046    943 	C$spi.c$48$1$1 ==.
+                            944 ;	spi.c:48: void spi_write_word(__xdata uint16_t data_word)
+                            945 ;	-----------------------------------------
+                            946 ;	 function spi_write_word
+                            947 ;	-----------------------------------------
+   0046                     948 _spi_write_word:
+                            949 ;	genReceive
+   0046 AA 83               950 	mov	r2,dph
+   0048 E5 82               951 	mov	a,dpl
+   004A 90s00r0F            952 	mov	dptr,#_spi_write_word_data_word_1_1
+   004D F0                  953 	movx	@dptr,a
+   004E A3                  954 	inc	dptr
+   004F EA                  955 	mov	a,r2
+   0050 F0                  956 	movx	@dptr,a
+                    0051    957 	C$spi.c$51$1$1 ==.
+                            958 ;	spi.c:51: sck = 0;
+                            959 ;	genAssign
+   0051 C2 95               960 	clr	_P1_5
+                    0053    961 	C$spi.c$52$1$1 ==.
+                            962 ;	spi.c:52: ldac_bar = 1;
+                            963 ;	genAssign
+   0053 D2 97               964 	setb	_P1_7
+                    0055    965 	C$spi.c$53$1$1 ==.
+                            966 ;	spi.c:53: cs_bar = 0;
+                            967 ;	genAssign
+   0055 C2 93               968 	clr	_P1_3
+                    0057    969 	C$spi.c$54$1$1 ==.
+                            970 ;	spi.c:54: for(i=0;i<16;i++)
+                            971 ;	genAssign
+   0057 7A 00               972 	mov	r2,#0x00
+   0059                     973 00104$:
+                            974 ;	genCmpLt
+                            975 ;	genCmp
+   0059 BA 10 00            976 	cjne	r2,#0x10,00114$
+   005C                     977 00114$:
+                            978 ;	genIfxJump
+                            979 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   005C 50 31               980 	jnc	00107$
+                            981 ;	Peephole 300	removed redundant label 00115$
+                    005E    982 	C$spi.c$56$2$2 ==.
+                            983 ;	spi.c:56: if(data_word & spi_MSB_mask)
+                            984 ;	genAssign
+   005E 90s00r0F            985 	mov	dptr,#_spi_write_word_data_word_1_1
+   0061 E0                  986 	movx	a,@dptr
+   0062 FB                  987 	mov	r3,a
+   0063 A3                  988 	inc	dptr
+   0064 E0                  989 	movx	a,@dptr
+                            990 ;	genAnd
+   0065 FC                  991 	mov	r4,a
+                            992 ;	Peephole 105	removed redundant mov
+                            993 ;	genIfxJump
+                            994 ;	Peephole 108.d	removed ljmp by inverse jump logic
+   0066 30 E7 04            995 	jnb	acc.7,00102$
+                            996 ;	Peephole 300	removed redundant label 00116$
+                    0069    997 	C$spi.c$58$3$3 ==.
+                            998 ;	spi.c:58: sdi = 1;
+                            999 ;	genAssign
+   0069 D2 96              1000 	setb	_P1_6
+                           1001 ;	Peephole 112.b	changed ljmp to sjmp
+   006B 80 02              1002 	sjmp	00103$
+   006D                    1003 00102$:
+                    006D   1004 	C$spi.c$62$3$4 ==.
+                           1005 ;	spi.c:62: sdi = 0;
+                           1006 ;	genAssign
+   006D C2 96              1007 	clr	_P1_6
+   006F                    1008 00103$:
+                    006F   1009 	C$spi.c$64$2$2 ==.
+                           1010 ;	spi.c:64: spi_clock_tick();
+                           1011 ;	genCall
+   006F C0 02              1012 	push	ar2
+   0071 12s00r41           1013 	lcall	_spi_clock_tick
+   0074 D0 02              1014 	pop	ar2
+                    0076   1015 	C$spi.c$65$2$2 ==.
+                           1016 ;	spi.c:65: data_word = data_word<<1;
+                           1017 ;	genAssign
+   0076 90s00r0F           1018 	mov	dptr,#_spi_write_word_data_word_1_1
+   0079 E0                 1019 	movx	a,@dptr
+   007A FB                 1020 	mov	r3,a
+   007B A3                 1021 	inc	dptr
+   007C E0                 1022 	movx	a,@dptr
+                           1023 ;	genLeftShift
+                           1024 ;	genLeftShiftLiteral
+                           1025 ;	genlshTwo
+   007D FC                 1026 	mov	r4,a
+                           1027 ;	Peephole 105	removed redundant mov
+   007E CB                 1028 	xch	a,r3
+   007F 25 E0              1029 	add	a,acc
+   0081 CB                 1030 	xch	a,r3
+   0082 33                 1031 	rlc	a
+   0083 FC                 1032 	mov	r4,a
+                           1033 ;	genAssign
+   0084 90s00r0F           1034 	mov	dptr,#_spi_write_word_data_word_1_1
+   0087 EB                 1035 	mov	a,r3
+   0088 F0                 1036 	movx	@dptr,a
+   0089 A3                 1037 	inc	dptr
+   008A EC                 1038 	mov	a,r4
+   008B F0                 1039 	movx	@dptr,a
+                    008C   1040 	C$spi.c$54$1$1 ==.
+                           1041 ;	spi.c:54: for(i=0;i<16;i++)
+                           1042 ;	genPlus
+                           1043 ;     genPlusIncr
+   008C 0A                 1044 	inc	r2
+                           1045 ;	Peephole 112.b	changed ljmp to sjmp
+   008D 80 CA              1046 	sjmp	00104$
+   008F                    1047 00107$:
+                    008F   1048 	C$spi.c$67$1$1 ==.
+                           1049 ;	spi.c:67: cs_bar = 1;
+                           1050 ;	genAssign
+   008F D2 93              1051 	setb	_P1_3
+                    0091   1052 	C$spi.c$68$1$1 ==.
+                           1053 ;	spi.c:68: ldac_bar =0;
+                           1054 ;	genAssign
+   0091 C2 97              1055 	clr	_P1_7
+                    0093   1056 	C$spi.c$69$1$1 ==.
+                           1057 ;	spi.c:69: sck = 0;
+                           1058 ;	genAssign
+   0093 C2 95              1059 	clr	_P1_5
+                    0095   1060 	C$spi.c$70$1$1 ==.
+                           1061 ;	spi.c:70: return;
+                           1062 ;	genRet
+                           1063 ;	Peephole 300	removed redundant label 00108$
+                    0095   1064 	C$spi.c$71$1$1 ==.
+                    0095   1065 	XG$spi_write_word$0$0 ==.
+   0095 22                 1066 	ret
+                           1067 ;------------------------------------------------------------
+                           1068 ;Allocation info for local variables in function 'dac_update_output'
+                           1069 ;------------------------------------------------------------
+                           1070 ;output_channel_local_ptr  Allocated with name '_dac_update_output_output_channel_local_ptr_1_1'
+                           1071 ;command_word              Allocated with name '_dac_update_output_command_word_1_1'
+                           1072 ;------------------------------------------------------------
+                    0096   1073 	G$dac_update_output$0$0 ==.
+                    0096   1074 	C$spi.c$78$1$1 ==.
+                           1075 ;	spi.c:78: void dac_update_output(output_channel* output_channel_local_ptr)
+                           1076 ;	-----------------------------------------
+                           1077 ;	 function dac_update_output
+                           1078 ;	-----------------------------------------
+   0096                    1079 _dac_update_output:
+                           1080 ;	genReceive
+   0096 AA 83              1081 	mov	r2,dph
+   0098 E5 82              1082 	mov	a,dpl
+   009A 90s00r11           1083 	mov	dptr,#_dac_update_output_output_channel_local_ptr_1_1
+   009D F0                 1084 	movx	@dptr,a
+   009E A3                 1085 	inc	dptr
+   009F EA                 1086 	mov	a,r2
+   00A0 F0                 1087 	movx	@dptr,a
+                    00A1   1088 	C$spi.c$81$1$1 ==.
+                           1089 ;	spi.c:81: command_word = output_channel_local_ptr->id;
+                           1090 ;	genAssign
+   00A1 90s00r11           1091 	mov	dptr,#_dac_update_output_output_channel_local_ptr_1_1
+   00A4 E0                 1092 	movx	a,@dptr
+   00A5 FA                 1093 	mov	r2,a
+   00A6 A3                 1094 	inc	dptr
+   00A7 E0                 1095 	movx	a,@dptr
+   00A8 FB                 1096 	mov	r3,a
+                    00A9   1097 	C$spi.c$83$1$1 ==.
+                           1098 ;	spi.c:83: if(output_channel_local_ptr->on_off == 1)
+                           1099 ;	genPlus
+                           1100 ;     genPlusIncr
+   00A9 8A 82              1101 	mov	dpl,r2
+   00AB 8B 83              1102 	mov	dph,r3
+   00AD A3                 1103 	inc	dptr
+                           1104 ;	genPointerGet
+                           1105 ;	genFarPointerGet
+   00AE E0                 1106 	movx	a,@dptr
+   00AF FA                 1107 	mov	r2,a
+                           1108 ;	genCmpEq
+                           1109 ;	gencjne
+                           1110 ;	gencjneshort
+                           1111 ;	Peephole 241.d	optimized compare
+   00B0 E4                 1112 	clr	a
+   00B1 BA 01 01           1113 	cjne	r2,#0x01,00111$
+   00B4 04                 1114 	inc	a
+   00B5                    1115 00111$:
+                           1116 ;	Peephole 300	removed redundant label 00112$
+                    00B5   1117 	C$spi.c$91$1$1 ==.
+                           1118 ;	spi.c:91: if(output_channel_local_ptr->gain == 1)
+                           1119 ;	genAssign
+   00B5 90s00r11           1120 	mov	dptr,#_dac_update_output_output_channel_local_ptr_1_1
+   00B8 E0                 1121 	movx	a,@dptr
+   00B9 FA                 1122 	mov	r2,a
+   00BA A3                 1123 	inc	dptr
+   00BB E0                 1124 	movx	a,@dptr
+   00BC FB                 1125 	mov	r3,a
+                           1126 ;	genPlus
+                           1127 ;     genPlusIncr
+   00BD 8A 82              1128 	mov	dpl,r2
+   00BF 8B 83              1129 	mov	dph,r3
+   00C1 A3                 1130 	inc	dptr
+   00C2 A3                 1131 	inc	dptr
+                           1132 ;	genPointerGet
+                           1133 ;	genFarPointerGet
+   00C3 E0                 1134 	movx	a,@dptr
+   00C4 FA                 1135 	mov	r2,a
+                           1136 ;	genCmpEq
+                           1137 ;	gencjne
+                           1138 ;	gencjneshort
+                           1139 ;	Peephole 241.d	optimized compare
+   00C5 E4                 1140 	clr	a
+   00C6 BA 01 01           1141 	cjne	r2,#0x01,00113$
+   00C9 04                 1142 	inc	a
+   00CA                    1143 00113$:
+                           1144 ;	Peephole 300	removed redundant label 00114$
+                    00CA   1145 	C$spi.c$99$1$1 ==.
+                           1146 ;	spi.c:99: output_channel_local_ptr->value = dac_next_value(output_channel_local_ptr->wave);
+                           1147 ;	genAssign
+   00CA 90s00r11           1148 	mov	dptr,#_dac_update_output_output_channel_local_ptr_1_1
+   00CD E0                 1149 	movx	a,@dptr
+   00CE FA                 1150 	mov	r2,a
+   00CF A3                 1151 	inc	dptr
+   00D0 E0                 1152 	movx	a,@dptr
+   00D1 FB                 1153 	mov	r3,a
+                           1154 ;	genPlus
+                           1155 ;     genPlusIncr
+   00D2 74 03              1156 	mov	a,#0x03
+                           1157 ;	Peephole 236.a	used r2 instead of ar2
+   00D4 2A                 1158 	add	a,r2
+   00D5 FC                 1159 	mov	r4,a
+                           1160 ;	Peephole 181	changed mov to clr
+   00D6 E4                 1161 	clr	a
+                           1162 ;	Peephole 236.b	used r3 instead of ar3
+   00D7 3B                 1163 	addc	a,r3
+   00D8 FD                 1164 	mov	r5,a
+                           1165 ;	genPlus
+                           1166 ;     genPlusIncr
+   00D9 8A 82              1167 	mov	dpl,r2
+   00DB 8B 83              1168 	mov	dph,r3
+   00DD A3                 1169 	inc	dptr
+   00DE A3                 1170 	inc	dptr
+   00DF A3                 1171 	inc	dptr
+   00E0 A3                 1172 	inc	dptr
+   00E1 A3                 1173 	inc	dptr
+                           1174 ;	genPointerGet
+                           1175 ;	genFarPointerGet
+   00E2 E0                 1176 	movx	a,@dptr
+                           1177 ;	genCall
+   00E3 FA                 1178 	mov	r2,a
+                           1179 ;	Peephole 244.c	loading dpl from a instead of r2
+   00E4 F5 82              1180 	mov	dpl,a
+   00E6 C0 04              1181 	push	ar4
+   00E8 C0 05              1182 	push	ar5
+   00EA 12s01r13           1183 	lcall	_dac_next_value
+   00ED AA 82              1184 	mov	r2,dpl
+   00EF AB 83              1185 	mov	r3,dph
+   00F1 D0 05              1186 	pop	ar5
+   00F3 D0 04              1187 	pop	ar4
+                           1188 ;	genPointerSet
+                           1189 ;     genFarPointerSet
+   00F5 8C 82              1190 	mov	dpl,r4
+   00F7 8D 83              1191 	mov	dph,r5
+   00F9 EA                 1192 	mov	a,r2
+   00FA F0                 1193 	movx	@dptr,a
+   00FB A3                 1194 	inc	dptr
+   00FC EB                 1195 	mov	a,r3
+   00FD F0                 1196 	movx	@dptr,a
+                    00FE   1197 	C$spi.c$100$1$1 ==.
+                           1198 ;	spi.c:100: command_word = output_channel_local_ptr->value << 4;
+                           1199 ;	genLeftShift
+                           1200 ;	genLeftShiftLiteral
+                           1201 ;	genlshTwo
+   00FE EB                 1202 	mov	a,r3
+   00FF C4                 1203 	swap	a
+   0100 54 F0              1204 	anl	a,#0xf0
+   0102 CA                 1205 	xch	a,r2
+   0103 C4                 1206 	swap	a
+   0104 CA                 1207 	xch	a,r2
+   0105 6A                 1208 	xrl	a,r2
+   0106 CA                 1209 	xch	a,r2
+   0107 54 F0              1210 	anl	a,#0xf0
+   0109 CA                 1211 	xch	a,r2
+   010A 6A                 1212 	xrl	a,r2
+   010B FB                 1213 	mov	r3,a
+                    010C   1214 	C$spi.c$101$1$1 ==.
+                           1215 ;	spi.c:101: spi_write_word(command_word);
+                           1216 ;	genCall
+   010C 8A 82              1217 	mov	dpl,r2
+   010E 8B 83              1218 	mov	dph,r3
+                    0110   1219 	C$spi.c$102$1$1 ==.
+                           1220 ;	spi.c:102: return;
+                           1221 ;	genRet
+                    0110   1222 	C$spi.c$103$1$1 ==.
+                    0110   1223 	XG$dac_update_output$0$0 ==.
+                           1224 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0110 02s00r46           1225 	ljmp	_spi_write_word
+                           1226 ;
+                           1227 ;------------------------------------------------------------
+                           1228 ;Allocation info for local variables in function 'dac_next_value'
+                           1229 ;------------------------------------------------------------
+                           1230 ;wave                      Allocated with name '_dac_next_value_wave_1_1'
+                           1231 ;counter                   Allocated with name '_dac_next_value_counter_1_1'
+                           1232 ;data_value                Allocated with name '_dac_next_value_data_value_1_1'
+                           1233 ;local_wave_ptr            Allocated with name '_dac_next_value_local_wave_ptr_1_1'
+                           1234 ;------------------------------------------------------------
+                    0113   1235 	G$dac_next_value$0$0 ==.
+                    0113   1236 	C$spi.c$110$1$1 ==.
+                           1237 ;	spi.c:110: uint16_t dac_next_value(uint8_t wave)
+                           1238 ;	-----------------------------------------
+                           1239 ;	 function dac_next_value
+                           1240 ;	-----------------------------------------
+   0113                    1241 _dac_next_value:
+                           1242 ;	genReceive
+   0113 E5 82              1243 	mov	a,dpl
+   0115 90s00r13           1244 	mov	dptr,#_dac_next_value_wave_1_1
+   0118 F0                 1245 	movx	@dptr,a
+                    0119   1246 	C$spi.c$115$1$1 ==.
+                           1247 ;	spi.c:115: local_wave_ptr = wave_ptr_array[wave];
+                           1248 ;	genAssign
+   0119 90s00r13           1249 	mov	dptr,#_dac_next_value_wave_1_1
+   011C E0                 1250 	movx	a,@dptr
+                           1251 ;	genMult
+                           1252 ;	genMultOneByte
+   011D FA                 1253 	mov	r2,a
+                           1254 ;	Peephole 105	removed redundant mov
+   011E 75 F0 03           1255 	mov	b,#0x03
+   0121 A4                 1256 	mul	ab
+                           1257 ;	genPlus
+   0122 24r00              1258 	add	a,#_wave_ptr_array
+   0124 F5 82              1259 	mov	dpl,a
+                           1260 ;	Peephole 240	use clr instead of addc a,#0
+   0126 E4                 1261 	clr	a
+   0127 34s04              1262 	addc	a,#(_wave_ptr_array >> 8)
+   0129 F5 83              1263 	mov	dph,a
+                           1264 ;	genPointerGet
+                           1265 ;	genFarPointerGet
+   012B E0                 1266 	movx	a,@dptr
+   012C FA                 1267 	mov	r2,a
+   012D A3                 1268 	inc	dptr
+   012E E0                 1269 	movx	a,@dptr
+   012F FB                 1270 	mov	r3,a
+   0130 A3                 1271 	inc	dptr
+   0131 E0                 1272 	movx	a,@dptr
+   0132 FC                 1273 	mov	r4,a
+                    0133   1274 	C$spi.c$116$1$1 ==.
+                           1275 ;	spi.c:116: data_value = *(local_wave_ptr + counter);
+                           1276 ;	genAssign
+   0133 90s00r14           1277 	mov	dptr,#_dac_next_value_counter_1_1
+   0136 E0                 1278 	movx	a,@dptr
+   0137 FD                 1279 	mov	r5,a
+   0138 A3                 1280 	inc	dptr
+   0139 E0                 1281 	movx	a,@dptr
+                           1282 ;	genLeftShift
+                           1283 ;	genLeftShiftLiteral
+                           1284 ;	genlshTwo
+   013A FE                 1285 	mov	r6,a
+   013B 8D 07              1286 	mov	ar7,r5
+                           1287 ;	Peephole 177.d	removed redundant move
+   013D CF                 1288 	xch	a,r7
+   013E 25 E0              1289 	add	a,acc
+   0140 CF                 1290 	xch	a,r7
+   0141 33                 1291 	rlc	a
+   0142 F8                 1292 	mov	r0,a
+                           1293 ;	genPlus
+                           1294 ;	Peephole 236.g	used r7 instead of ar7
+   0143 EF                 1295 	mov	a,r7
+                           1296 ;	Peephole 236.a	used r2 instead of ar2
+   0144 2A                 1297 	add	a,r2
+   0145 FA                 1298 	mov	r2,a
+                           1299 ;	Peephole 236.g	used r0 instead of ar0
+   0146 E8                 1300 	mov	a,r0
+                           1301 ;	Peephole 236.b	used r3 instead of ar3
+   0147 3B                 1302 	addc	a,r3
+   0148 FB                 1303 	mov	r3,a
+                           1304 ;	genPointerGet
+                           1305 ;	genGenPointerGet
+   0149 8A 82              1306 	mov	dpl,r2
+   014B 8B 83              1307 	mov	dph,r3
+   014D 8C F0              1308 	mov	b,r4
+   014F 12s00r00           1309 	lcall	__gptrget
+   0152 FA                 1310 	mov	r2,a
+   0153 A3                 1311 	inc	dptr
+   0154 12s00r00           1312 	lcall	__gptrget
+   0157 FB                 1313 	mov	r3,a
+                           1314 ;	genAssign
+   0158 90s00r16           1315 	mov	dptr,#_dac_next_value_data_value_1_1
+   015B EA                 1316 	mov	a,r2
+   015C F0                 1317 	movx	@dptr,a
+   015D A3                 1318 	inc	dptr
+   015E EB                 1319 	mov	a,r3
+   015F F0                 1320 	movx	@dptr,a
+                    0160   1321 	C$spi.c$117$1$1 ==.
+                           1322 ;	spi.c:117: if(counter == (number_of_samples - 1))
+                           1323 ;	genCmpEq
+                           1324 ;	gencjneshort
+                           1325 ;	Peephole 112.b	changed ljmp to sjmp
+                           1326 ;	Peephole 198.a	optimized misc jump sequence
+   0160 BD FF 0C           1327 	cjne	r5,#0xFF,00102$
+   0163 BE 00 09           1328 	cjne	r6,#0x00,00102$
+                           1329 ;	Peephole 200.b	removed redundant sjmp
+                           1330 ;	Peephole 300	removed redundant label 00107$
+                           1331 ;	Peephole 300	removed redundant label 00108$
+                    0166   1332 	C$spi.c$119$2$2 ==.
+                           1333 ;	spi.c:119: counter = 0;
+                           1334 ;	genAssign
+   0166 90s00r14           1335 	mov	dptr,#_dac_next_value_counter_1_1
+   0169 E4                 1336 	clr	a
+   016A F0                 1337 	movx	@dptr,a
+   016B A3                 1338 	inc	dptr
+   016C F0                 1339 	movx	@dptr,a
+                           1340 ;	Peephole 112.b	changed ljmp to sjmp
+   016D 80 0B              1341 	sjmp	00103$
+   016F                    1342 00102$:
+                    016F   1343 	C$spi.c$123$2$3 ==.
+                           1344 ;	spi.c:123: counter++;
+                           1345 ;	genPlus
+   016F 90s00r14           1346 	mov	dptr,#_dac_next_value_counter_1_1
+                           1347 ;     genPlusIncr
+   0172 74 01              1348 	mov	a,#0x01
+                           1349 ;	Peephole 236.a	used r5 instead of ar5
+   0174 2D                 1350 	add	a,r5
+   0175 F0                 1351 	movx	@dptr,a
+                           1352 ;	Peephole 181	changed mov to clr
+   0176 E4                 1353 	clr	a
+                           1354 ;	Peephole 236.b	used r6 instead of ar6
+   0177 3E                 1355 	addc	a,r6
+   0178 A3                 1356 	inc	dptr
+   0179 F0                 1357 	movx	@dptr,a
+   017A                    1358 00103$:
+                    017A   1359 	C$spi.c$125$1$1 ==.
+                           1360 ;	spi.c:125: return data_value;
+                           1361 ;	genAssign
+   017A 90s00r16           1362 	mov	dptr,#_dac_next_value_data_value_1_1
+   017D E0                 1363 	movx	a,@dptr
+   017E FA                 1364 	mov	r2,a
+   017F A3                 1365 	inc	dptr
+   0180 E0                 1366 	movx	a,@dptr
+                           1367 ;	genRet
+                    0181   1368 	C$spi.c$126$1$1 ==.
+                    0181   1369 	XG$dac_next_value$0$0 ==.
+                           1370 ;	Peephole 234.b	loading dph directly from a(ccumulator), r3 not set
+   0181 8A 82              1371 	mov	dpl,r2
+   0183 F5 83              1372 	mov	dph,a
+                           1373 ;	Peephole 300	removed redundant label 00104$
+   0185 22                 1374 	ret
+                           1375 ;------------------------------------------------------------
+                           1376 ;Allocation info for local variables in function 'dac_start_output'
+                           1377 ;------------------------------------------------------------
+                           1378 ;------------------------------------------------------------
+                    0186   1379 	G$dac_start_output$0$0 ==.
+                    0186   1380 	C$spi.c$132$1$1 ==.
+                           1381 ;	spi.c:132: void dac_start_output(void)
+                           1382 ;	-----------------------------------------
+                           1383 ;	 function dac_start_output
+                           1384 ;	-----------------------------------------
+   0186                    1385 _dac_start_output:
+                    0186   1386 	C$spi.c$134$1$1 ==.
+                           1387 ;	spi.c:134: output_channel_ptr->on_off = 1;
+                           1388 ;	genAssign
+   0186 90s00r0D           1389 	mov	dptr,#_output_channel_ptr
+   0189 E0                 1390 	movx	a,@dptr
+   018A FA                 1391 	mov	r2,a
+   018B A3                 1392 	inc	dptr
+   018C E0                 1393 	movx	a,@dptr
+   018D FB                 1394 	mov	r3,a
+                           1395 ;	genPlus
+                           1396 ;     genPlusIncr
+   018E 8A 82              1397 	mov	dpl,r2
+   0190 8B 83              1398 	mov	dph,r3
+   0192 A3                 1399 	inc	dptr
+                           1400 ;	genPointerSet
+                           1401 ;     genFarPointerSet
+   0193 74 01              1402 	mov	a,#0x01
+   0195 F0                 1403 	movx	@dptr,a
+                    0196   1404 	C$spi.c$135$1$1 ==.
+                           1405 ;	spi.c:135: return;
+                           1406 ;	genRet
+                           1407 ;	Peephole 300	removed redundant label 00101$
+                    0196   1408 	C$spi.c$136$1$1 ==.
+                    0196   1409 	XG$dac_start_output$0$0 ==.
+   0196 22                 1410 	ret
+                           1411 ;------------------------------------------------------------
+                           1412 ;Allocation info for local variables in function 'dac_stop_output'
+                           1413 ;------------------------------------------------------------
+                           1414 ;------------------------------------------------------------
+                    0197   1415 	G$dac_stop_output$0$0 ==.
+                    0197   1416 	C$spi.c$142$1$1 ==.
+                           1417 ;	spi.c:142: void dac_stop_output(void)
+                           1418 ;	-----------------------------------------
+                           1419 ;	 function dac_stop_output
+                           1420 ;	-----------------------------------------
+   0197                    1421 _dac_stop_output:
+                    0197   1422 	C$spi.c$144$1$1 ==.
+                           1423 ;	spi.c:144: output_channel_ptr->on_off = 0;
+                           1424 ;	genAssign
+   0197 90s00r0D           1425 	mov	dptr,#_output_channel_ptr
+   019A E0                 1426 	movx	a,@dptr
+   019B FA                 1427 	mov	r2,a
+   019C A3                 1428 	inc	dptr
+   019D E0                 1429 	movx	a,@dptr
+   019E FB                 1430 	mov	r3,a
+                           1431 ;	genPlus
+                           1432 ;     genPlusIncr
+   019F 8A 82              1433 	mov	dpl,r2
+   01A1 8B 83              1434 	mov	dph,r3
+   01A3 A3                 1435 	inc	dptr
+                           1436 ;	genPointerSet
+                           1437 ;     genFarPointerSet
+                           1438 ;	Peephole 181	changed mov to clr
+   01A4 E4                 1439 	clr	a
+   01A5 F0                 1440 	movx	@dptr,a
+                    01A6   1441 	C$spi.c$145$1$1 ==.
+                           1442 ;	spi.c:145: return;
+                           1443 ;	genRet
+                           1444 ;	Peephole 300	removed redundant label 00101$
+                    01A6   1445 	C$spi.c$146$1$1 ==.
+                    01A6   1446 	XG$dac_stop_output$0$0 ==.
+   01A6 22                 1447 	ret
+                           1448 ;------------------------------------------------------------
+                           1449 ;Allocation info for local variables in function 'dac_output_control_change'
+                           1450 ;------------------------------------------------------------
+                           1451 ;a_or_b                    Allocated with name '_dac_output_control_change_a_or_b_1_1'
+                           1452 ;------------------------------------------------------------
+                    01A7   1453 	G$dac_output_control_change$0$0 ==.
+                    01A7   1454 	C$spi.c$152$1$1 ==.
+                           1455 ;	spi.c:152: void dac_output_control_change(void)
+                           1456 ;	-----------------------------------------
+                           1457 ;	 function dac_output_control_change
+                           1458 ;	-----------------------------------------
+   01A7                    1459 _dac_output_control_change:
+                    01A7   1460 	C$spi.c$155$1$1 ==.
+                           1461 ;	spi.c:155: if(a_or_b == 0)
+                           1462 ;	genAssign
+   01A7 90s00r18           1463 	mov	dptr,#_dac_output_control_change_a_or_b_1_1
+   01AA E0                 1464 	movx	a,@dptr
+                           1465 ;	genIfx
+   01AB FA                 1466 	mov	r2,a
+                           1467 ;	Peephole 105	removed redundant mov
+                           1468 ;	genIfxJump
+                           1469 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   01AC 70 12              1470 	jnz	00102$
+                           1471 ;	Peephole 300	removed redundant label 00107$
+                    01AE   1472 	C$spi.c$157$2$2 ==.
+                           1473 ;	spi.c:157: output_channel_ptr = &b;
+                           1474 ;	genAssign
+   01AE 90s00r0D           1475 	mov	dptr,#_output_channel_ptr
+   01B1 74r07              1476 	mov	a,#_b
+   01B3 F0                 1477 	movx	@dptr,a
+   01B4 A3                 1478 	inc	dptr
+   01B5 74s00              1479 	mov	a,#(_b >> 8)
+   01B7 F0                 1480 	movx	@dptr,a
+                    01B8   1481 	C$spi.c$158$2$2 ==.
+                           1482 ;	spi.c:158: a_or_b = 1;
+                           1483 ;	genAssign
+   01B8 90s00r18           1484 	mov	dptr,#_dac_output_control_change_a_or_b_1_1
+   01BB 74 01              1485 	mov	a,#0x01
+   01BD F0                 1486 	movx	@dptr,a
+                           1487 ;	Peephole 112.b	changed ljmp to sjmp
+   01BE 80 0F              1488 	sjmp	00103$
+   01C0                    1489 00102$:
+                    01C0   1490 	C$spi.c$162$2$3 ==.
+                           1491 ;	spi.c:162: output_channel_ptr = &a;
+                           1492 ;	genAssign
+   01C0 90s00r0D           1493 	mov	dptr,#_output_channel_ptr
+   01C3 74r01              1494 	mov	a,#_a
+   01C5 F0                 1495 	movx	@dptr,a
+   01C6 A3                 1496 	inc	dptr
+   01C7 74s00              1497 	mov	a,#(_a >> 8)
+   01C9 F0                 1498 	movx	@dptr,a
+                    01CA   1499 	C$spi.c$163$2$3 ==.
+                           1500 ;	spi.c:163: a_or_b = 0;
+                           1501 ;	genAssign
+   01CA 90s00r18           1502 	mov	dptr,#_dac_output_control_change_a_or_b_1_1
+                           1503 ;	Peephole 181	changed mov to clr
+   01CD E4                 1504 	clr	a
+   01CE F0                 1505 	movx	@dptr,a
+   01CF                    1506 00103$:
+                    01CF   1507 	C$spi.c$165$1$1 ==.
+                           1508 ;	spi.c:165: return;
+                           1509 ;	genRet
+                           1510 ;	Peephole 300	removed redundant label 00104$
+                    01CF   1511 	C$spi.c$166$1$1 ==.
+                    01CF   1512 	XG$dac_output_control_change$0$0 ==.
+   01CF 22                 1513 	ret
+                           1514 ;------------------------------------------------------------
+                           1515 ;Allocation info for local variables in function 'dac_next_wave'
+                           1516 ;------------------------------------------------------------
+                           1517 ;------------------------------------------------------------
+                    01D0   1518 	G$dac_next_wave$0$0 ==.
+                    01D0   1519 	C$spi.c$173$1$1 ==.
+                           1520 ;	spi.c:173: uint8_t dac_next_wave(void)
+                           1521 ;	-----------------------------------------
+                           1522 ;	 function dac_next_wave
+                           1523 ;	-----------------------------------------
+   01D0                    1524 _dac_next_wave:
+                    01D0   1525 	C$spi.c$175$1$1 ==.
+                           1526 ;	spi.c:175: if(output_channel_ptr->wave == (total_waves - 1))
+                           1527 ;	genAssign
+   01D0 90s00r0D           1528 	mov	dptr,#_output_channel_ptr
+   01D3 E0                 1529 	movx	a,@dptr
+   01D4 FA                 1530 	mov	r2,a
+   01D5 A3                 1531 	inc	dptr
+   01D6 E0                 1532 	movx	a,@dptr
+   01D7 FB                 1533 	mov	r3,a
+                           1534 ;	genPlus
+                           1535 ;     genPlusIncr
+   01D8 74 05              1536 	mov	a,#0x05
+                           1537 ;	Peephole 236.a	used r2 instead of ar2
+   01DA 2A                 1538 	add	a,r2
+   01DB FA                 1539 	mov	r2,a
+                           1540 ;	Peephole 181	changed mov to clr
+   01DC E4                 1541 	clr	a
+                           1542 ;	Peephole 236.b	used r3 instead of ar3
+   01DD 3B                 1543 	addc	a,r3
+   01DE FB                 1544 	mov	r3,a
+                           1545 ;	genPointerGet
+                           1546 ;	genFarPointerGet
+   01DF 8A 82              1547 	mov	dpl,r2
+   01E1 8B 83              1548 	mov	dph,r3
+   01E3 E0                 1549 	movx	a,@dptr
+   01E4 FC                 1550 	mov	r4,a
+                           1551 ;	genCmpEq
+                           1552 ;	gencjneshort
+                           1553 ;	Peephole 112.b	changed ljmp to sjmp
+                           1554 ;	Peephole 198.b	optimized misc jump sequence
+   01E5 BC 03 08           1555 	cjne	r4,#0x03,00102$
+                           1556 ;	Peephole 200.b	removed redundant sjmp
+                           1557 ;	Peephole 300	removed redundant label 00107$
+                           1558 ;	Peephole 300	removed redundant label 00108$
+                    01E8   1559 	C$spi.c$177$2$2 ==.
+                           1560 ;	spi.c:177: output_channel_ptr->wave = 0;
+                           1561 ;	genPointerSet
+                           1562 ;     genFarPointerSet
+   01E8 8A 82              1563 	mov	dpl,r2
+   01EA 8B 83              1564 	mov	dph,r3
+                           1565 ;	Peephole 181	changed mov to clr
+   01EC E4                 1566 	clr	a
+   01ED F0                 1567 	movx	@dptr,a
+                           1568 ;	Peephole 112.b	changed ljmp to sjmp
+   01EE 80 07              1569 	sjmp	00103$
+   01F0                    1570 00102$:
+                    01F0   1571 	C$spi.c$181$2$3 ==.
+                           1572 ;	spi.c:181: output_channel_ptr->wave++;
+                           1573 ;	genPlus
+                           1574 ;     genPlusIncr
+   01F0 0C                 1575 	inc	r4
+                           1576 ;	genPointerSet
+                           1577 ;     genFarPointerSet
+   01F1 8A 82              1578 	mov	dpl,r2
+   01F3 8B 83              1579 	mov	dph,r3
+   01F5 EC                 1580 	mov	a,r4
+   01F6 F0                 1581 	movx	@dptr,a
+   01F7                    1582 00103$:
+                    01F7   1583 	C$spi.c$183$1$1 ==.
+                           1584 ;	spi.c:183: return output_channel_ptr->wave;
+                           1585 ;	genPointerGet
+                           1586 ;	genFarPointerGet
+   01F7 8A 82              1587 	mov	dpl,r2
+   01F9 8B 83              1588 	mov	dph,r3
+   01FB E0                 1589 	movx	a,@dptr
+                           1590 ;	genRet
+                    01FC   1591 	C$spi.c$184$1$1 ==.
+                    01FC   1592 	XG$dac_next_wave$0$0 ==.
+                           1593 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
+   01FC F5 82              1594 	mov	dpl,a
+                           1595 ;	Peephole 300	removed redundant label 00104$
+   01FE 22                 1596 	ret
+                           1597 ;------------------------------------------------------------
+                           1598 ;Allocation info for local variables in function 'dac_increase_voltage'
+                           1599 ;------------------------------------------------------------
+                           1600 ;------------------------------------------------------------
+                    01FF   1601 	G$dac_increase_voltage$0$0 ==.
+                    01FF   1602 	C$spi.c$190$1$1 ==.
+                           1603 ;	spi.c:190: void dac_increase_voltage(void)
+                           1604 ;	-----------------------------------------
+                           1605 ;	 function dac_increase_voltage
+                           1606 ;	-----------------------------------------
+   01FF                    1607 _dac_increase_voltage:
+                    01FF   1608 	C$spi.c$192$1$1 ==.
+                           1609 ;	spi.c:192: output_channel_ptr->gain = 1;
+                           1610 ;	genAssign
+   01FF 90s00r0D           1611 	mov	dptr,#_output_channel_ptr
+   0202 E0                 1612 	movx	a,@dptr
+   0203 FA                 1613 	mov	r2,a
+   0204 A3                 1614 	inc	dptr
+   0205 E0                 1615 	movx	a,@dptr
+   0206 FB                 1616 	mov	r3,a
+                           1617 ;	genPlus
+                           1618 ;     genPlusIncr
+   0207 8A 82              1619 	mov	dpl,r2
+   0209 8B 83              1620 	mov	dph,r3
+   020B A3                 1621 	inc	dptr
+   020C A3                 1622 	inc	dptr
+                           1623 ;	genPointerSet
+                           1624 ;     genFarPointerSet
+   020D 74 01              1625 	mov	a,#0x01
+   020F F0                 1626 	movx	@dptr,a
+                    0210   1627 	C$spi.c$193$1$1 ==.
+                           1628 ;	spi.c:193: return;
+                           1629 ;	genRet
+                           1630 ;	Peephole 300	removed redundant label 00101$
+                    0210   1631 	C$spi.c$194$1$1 ==.
+                    0210   1632 	XG$dac_increase_voltage$0$0 ==.
+   0210 22                 1633 	ret
+                           1634 ;------------------------------------------------------------
+                           1635 ;Allocation info for local variables in function 'dac_decrease_voltage'
+                           1636 ;------------------------------------------------------------
+                           1637 ;------------------------------------------------------------
+                    0211   1638 	G$dac_decrease_voltage$0$0 ==.
+                    0211   1639 	C$spi.c$200$1$1 ==.
+                           1640 ;	spi.c:200: void dac_decrease_voltage(void)
+                           1641 ;	-----------------------------------------
+                           1642 ;	 function dac_decrease_voltage
+                           1643 ;	-----------------------------------------
+   0211                    1644 _dac_decrease_voltage:
+                    0211   1645 	C$spi.c$202$1$1 ==.
+                           1646 ;	spi.c:202: output_channel_ptr->gain = 0;
+                           1647 ;	genAssign
+   0211 90s00r0D           1648 	mov	dptr,#_output_channel_ptr
+   0214 E0                 1649 	movx	a,@dptr
+   0215 FA                 1650 	mov	r2,a
+   0216 A3                 1651 	inc	dptr
+   0217 E0                 1652 	movx	a,@dptr
+   0218 FB                 1653 	mov	r3,a
+                           1654 ;	genPlus
+                           1655 ;     genPlusIncr
+   0219 8A 82              1656 	mov	dpl,r2
+   021B 8B 83              1657 	mov	dph,r3
+   021D A3                 1658 	inc	dptr
+   021E A3                 1659 	inc	dptr
+                           1660 ;	genPointerSet
+                           1661 ;     genFarPointerSet
+                           1662 ;	Peephole 181	changed mov to clr
+   021F E4                 1663 	clr	a
+   0220 F0                 1664 	movx	@dptr,a
+                    0221   1665 	C$spi.c$203$1$1 ==.
+                           1666 ;	spi.c:203: return;
+                           1667 ;	genRet
+                           1668 ;	Peephole 300	removed redundant label 00101$
+                    0221   1669 	C$spi.c$204$1$1 ==.
+                    0221   1670 	XG$dac_decrease_voltage$0$0 ==.
+   0221 22                 1671 	ret
+                           1672 	.area CSEG    (CODE)
+                           1673 	.area CONST   (CODE)
+                           1674 	.area XINIT   (CODE)
+                    0000   1675 Fspi$__xinit_sine_wave$0$0 == .
+   0000                    1676 __xinit__sine_wave:
+   0000 80                 1677 	.db #0x80
+   0001 83                 1678 	.db #0x83
+   0002 86                 1679 	.db #0x86
+   0003 89                 1680 	.db #0x89
+   0004 8C                 1681 	.db #0x8C
+   0005 90                 1682 	.db #0x90
+   0006 93                 1683 	.db #0x93
+   0007 96                 1684 	.db #0x96
+   0008 99                 1685 	.db #0x99
+   0009 9C                 1686 	.db #0x9C
+   000A 9F                 1687 	.db #0x9F
+   000B A2                 1688 	.db #0xA2
+   000C A5                 1689 	.db #0xA5
+   000D A8                 1690 	.db #0xA8
+   000E AB                 1691 	.db #0xAB
+   000F AE                 1692 	.db #0xAE
+   0010 B1                 1693 	.db #0xB1
+   0011 B4                 1694 	.db #0xB4
+   0012 B6                 1695 	.db #0xB6
+   0013 B9                 1696 	.db #0xB9
+   0014 BC                 1697 	.db #0xBC
+   0015 BF                 1698 	.db #0xBF
+   0016 C2                 1699 	.db #0xC2
+   0017 C4                 1700 	.db #0xC4
+   0018 C7                 1701 	.db #0xC7
+   0019 C9                 1702 	.db #0xC9
+   001A CC                 1703 	.db #0xCC
+   001B CE                 1704 	.db #0xCE
+   001C D1                 1705 	.db #0xD1
+   001D D3                 1706 	.db #0xD3
+   001E D6                 1707 	.db #0xD6
+   001F D8                 1708 	.db #0xD8
+   0020 DA                 1709 	.db #0xDA
+   0021 DC                 1710 	.db #0xDC
+   0022 DE                 1711 	.db #0xDE
+   0023 E0                 1712 	.db #0xE0
+   0024 E2                 1713 	.db #0xE2
+   0025 E4                 1714 	.db #0xE4
+   0026 E6                 1715 	.db #0xE6
+   0027 E8                 1716 	.db #0xE8
+   0028 EA                 1717 	.db #0xEA
+   0029 EC                 1718 	.db #0xEC
+   002A ED                 1719 	.db #0xED
+   002B EF                 1720 	.db #0xEF
+   002C F0                 1721 	.db #0xF0
+   002D F2                 1722 	.db #0xF2
+   002E F3                 1723 	.db #0xF3
+   002F F4                 1724 	.db #0xF4
+   0030 F6                 1725 	.db #0xF6
+   0031 F7                 1726 	.db #0xF7
+   0032 F8                 1727 	.db #0xF8
+   0033 F9                 1728 	.db #0xF9
+   0034 FA                 1729 	.db #0xFA
+   0035 FB                 1730 	.db #0xFB
+   0036 FB                 1731 	.db #0xFB
+   0037 FC                 1732 	.db #0xFC
+   0038 FD                 1733 	.db #0xFD
+   0039 FD                 1734 	.db #0xFD
+   003A FE                 1735 	.db #0xFE
+   003B FE                 1736 	.db #0xFE
+   003C FE                 1737 	.db #0xFE
+   003D FF                 1738 	.db #0xFF
+   003E FF                 1739 	.db #0xFF
+   003F FF                 1740 	.db #0xFF
+   0040 FF                 1741 	.db #0xFF
+   0041 FF                 1742 	.db #0xFF
+   0042 FF                 1743 	.db #0xFF
+   0043 FF                 1744 	.db #0xFF
+   0044 FE                 1745 	.db #0xFE
+   0045 FE                 1746 	.db #0xFE
+   0046 FD                 1747 	.db #0xFD
+   0047 FD                 1748 	.db #0xFD
+   0048 FC                 1749 	.db #0xFC
+   0049 FC                 1750 	.db #0xFC
+   004A FB                 1751 	.db #0xFB
+   004B FA                 1752 	.db #0xFA
+   004C F9                 1753 	.db #0xF9
+   004D F8                 1754 	.db #0xF8
+   004E F7                 1755 	.db #0xF7
+   004F F6                 1756 	.db #0xF6
+   0050 F5                 1757 	.db #0xF5
+   0051 F4                 1758 	.db #0xF4
+   0052 F2                 1759 	.db #0xF2
+   0053 F1                 1760 	.db #0xF1
+   0054 F0                 1761 	.db #0xF0
+   0055 EE                 1762 	.db #0xEE
+   0056 EC                 1763 	.db #0xEC
+   0057 EB                 1764 	.db #0xEB
+   0058 E9                 1765 	.db #0xE9
+   0059 E7                 1766 	.db #0xE7
+   005A E5                 1767 	.db #0xE5
+   005B E3                 1768 	.db #0xE3
+   005C E1                 1769 	.db #0xE1
+   005D DF                 1770 	.db #0xDF
+   005E DD                 1771 	.db #0xDD
+   005F DB                 1772 	.db #0xDB
+   0060 D9                 1773 	.db #0xD9
+   0061 D7                 1774 	.db #0xD7
+   0062 D4                 1775 	.db #0xD4
+   0063 D2                 1776 	.db #0xD2
+   0064 D0                 1777 	.db #0xD0
+   0065 CD                 1778 	.db #0xCD
+   0066 CB                 1779 	.db #0xCB
+   0067 C8                 1780 	.db #0xC8
+   0068 C5                 1781 	.db #0xC5
+   0069 C3                 1782 	.db #0xC3
+   006A C0                 1783 	.db #0xC0
+   006B BD                 1784 	.db #0xBD
+   006C BB                 1785 	.db #0xBB
+   006D B8                 1786 	.db #0xB8
+   006E B5                 1787 	.db #0xB5
+   006F B2                 1788 	.db #0xB2
+   0070 AF                 1789 	.db #0xAF
+   0071 AC                 1790 	.db #0xAC
+   0072 A9                 1791 	.db #0xA9
+   0073 A7                 1792 	.db #0xA7
+   0074 A4                 1793 	.db #0xA4
+   0075 A0                 1794 	.db #0xA0
+   0076 9D                 1795 	.db #0x9D
+   0077 9A                 1796 	.db #0x9A
+   0078 97                 1797 	.db #0x97
+   0079 94                 1798 	.db #0x94
+   007A 91                 1799 	.db #0x91
+   007B 8E                 1800 	.db #0x8E
+   007C 8B                 1801 	.db #0x8B
+   007D 88                 1802 	.db #0x88
+   007E 85                 1803 	.db #0x85
+   007F 82                 1804 	.db #0x82
+   0080 7E                 1805 	.db #0x7E
+   0081 7B                 1806 	.db #0x7B
+   0082 78                 1807 	.db #0x78
+   0083 75                 1808 	.db #0x75
+   0084 72                 1809 	.db #0x72
+   0085 6F                 1810 	.db #0x6F
+   0086 6C                 1811 	.db #0x6C
+   0087 69                 1812 	.db #0x69
+   0088 66                 1813 	.db #0x66
+   0089 63                 1814 	.db #0x63
+   008A 60                 1815 	.db #0x60
+   008B 5C                 1816 	.db #0x5C
+   008C 59                 1817 	.db #0x59
+   008D 57                 1818 	.db #0x57
+   008E 54                 1819 	.db #0x54
+   008F 51                 1820 	.db #0x51
+   0090 4E                 1821 	.db #0x4E
+   0091 4B                 1822 	.db #0x4B
+   0092 48                 1823 	.db #0x48
+   0093 45                 1824 	.db #0x45
+   0094 43                 1825 	.db #0x43
+   0095 40                 1826 	.db #0x40
+   0096 3D                 1827 	.db #0x3D
+   0097 3B                 1828 	.db #0x3B
+   0098 38                 1829 	.db #0x38
+   0099 35                 1830 	.db #0x35
+   009A 33                 1831 	.db #0x33
+   009B 30                 1832 	.db #0x30
+   009C 2E                 1833 	.db #0x2E
+   009D 2C                 1834 	.db #0x2C
+   009E 29                 1835 	.db #0x29
+   009F 27                 1836 	.db #0x27
+   00A0 25                 1837 	.db #0x25
+   00A1 23                 1838 	.db #0x23
+   00A2 21                 1839 	.db #0x21
+   00A3 1F                 1840 	.db #0x1F
+   00A4 1D                 1841 	.db #0x1D
+   00A5 1B                 1842 	.db #0x1B
+   00A6 19                 1843 	.db #0x19
+   00A7 17                 1844 	.db #0x17
+   00A8 15                 1845 	.db #0x15
+   00A9 14                 1846 	.db #0x14
+   00AA 12                 1847 	.db #0x12
+   00AB 10                 1848 	.db #0x10
+   00AC 0F                 1849 	.db #0x0F
+   00AD 0E                 1850 	.db #0x0E
+   00AE 0C                 1851 	.db #0x0C
+   00AF 0B                 1852 	.db #0x0B
+   00B0 0A                 1853 	.db #0x0A
+   00B1 09                 1854 	.db #0x09
+   00B2 08                 1855 	.db #0x08
+   00B3 07                 1856 	.db #0x07
+   00B4 06                 1857 	.db #0x06
+   00B5 05                 1858 	.db #0x05
+   00B6 04                 1859 	.db #0x04
+   00B7 04                 1860 	.db #0x04
+   00B8 03                 1861 	.db #0x03
+   00B9 03                 1862 	.db #0x03
+   00BA 02                 1863 	.db #0x02
+   00BB 02                 1864 	.db #0x02
+   00BC 01                 1865 	.db #0x01
+   00BD 01                 1866 	.db #0x01
+   00BE 01                 1867 	.db #0x01
+   00BF 01                 1868 	.db #0x01
+   00C0 01                 1869 	.db #0x01
+   00C1 01                 1870 	.db #0x01
+   00C2 01                 1871 	.db #0x01
+   00C3 02                 1872 	.db #0x02
+   00C4 02                 1873 	.db #0x02
+   00C5 02                 1874 	.db #0x02
+   00C6 03                 1875 	.db #0x03
+   00C7 03                 1876 	.db #0x03
+   00C8 04                 1877 	.db #0x04
+   00C9 05                 1878 	.db #0x05
+   00CA 05                 1879 	.db #0x05
+   00CB 06                 1880 	.db #0x06
+   00CC 07                 1881 	.db #0x07
+   00CD 08                 1882 	.db #0x08
+   00CE 09                 1883 	.db #0x09
+   00CF 0A                 1884 	.db #0x0A
+   00D0 0C                 1885 	.db #0x0C
+   00D1 0D                 1886 	.db #0x0D
+   00D2 0E                 1887 	.db #0x0E
+   00D3 10                 1888 	.db #0x10
+   00D4 11                 1889 	.db #0x11
+   00D5 13                 1890 	.db #0x13
+   00D6 14                 1891 	.db #0x14
+   00D7 16                 1892 	.db #0x16
+   00D8 18                 1893 	.db #0x18
+   00D9 1A                 1894 	.db #0x1A
+   00DA 1C                 1895 	.db #0x1C
+   00DB 1E                 1896 	.db #0x1E
+   00DC 20                 1897 	.db #0x20
+   00DD 22                 1898 	.db #0x22
+   00DE 24                 1899 	.db #0x24
+   00DF 26                 1900 	.db #0x26
+   00E0 28                 1901 	.db #0x28
+   00E1 2A                 1902 	.db #0x2A
+   00E2 2D                 1903 	.db #0x2D
+   00E3 2F                 1904 	.db #0x2F
+   00E4 32                 1905 	.db #0x32
+   00E5 34                 1906 	.db #0x34
+   00E6 37                 1907 	.db #0x37
+   00E7 39                 1908 	.db #0x39
+   00E8 3C                 1909 	.db #0x3C
+   00E9 3E                 1910 	.db #0x3E
+   00EA 41                 1911 	.db #0x41
+   00EB 44                 1912 	.db #0x44
+   00EC 47                 1913 	.db #0x47
+   00ED 4A                 1914 	.db #0x4A
+   00EE 4C                 1915 	.db #0x4C
+   00EF 4F                 1916 	.db #0x4F
+   00F0 52                 1917 	.db #0x52
+   00F1 55                 1918 	.db #0x55
+   00F2 58                 1919 	.db #0x58
+   00F3 5B                 1920 	.db #0x5B
+   00F4 5E                 1921 	.db #0x5E
+   00F5 61                 1922 	.db #0x61
+   00F6 64                 1923 	.db #0x64
+   00F7 67                 1924 	.db #0x67
+   00F8 6A                 1925 	.db #0x6A
+   00F9 6D                 1926 	.db #0x6D
+   00FA 70                 1927 	.db #0x70
+   00FB 74                 1928 	.db #0x74
+   00FC 77                 1929 	.db #0x77
+   00FD 7A                 1930 	.db #0x7A
+   00FE 7D                 1931 	.db #0x7D
+   00FF 80                 1932 	.db #0x80
+                    0100   1933 Fspi$__xinit_square_wave$0$0 == .
+   0100                    1934 __xinit__square_wave:
+   0100 00                 1935 	.db #0x00
+   0101 00                 1936 	.db #0x00
+   0102 00                 1937 	.db #0x00
+   0103 00                 1938 	.db #0x00
+   0104 00                 1939 	.db #0x00
+   0105 00                 1940 	.db #0x00
+   0106 00                 1941 	.db #0x00
+   0107 00                 1942 	.db #0x00
+   0108 00                 1943 	.db #0x00
+   0109 00                 1944 	.db #0x00
+   010A 00                 1945 	.db #0x00
+   010B 00                 1946 	.db #0x00
+   010C 00                 1947 	.db #0x00
+   010D 00                 1948 	.db #0x00
+   010E 00                 1949 	.db #0x00
+   010F 00                 1950 	.db #0x00
+   0110 00                 1951 	.db #0x00
+   0111 00                 1952 	.db #0x00
+   0112 00                 1953 	.db #0x00
+   0113 00                 1954 	.db #0x00
+   0114 00                 1955 	.db #0x00
+   0115 00                 1956 	.db #0x00
+   0116 00                 1957 	.db #0x00
+   0117 00                 1958 	.db #0x00
+   0118 00                 1959 	.db #0x00
+   0119 00                 1960 	.db #0x00
+   011A 00                 1961 	.db #0x00
+   011B 00                 1962 	.db #0x00
+   011C 00                 1963 	.db #0x00
+   011D 00                 1964 	.db #0x00
+   011E 00                 1965 	.db #0x00
+   011F 00                 1966 	.db #0x00
+   0120 00                 1967 	.db #0x00
+   0121 00                 1968 	.db #0x00
+   0122 00                 1969 	.db #0x00
+   0123 00                 1970 	.db #0x00
+   0124 00                 1971 	.db #0x00
+   0125 00                 1972 	.db #0x00
+   0126 00                 1973 	.db #0x00
+   0127 00                 1974 	.db #0x00
+   0128 00                 1975 	.db #0x00
+   0129 00                 1976 	.db #0x00
+   012A 00                 1977 	.db #0x00
+   012B 00                 1978 	.db #0x00
+   012C 00                 1979 	.db #0x00
+   012D 00                 1980 	.db #0x00
+   012E 00                 1981 	.db #0x00
+   012F 00                 1982 	.db #0x00
+   0130 00                 1983 	.db #0x00
+   0131 00                 1984 	.db #0x00
+   0132 00                 1985 	.db #0x00
+   0133 00                 1986 	.db #0x00
+   0134 00                 1987 	.db #0x00
+   0135 00                 1988 	.db #0x00
+   0136 00                 1989 	.db #0x00
+   0137 00                 1990 	.db #0x00
+   0138 00                 1991 	.db #0x00
+   0139 00                 1992 	.db #0x00
+   013A 00                 1993 	.db #0x00
+   013B 00                 1994 	.db #0x00
+   013C 00                 1995 	.db #0x00
+   013D 00                 1996 	.db #0x00
+   013E 00                 1997 	.db #0x00
+   013F 00                 1998 	.db #0x00
+   0140 00                 1999 	.db #0x00
+   0141 00                 2000 	.db #0x00
+   0142 00                 2001 	.db #0x00
+   0143 00                 2002 	.db #0x00
+   0144 00                 2003 	.db #0x00
+   0145 00                 2004 	.db #0x00
+   0146 00                 2005 	.db #0x00
+   0147 00                 2006 	.db #0x00
+   0148 00                 2007 	.db #0x00
+   0149 00                 2008 	.db #0x00
+   014A 00                 2009 	.db #0x00
+   014B 00                 2010 	.db #0x00
+   014C 00                 2011 	.db #0x00
+   014D 00                 2012 	.db #0x00
+   014E 00                 2013 	.db #0x00
+   014F 00                 2014 	.db #0x00
+   0150 00                 2015 	.db #0x00
+   0151 00                 2016 	.db #0x00
+   0152 00                 2017 	.db #0x00
+   0153 00                 2018 	.db #0x00
+   0154 00                 2019 	.db #0x00
+   0155 00                 2020 	.db #0x00
+   0156 00                 2021 	.db #0x00
+   0157 00                 2022 	.db #0x00
+   0158 00                 2023 	.db #0x00
+   0159 00                 2024 	.db #0x00
+   015A 00                 2025 	.db #0x00
+   015B 00                 2026 	.db #0x00
+   015C 00                 2027 	.db #0x00
+   015D 00                 2028 	.db #0x00
+   015E 00                 2029 	.db #0x00
+   015F 00                 2030 	.db #0x00
+   0160 00                 2031 	.db #0x00
+   0161 00                 2032 	.db #0x00
+   0162 00                 2033 	.db #0x00
+   0163 00                 2034 	.db #0x00
+   0164 00                 2035 	.db #0x00
+   0165 00                 2036 	.db #0x00
+   0166 00                 2037 	.db #0x00
+   0167 00                 2038 	.db #0x00
+   0168 00                 2039 	.db #0x00
+   0169 00                 2040 	.db #0x00
+   016A 00                 2041 	.db #0x00
+   016B 00                 2042 	.db #0x00
+   016C 00                 2043 	.db #0x00
+   016D 00                 2044 	.db #0x00
+   016E 00                 2045 	.db #0x00
+   016F 00                 2046 	.db #0x00
+   0170 00                 2047 	.db #0x00
+   0171 00                 2048 	.db #0x00
+   0172 00                 2049 	.db #0x00
+   0173 00                 2050 	.db #0x00
+   0174 00                 2051 	.db #0x00
+   0175 00                 2052 	.db #0x00
+   0176 00                 2053 	.db #0x00
+   0177 00                 2054 	.db #0x00
+   0178 00                 2055 	.db #0x00
+   0179 00                 2056 	.db #0x00
+   017A 00                 2057 	.db #0x00
+   017B 00                 2058 	.db #0x00
+   017C 00                 2059 	.db #0x00
+   017D 00                 2060 	.db #0x00
+   017E 00                 2061 	.db #0x00
+   017F 00                 2062 	.db #0x00
+   0180 00                 2063 	.db #0x00
+   0181 00                 2064 	.db #0x00
+   0182 FF                 2065 	.db #0xFF
+   0183 FF                 2066 	.db #0xFF
+   0184 FF                 2067 	.db #0xFF
+   0185 FF                 2068 	.db #0xFF
+   0186 FF                 2069 	.db #0xFF
+   0187 FF                 2070 	.db #0xFF
+   0188 FF                 2071 	.db #0xFF
+   0189 FF                 2072 	.db #0xFF
+   018A FF                 2073 	.db #0xFF
+   018B FF                 2074 	.db #0xFF
+   018C FF                 2075 	.db #0xFF
+   018D FF                 2076 	.db #0xFF
+   018E FF                 2077 	.db #0xFF
+   018F FF                 2078 	.db #0xFF
+   0190 FF                 2079 	.db #0xFF
+   0191 FF                 2080 	.db #0xFF
+   0192 FF                 2081 	.db #0xFF
+   0193 FF                 2082 	.db #0xFF
+   0194 FF                 2083 	.db #0xFF
+   0195 FF                 2084 	.db #0xFF
+   0196 FF                 2085 	.db #0xFF
+   0197 FF                 2086 	.db #0xFF
+   0198 FF                 2087 	.db #0xFF
+   0199 FF                 2088 	.db #0xFF
+   019A FF                 2089 	.db #0xFF
+   019B FF                 2090 	.db #0xFF
+   019C FF                 2091 	.db #0xFF
+   019D FF                 2092 	.db #0xFF
+   019E FF                 2093 	.db #0xFF
+   019F FF                 2094 	.db #0xFF
+   01A0 FF                 2095 	.db #0xFF
+   01A1 FF                 2096 	.db #0xFF
+   01A2 FF                 2097 	.db #0xFF
+   01A3 FF                 2098 	.db #0xFF
+   01A4 FF                 2099 	.db #0xFF
+   01A5 FF                 2100 	.db #0xFF
+   01A6 FF                 2101 	.db #0xFF
+   01A7 FF                 2102 	.db #0xFF
+   01A8 FF                 2103 	.db #0xFF
+   01A9 FF                 2104 	.db #0xFF
+   01AA FF                 2105 	.db #0xFF
+   01AB FF                 2106 	.db #0xFF
+   01AC FF                 2107 	.db #0xFF
+   01AD FF                 2108 	.db #0xFF
+   01AE FF                 2109 	.db #0xFF
+   01AF FF                 2110 	.db #0xFF
+   01B0 FF                 2111 	.db #0xFF
+   01B1 FF                 2112 	.db #0xFF
+   01B2 FF                 2113 	.db #0xFF
+   01B3 FF                 2114 	.db #0xFF
+   01B4 FF                 2115 	.db #0xFF
+   01B5 FF                 2116 	.db #0xFF
+   01B6 FF                 2117 	.db #0xFF
+   01B7 FF                 2118 	.db #0xFF
+   01B8 FF                 2119 	.db #0xFF
+   01B9 FF                 2120 	.db #0xFF
+   01BA FF                 2121 	.db #0xFF
+   01BB FF                 2122 	.db #0xFF
+   01BC FF                 2123 	.db #0xFF
+   01BD FF                 2124 	.db #0xFF
+   01BE FF                 2125 	.db #0xFF
+   01BF FF                 2126 	.db #0xFF
+   01C0 FF                 2127 	.db #0xFF
+   01C1 FF                 2128 	.db #0xFF
+   01C2 FF                 2129 	.db #0xFF
+   01C3 FF                 2130 	.db #0xFF
+   01C4 FF                 2131 	.db #0xFF
+   01C5 FF                 2132 	.db #0xFF
+   01C6 FF                 2133 	.db #0xFF
+   01C7 FF                 2134 	.db #0xFF
+   01C8 FF                 2135 	.db #0xFF
+   01C9 FF                 2136 	.db #0xFF
+   01CA FF                 2137 	.db #0xFF
+   01CB FF                 2138 	.db #0xFF
+   01CC FF                 2139 	.db #0xFF
+   01CD FF                 2140 	.db #0xFF
+   01CE FF                 2141 	.db #0xFF
+   01CF FF                 2142 	.db #0xFF
+   01D0 FF                 2143 	.db #0xFF
+   01D1 FF                 2144 	.db #0xFF
+   01D2 FF                 2145 	.db #0xFF
+   01D3 FF                 2146 	.db #0xFF
+   01D4 FF                 2147 	.db #0xFF
+   01D5 FF                 2148 	.db #0xFF
+   01D6 FF                 2149 	.db #0xFF
+   01D7 FF                 2150 	.db #0xFF
+   01D8 FF                 2151 	.db #0xFF
+   01D9 FF                 2152 	.db #0xFF
+   01DA FF                 2153 	.db #0xFF
+   01DB FF                 2154 	.db #0xFF
+   01DC FF                 2155 	.db #0xFF
+   01DD FF                 2156 	.db #0xFF
+   01DE FF                 2157 	.db #0xFF
+   01DF FF                 2158 	.db #0xFF
+   01E0 FF                 2159 	.db #0xFF
+   01E1 FF                 2160 	.db #0xFF
+   01E2 FF                 2161 	.db #0xFF
+   01E3 FF                 2162 	.db #0xFF
+   01E4 FF                 2163 	.db #0xFF
+   01E5 FF                 2164 	.db #0xFF
+   01E6 FF                 2165 	.db #0xFF
+   01E7 FF                 2166 	.db #0xFF
+   01E8 FF                 2167 	.db #0xFF
+   01E9 FF                 2168 	.db #0xFF
+   01EA FF                 2169 	.db #0xFF
+   01EB FF                 2170 	.db #0xFF
+   01EC FF                 2171 	.db #0xFF
+   01ED FF                 2172 	.db #0xFF
+   01EE FF                 2173 	.db #0xFF
+   01EF FF                 2174 	.db #0xFF
+   01F0 FF                 2175 	.db #0xFF
+   01F1 FF                 2176 	.db #0xFF
+   01F2 FF                 2177 	.db #0xFF
+   01F3 FF                 2178 	.db #0xFF
+   01F4 FF                 2179 	.db #0xFF
+   01F5 FF                 2180 	.db #0xFF
+   01F6 FF                 2181 	.db #0xFF
+   01F7 FF                 2182 	.db #0xFF
+   01F8 FF                 2183 	.db #0xFF
+   01F9 FF                 2184 	.db #0xFF
+   01FA FF                 2185 	.db #0xFF
+   01FB FF                 2186 	.db #0xFF
+   01FC FF                 2187 	.db #0xFF
+   01FD FF                 2188 	.db #0xFF
+   01FE FF                 2189 	.db #0xFF
+   01FF FF                 2190 	.db #0xFF
+                    0200   2191 Fspi$__xinit_triangular_value_wave$0$0 == .
+   0200                    2192 __xinit__triangular_value_wave:
+   0200 00                 2193 	.db #0x00
+   0201 02                 2194 	.db #0x02
+   0202 04                 2195 	.db #0x04
+   0203 06                 2196 	.db #0x06
+   0204 08                 2197 	.db #0x08
+   0205 0A                 2198 	.db #0x0A
+   0206 0C                 2199 	.db #0x0C
+   0207 0E                 2200 	.db #0x0E
+   0208 10                 2201 	.db #0x10
+   0209 12                 2202 	.db #0x12
+   020A 14                 2203 	.db #0x14
+   020B 16                 2204 	.db #0x16
+   020C 18                 2205 	.db #0x18
+   020D 1A                 2206 	.db #0x1A
+   020E 1C                 2207 	.db #0x1C
+   020F 1E                 2208 	.db #0x1E
+   0210 20                 2209 	.db #0x20
+   0211 22                 2210 	.db #0x22
+   0212 24                 2211 	.db #0x24
+   0213 26                 2212 	.db #0x26
+   0214 28                 2213 	.db #0x28
+   0215 2A                 2214 	.db #0x2A
+   0216 2C                 2215 	.db #0x2C
+   0217 2E                 2216 	.db #0x2E
+   0218 30                 2217 	.db #0x30
+   0219 32                 2218 	.db #0x32
+   021A 34                 2219 	.db #0x34
+   021B 36                 2220 	.db #0x36
+   021C 38                 2221 	.db #0x38
+   021D 3A                 2222 	.db #0x3A
+   021E 3C                 2223 	.db #0x3C
+   021F 3E                 2224 	.db #0x3E
+   0220 40                 2225 	.db #0x40
+   0221 42                 2226 	.db #0x42
+   0222 44                 2227 	.db #0x44
+   0223 46                 2228 	.db #0x46
+   0224 48                 2229 	.db #0x48
+   0225 4A                 2230 	.db #0x4A
+   0226 4C                 2231 	.db #0x4C
+   0227 4E                 2232 	.db #0x4E
+   0228 50                 2233 	.db #0x50
+   0229 52                 2234 	.db #0x52
+   022A 54                 2235 	.db #0x54
+   022B 56                 2236 	.db #0x56
+   022C 58                 2237 	.db #0x58
+   022D 5A                 2238 	.db #0x5A
+   022E 5C                 2239 	.db #0x5C
+   022F 5E                 2240 	.db #0x5E
+   0230 60                 2241 	.db #0x60
+   0231 62                 2242 	.db #0x62
+   0232 64                 2243 	.db #0x64
+   0233 66                 2244 	.db #0x66
+   0234 68                 2245 	.db #0x68
+   0235 6A                 2246 	.db #0x6A
+   0236 6C                 2247 	.db #0x6C
+   0237 6E                 2248 	.db #0x6E
+   0238 70                 2249 	.db #0x70
+   0239 72                 2250 	.db #0x72
+   023A 74                 2251 	.db #0x74
+   023B 76                 2252 	.db #0x76
+   023C 78                 2253 	.db #0x78
+   023D 7A                 2254 	.db #0x7A
+   023E 7C                 2255 	.db #0x7C
+   023F 7E                 2256 	.db #0x7E
+   0240 80                 2257 	.db #0x80
+   0241 82                 2258 	.db #0x82
+   0242 84                 2259 	.db #0x84
+   0243 86                 2260 	.db #0x86
+   0244 88                 2261 	.db #0x88
+   0245 8A                 2262 	.db #0x8A
+   0246 8C                 2263 	.db #0x8C
+   0247 8E                 2264 	.db #0x8E
+   0248 90                 2265 	.db #0x90
+   0249 92                 2266 	.db #0x92
+   024A 94                 2267 	.db #0x94
+   024B 96                 2268 	.db #0x96
+   024C 98                 2269 	.db #0x98
+   024D 9A                 2270 	.db #0x9A
+   024E 9C                 2271 	.db #0x9C
+   024F 9E                 2272 	.db #0x9E
+   0250 A0                 2273 	.db #0xA0
+   0251 A2                 2274 	.db #0xA2
+   0252 A4                 2275 	.db #0xA4
+   0253 A6                 2276 	.db #0xA6
+   0254 A8                 2277 	.db #0xA8
+   0255 AA                 2278 	.db #0xAA
+   0256 AC                 2279 	.db #0xAC
+   0257 AE                 2280 	.db #0xAE
+   0258 B0                 2281 	.db #0xB0
+   0259 B2                 2282 	.db #0xB2
+   025A B4                 2283 	.db #0xB4
+   025B B6                 2284 	.db #0xB6
+   025C B8                 2285 	.db #0xB8
+   025D BA                 2286 	.db #0xBA
+   025E BC                 2287 	.db #0xBC
+   025F BE                 2288 	.db #0xBE
+   0260 C0                 2289 	.db #0xC0
+   0261 C2                 2290 	.db #0xC2
+   0262 C4                 2291 	.db #0xC4
+   0263 C6                 2292 	.db #0xC6
+   0264 C8                 2293 	.db #0xC8
+   0265 CA                 2294 	.db #0xCA
+   0266 CC                 2295 	.db #0xCC
+   0267 CE                 2296 	.db #0xCE
+   0268 D0                 2297 	.db #0xD0
+   0269 D2                 2298 	.db #0xD2
+   026A D4                 2299 	.db #0xD4
+   026B D6                 2300 	.db #0xD6
+   026C D8                 2301 	.db #0xD8
+   026D DA                 2302 	.db #0xDA
+   026E DC                 2303 	.db #0xDC
+   026F DE                 2304 	.db #0xDE
+   0270 E0                 2305 	.db #0xE0
+   0271 E2                 2306 	.db #0xE2
+   0272 E4                 2307 	.db #0xE4
+   0273 E6                 2308 	.db #0xE6
+   0274 E8                 2309 	.db #0xE8
+   0275 EA                 2310 	.db #0xEA
+   0276 EC                 2311 	.db #0xEC
+   0277 EE                 2312 	.db #0xEE
+   0278 F0                 2313 	.db #0xF0
+   0279 F2                 2314 	.db #0xF2
+   027A F4                 2315 	.db #0xF4
+   027B F6                 2316 	.db #0xF6
+   027C F8                 2317 	.db #0xF8
+   027D FA                 2318 	.db #0xFA
+   027E FC                 2319 	.db #0xFC
+   027F FE                 2320 	.db #0xFE
+   0280 FF                 2321 	.db #0xFF
+   0281 FE                 2322 	.db #0xFE
+   0282 FC                 2323 	.db #0xFC
+   0283 FA                 2324 	.db #0xFA
+   0284 F8                 2325 	.db #0xF8
+   0285 F6                 2326 	.db #0xF6
+   0286 F4                 2327 	.db #0xF4
+   0287 F2                 2328 	.db #0xF2
+   0288 F0                 2329 	.db #0xF0
+   0289 EE                 2330 	.db #0xEE
+   028A EC                 2331 	.db #0xEC
+   028B EA                 2332 	.db #0xEA
+   028C E8                 2333 	.db #0xE8
+   028D E6                 2334 	.db #0xE6
+   028E E4                 2335 	.db #0xE4
+   028F E2                 2336 	.db #0xE2
+   0290 E0                 2337 	.db #0xE0
+   0291 DE                 2338 	.db #0xDE
+   0292 DC                 2339 	.db #0xDC
+   0293 DA                 2340 	.db #0xDA
+   0294 D8                 2341 	.db #0xD8
+   0295 D6                 2342 	.db #0xD6
+   0296 D4                 2343 	.db #0xD4
+   0297 D2                 2344 	.db #0xD2
+   0298 D0                 2345 	.db #0xD0
+   0299 CE                 2346 	.db #0xCE
+   029A CC                 2347 	.db #0xCC
+   029B CA                 2348 	.db #0xCA
+   029C C8                 2349 	.db #0xC8
+   029D C6                 2350 	.db #0xC6
+   029E C4                 2351 	.db #0xC4
+   029F C2                 2352 	.db #0xC2
+   02A0 C0                 2353 	.db #0xC0
+   02A1 BE                 2354 	.db #0xBE
+   02A2 BC                 2355 	.db #0xBC
+   02A3 BA                 2356 	.db #0xBA
+   02A4 B8                 2357 	.db #0xB8
+   02A5 B6                 2358 	.db #0xB6
+   02A6 B4                 2359 	.db #0xB4
+   02A7 B2                 2360 	.db #0xB2
+   02A8 B0                 2361 	.db #0xB0
+   02A9 AE                 2362 	.db #0xAE
+   02AA AC                 2363 	.db #0xAC
+   02AB AA                 2364 	.db #0xAA
+   02AC A8                 2365 	.db #0xA8
+   02AD A6                 2366 	.db #0xA6
+   02AE A4                 2367 	.db #0xA4
+   02AF A2                 2368 	.db #0xA2
+   02B0 A0                 2369 	.db #0xA0
+   02B1 9E                 2370 	.db #0x9E
+   02B2 9C                 2371 	.db #0x9C
+   02B3 9A                 2372 	.db #0x9A
+   02B4 98                 2373 	.db #0x98
+   02B5 96                 2374 	.db #0x96
+   02B6 94                 2375 	.db #0x94
+   02B7 92                 2376 	.db #0x92
+   02B8 90                 2377 	.db #0x90
+   02B9 8E                 2378 	.db #0x8E
+   02BA 8C                 2379 	.db #0x8C
+   02BB 8A                 2380 	.db #0x8A
+   02BC 88                 2381 	.db #0x88
+   02BD 86                 2382 	.db #0x86
+   02BE 84                 2383 	.db #0x84
+   02BF 82                 2384 	.db #0x82
+   02C0 80                 2385 	.db #0x80
+   02C1 7E                 2386 	.db #0x7E
+   02C2 7C                 2387 	.db #0x7C
+   02C3 7A                 2388 	.db #0x7A
+   02C4 78                 2389 	.db #0x78
+   02C5 76                 2390 	.db #0x76
+   02C6 74                 2391 	.db #0x74
+   02C7 72                 2392 	.db #0x72
+   02C8 70                 2393 	.db #0x70
+   02C9 6E                 2394 	.db #0x6E
+   02CA 6C                 2395 	.db #0x6C
+   02CB 6A                 2396 	.db #0x6A
+   02CC 68                 2397 	.db #0x68
+   02CD 66                 2398 	.db #0x66
+   02CE 64                 2399 	.db #0x64
+   02CF 62                 2400 	.db #0x62
+   02D0 60                 2401 	.db #0x60
+   02D1 5E                 2402 	.db #0x5E
+   02D2 5C                 2403 	.db #0x5C
+   02D3 5A                 2404 	.db #0x5A
+   02D4 58                 2405 	.db #0x58
+   02D5 56                 2406 	.db #0x56
+   02D6 54                 2407 	.db #0x54
+   02D7 52                 2408 	.db #0x52
+   02D8 50                 2409 	.db #0x50
+   02D9 4E                 2410 	.db #0x4E
+   02DA 4C                 2411 	.db #0x4C
+   02DB 4A                 2412 	.db #0x4A
+   02DC 48                 2413 	.db #0x48
+   02DD 46                 2414 	.db #0x46
+   02DE 44                 2415 	.db #0x44
+   02DF 42                 2416 	.db #0x42
+   02E0 40                 2417 	.db #0x40
+   02E1 3E                 2418 	.db #0x3E
+   02E2 3C                 2419 	.db #0x3C
+   02E3 3A                 2420 	.db #0x3A
+   02E4 38                 2421 	.db #0x38
+   02E5 36                 2422 	.db #0x36
+   02E6 34                 2423 	.db #0x34
+   02E7 32                 2424 	.db #0x32
+   02E8 30                 2425 	.db #0x30
+   02E9 2E                 2426 	.db #0x2E
+   02EA 2C                 2427 	.db #0x2C
+   02EB 2A                 2428 	.db #0x2A
+   02EC 28                 2429 	.db #0x28
+   02ED 26                 2430 	.db #0x26
+   02EE 24                 2431 	.db #0x24
+   02EF 22                 2432 	.db #0x22
+   02F0 20                 2433 	.db #0x20
+   02F1 1E                 2434 	.db #0x1E
+   02F2 1C                 2435 	.db #0x1C
+   02F3 1A                 2436 	.db #0x1A
+   02F4 18                 2437 	.db #0x18
+   02F5 16                 2438 	.db #0x16
+   02F6 14                 2439 	.db #0x14
+   02F7 12                 2440 	.db #0x12
+   02F8 10                 2441 	.db #0x10
+   02F9 0E                 2442 	.db #0x0E
+   02FA 0C                 2443 	.db #0x0C
+   02FB 0A                 2444 	.db #0x0A
+   02FC 08                 2445 	.db #0x08
+   02FD 06                 2446 	.db #0x06
+   02FE 04                 2447 	.db #0x04
+   02FF 02                 2448 	.db #0x02
+                    0300   2449 Fspi$__xinit_saw_wave$0$0 == .
+   0300                    2450 __xinit__saw_wave:
+   0300 00                 2451 	.db #0x00
+   0301 01                 2452 	.db #0x01
+   0302 02                 2453 	.db #0x02
+   0303 03                 2454 	.db #0x03
+   0304 04                 2455 	.db #0x04
+   0305 05                 2456 	.db #0x05
+   0306 06                 2457 	.db #0x06
+   0307 07                 2458 	.db #0x07
+   0308 08                 2459 	.db #0x08
+   0309 09                 2460 	.db #0x09
+   030A 0A                 2461 	.db #0x0A
+   030B 0B                 2462 	.db #0x0B
+   030C 0C                 2463 	.db #0x0C
+   030D 0D                 2464 	.db #0x0D
+   030E 0E                 2465 	.db #0x0E
+   030F 0F                 2466 	.db #0x0F
+   0310 10                 2467 	.db #0x10
+   0311 11                 2468 	.db #0x11
+   0312 12                 2469 	.db #0x12
+   0313 13                 2470 	.db #0x13
+   0314 14                 2471 	.db #0x14
+   0315 15                 2472 	.db #0x15
+   0316 16                 2473 	.db #0x16
+   0317 17                 2474 	.db #0x17
+   0318 18                 2475 	.db #0x18
+   0319 19                 2476 	.db #0x19
+   031A 1A                 2477 	.db #0x1A
+   031B 1B                 2478 	.db #0x1B
+   031C 1C                 2479 	.db #0x1C
+   031D 1D                 2480 	.db #0x1D
+   031E 1E                 2481 	.db #0x1E
+   031F 1F                 2482 	.db #0x1F
+   0320 20                 2483 	.db #0x20
+   0321 21                 2484 	.db #0x21
+   0322 22                 2485 	.db #0x22
+   0323 23                 2486 	.db #0x23
+   0324 24                 2487 	.db #0x24
+   0325 25                 2488 	.db #0x25
+   0326 26                 2489 	.db #0x26
+   0327 27                 2490 	.db #0x27
+   0328 28                 2491 	.db #0x28
+   0329 29                 2492 	.db #0x29
+   032A 2A                 2493 	.db #0x2A
+   032B 2B                 2494 	.db #0x2B
+   032C 2C                 2495 	.db #0x2C
+   032D 2D                 2496 	.db #0x2D
+   032E 2E                 2497 	.db #0x2E
+   032F 2F                 2498 	.db #0x2F
+   0330 30                 2499 	.db #0x30
+   0331 31                 2500 	.db #0x31
+   0332 32                 2501 	.db #0x32
+   0333 33                 2502 	.db #0x33
+   0334 34                 2503 	.db #0x34
+   0335 35                 2504 	.db #0x35
+   0336 36                 2505 	.db #0x36
+   0337 37                 2506 	.db #0x37
+   0338 38                 2507 	.db #0x38
+   0339 39                 2508 	.db #0x39
+   033A 3A                 2509 	.db #0x3A
+   033B 3B                 2510 	.db #0x3B
+   033C 3C                 2511 	.db #0x3C
+   033D 3D                 2512 	.db #0x3D
+   033E 3E                 2513 	.db #0x3E
+   033F 3F                 2514 	.db #0x3F
+   0340 40                 2515 	.db #0x40
+   0341 41                 2516 	.db #0x41
+   0342 42                 2517 	.db #0x42
+   0343 43                 2518 	.db #0x43
+   0344 44                 2519 	.db #0x44
+   0345 45                 2520 	.db #0x45
+   0346 46                 2521 	.db #0x46
+   0347 47                 2522 	.db #0x47
+   0348 48                 2523 	.db #0x48
+   0349 49                 2524 	.db #0x49
+   034A 4A                 2525 	.db #0x4A
+   034B 4B                 2526 	.db #0x4B
+   034C 4C                 2527 	.db #0x4C
+   034D 4D                 2528 	.db #0x4D
+   034E 4E                 2529 	.db #0x4E
+   034F 4F                 2530 	.db #0x4F
+   0350 50                 2531 	.db #0x50
+   0351 51                 2532 	.db #0x51
+   0352 52                 2533 	.db #0x52
+   0353 53                 2534 	.db #0x53
+   0354 54                 2535 	.db #0x54
+   0355 55                 2536 	.db #0x55
+   0356 56                 2537 	.db #0x56
+   0357 57                 2538 	.db #0x57
+   0358 58                 2539 	.db #0x58
+   0359 59                 2540 	.db #0x59
+   035A 5A                 2541 	.db #0x5A
+   035B 5B                 2542 	.db #0x5B
+   035C 5C                 2543 	.db #0x5C
+   035D 5D                 2544 	.db #0x5D
+   035E 5E                 2545 	.db #0x5E
+   035F 5F                 2546 	.db #0x5F
+   0360 60                 2547 	.db #0x60
+   0361 61                 2548 	.db #0x61
+   0362 62                 2549 	.db #0x62
+   0363 63                 2550 	.db #0x63
+   0364 64                 2551 	.db #0x64
+   0365 65                 2552 	.db #0x65
+   0366 66                 2553 	.db #0x66
+   0367 67                 2554 	.db #0x67
+   0368 68                 2555 	.db #0x68
+   0369 69                 2556 	.db #0x69
+   036A 6A                 2557 	.db #0x6A
+   036B 6B                 2558 	.db #0x6B
+   036C 6C                 2559 	.db #0x6C
+   036D 6D                 2560 	.db #0x6D
+   036E 6E                 2561 	.db #0x6E
+   036F 6F                 2562 	.db #0x6F
+   0370 70                 2563 	.db #0x70
+   0371 71                 2564 	.db #0x71
+   0372 72                 2565 	.db #0x72
+   0373 73                 2566 	.db #0x73
+   0374 74                 2567 	.db #0x74
+   0375 75                 2568 	.db #0x75
+   0376 76                 2569 	.db #0x76
+   0377 77                 2570 	.db #0x77
+   0378 78                 2571 	.db #0x78
+   0379 79                 2572 	.db #0x79
+   037A 7A                 2573 	.db #0x7A
+   037B 7B                 2574 	.db #0x7B
+   037C 7C                 2575 	.db #0x7C
+   037D 7D                 2576 	.db #0x7D
+   037E 7E                 2577 	.db #0x7E
+   037F 7F                 2578 	.db #0x7F
+   0380 80                 2579 	.db #0x80
+   0381 81                 2580 	.db #0x81
+   0382 82                 2581 	.db #0x82
+   0383 83                 2582 	.db #0x83
+   0384 84                 2583 	.db #0x84
+   0385 85                 2584 	.db #0x85
+   0386 86                 2585 	.db #0x86
+   0387 87                 2586 	.db #0x87
+   0388 88                 2587 	.db #0x88
+   0389 89                 2588 	.db #0x89
+   038A 8A                 2589 	.db #0x8A
+   038B 8B                 2590 	.db #0x8B
+   038C 8C                 2591 	.db #0x8C
+   038D 8D                 2592 	.db #0x8D
+   038E 8E                 2593 	.db #0x8E
+   038F 8F                 2594 	.db #0x8F
+   0390 90                 2595 	.db #0x90
+   0391 91                 2596 	.db #0x91
+   0392 92                 2597 	.db #0x92
+   0393 93                 2598 	.db #0x93
+   0394 94                 2599 	.db #0x94
+   0395 95                 2600 	.db #0x95
+   0396 96                 2601 	.db #0x96
+   0397 97                 2602 	.db #0x97
+   0398 98                 2603 	.db #0x98
+   0399 99                 2604 	.db #0x99
+   039A 9A                 2605 	.db #0x9A
+   039B 9B                 2606 	.db #0x9B
+   039C 9C                 2607 	.db #0x9C
+   039D 9D                 2608 	.db #0x9D
+   039E 9E                 2609 	.db #0x9E
+   039F 9F                 2610 	.db #0x9F
+   03A0 A0                 2611 	.db #0xA0
+   03A1 A1                 2612 	.db #0xA1
+   03A2 A2                 2613 	.db #0xA2
+   03A3 A3                 2614 	.db #0xA3
+   03A4 A4                 2615 	.db #0xA4
+   03A5 A5                 2616 	.db #0xA5
+   03A6 A6                 2617 	.db #0xA6
+   03A7 A7                 2618 	.db #0xA7
+   03A8 A8                 2619 	.db #0xA8
+   03A9 A9                 2620 	.db #0xA9
+   03AA AA                 2621 	.db #0xAA
+   03AB AB                 2622 	.db #0xAB
+   03AC AC                 2623 	.db #0xAC
+   03AD AD                 2624 	.db #0xAD
+   03AE AE                 2625 	.db #0xAE
+   03AF AF                 2626 	.db #0xAF
+   03B0 B0                 2627 	.db #0xB0
+   03B1 B1                 2628 	.db #0xB1
+   03B2 B2                 2629 	.db #0xB2
+   03B3 B3                 2630 	.db #0xB3
+   03B4 B4                 2631 	.db #0xB4
+   03B5 B5                 2632 	.db #0xB5
+   03B6 B6                 2633 	.db #0xB6
+   03B7 B7                 2634 	.db #0xB7
+   03B8 B8                 2635 	.db #0xB8
+   03B9 B9                 2636 	.db #0xB9
+   03BA BA                 2637 	.db #0xBA
+   03BB BB                 2638 	.db #0xBB
+   03BC BC                 2639 	.db #0xBC
+   03BD BD                 2640 	.db #0xBD
+   03BE BE                 2641 	.db #0xBE
+   03BF BF                 2642 	.db #0xBF
+   03C0 C0                 2643 	.db #0xC0
+   03C1 C1                 2644 	.db #0xC1
+   03C2 C2                 2645 	.db #0xC2
+   03C3 C3                 2646 	.db #0xC3
+   03C4 C4                 2647 	.db #0xC4
+   03C5 C5                 2648 	.db #0xC5
+   03C6 C6                 2649 	.db #0xC6
+   03C7 C7                 2650 	.db #0xC7
+   03C8 C8                 2651 	.db #0xC8
+   03C9 C9                 2652 	.db #0xC9
+   03CA CA                 2653 	.db #0xCA
+   03CB CB                 2654 	.db #0xCB
+   03CC CC                 2655 	.db #0xCC
+   03CD CD                 2656 	.db #0xCD
+   03CE CE                 2657 	.db #0xCE
+   03CF CF                 2658 	.db #0xCF
+   03D0 D0                 2659 	.db #0xD0
+   03D1 D1                 2660 	.db #0xD1
+   03D2 D2                 2661 	.db #0xD2
+   03D3 D3                 2662 	.db #0xD3
+   03D4 D4                 2663 	.db #0xD4
+   03D5 D5                 2664 	.db #0xD5
+   03D6 D6                 2665 	.db #0xD6
+   03D7 D7                 2666 	.db #0xD7
+   03D8 D8                 2667 	.db #0xD8
+   03D9 D9                 2668 	.db #0xD9
+   03DA DA                 2669 	.db #0xDA
+   03DB DB                 2670 	.db #0xDB
+   03DC DC                 2671 	.db #0xDC
+   03DD DD                 2672 	.db #0xDD
+   03DE DE                 2673 	.db #0xDE
+   03DF DF                 2674 	.db #0xDF
+   03E0 E0                 2675 	.db #0xE0
+   03E1 E1                 2676 	.db #0xE1
+   03E2 E2                 2677 	.db #0xE2
+   03E3 E3                 2678 	.db #0xE3
+   03E4 E4                 2679 	.db #0xE4
+   03E5 E5                 2680 	.db #0xE5
+   03E6 E6                 2681 	.db #0xE6
+   03E7 E7                 2682 	.db #0xE7
+   03E8 E8                 2683 	.db #0xE8
+   03E9 E9                 2684 	.db #0xE9
+   03EA EA                 2685 	.db #0xEA
+   03EB EB                 2686 	.db #0xEB
+   03EC EC                 2687 	.db #0xEC
+   03ED ED                 2688 	.db #0xED
+   03EE EE                 2689 	.db #0xEE
+   03EF EF                 2690 	.db #0xEF
+   03F0 F0                 2691 	.db #0xF0
+   03F1 F1                 2692 	.db #0xF1
+   03F2 F2                 2693 	.db #0xF2
+   03F3 F3                 2694 	.db #0xF3
+   03F4 F4                 2695 	.db #0xF4
+   03F5 F5                 2696 	.db #0xF5
+   03F6 F6                 2697 	.db #0xF6
+   03F7 F7                 2698 	.db #0xF7
+   03F8 F8                 2699 	.db #0xF8
+   03F9 F9                 2700 	.db #0xF9
+   03FA FA                 2701 	.db #0xFA
+   03FB FB                 2702 	.db #0xFB
+   03FC FC                 2703 	.db #0xFC
+   03FD FD                 2704 	.db #0xFD
+   03FE FE                 2705 	.db #0xFE
+   03FF FF                 2706 	.db #0xFF
+                    0400   2707 Fspi$__xinit_wave_ptr_array$0$0 == .
+   0400                    2708 __xinit__wave_ptr_array:
+   0400r00s00 00           2709 	.byte _sine_wave,(_sine_wave >> 8),#0x00
+   0403r00s01 00           2710 	.byte _square_wave,(_square_wave >> 8),#0x00
+   0406r00s02 00           2711 	.byte _triangular_value_wave,(_triangular_value_wave >> 8),#0x00
+   0409r00s03 00           2712 	.byte _saw_wave,(_saw_wave >> 8),#0x00

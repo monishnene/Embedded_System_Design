@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  LAB1_8051                                                            02/02/2018 19:11:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab1_8051.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab1_8051.a51 SET(SMALL) DEBUG PRINT(.\Listings\lab1_8051.lst) OBJECT(.
+                      \Objects\lab1_8051.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H  ; start at 0000H
+0000 7408              2     MOV A,#8H
+0002 75F003            3     MOV B,#3H
+0005 FD                4     MOV R5,A
+0006 7A00              5     MOV R2,#00H
+0008 7930              6     MOV R1,#30H ;Loading Address for Error in R1
+000A E5F0              7     MOV A,B
+000C 04                8     INC A ;X+1
+000D 602D              9     JZ AD_Over
+000F F5F0             10     MOV B,A
+0011 ED               11     MOV A,R5
+0012                  12     Divide:
+0012 FB               13     MOV R3,A
+0013 95F0             14     SUBB A,B 
+0015 4003             15     JC Divide_done; Checking if A was smaller than B,  If  yes the division is done
+0017 0A               16     INC R2
+0018 80F8             17     JMP Divide
+001A                  18     Divide_done:
+001A 7821             19     MOV R0,#21H;Loading Address for Quotient in R0
+001C EA               20     MOV A,R2 
+001D F6               21     MOV @R0,A  ; Quotient Saved
+001E 7822             22     MOV R0,#22H ;Loading Address for Remainder in R0
+0020 EB               23     MOV A,R3
+0021 F6               24     MOV @R0,A;Remainder Saved
+0022 EA               25     MOV A,R2
+0023 2400             26     ADD A,#00H
+0025 33               27     RLC A   ; Multiply by 2
+0026 400D             28     JC M_Over ;Check Carry 
+0028 33               29     RLC A ;Multiply by 2
+0029 400A             30     JC M_Over ;Check Carry 
+002B FD               31     MOV R5,A
+002C 7400             32     MOV A,#00H
+002E F7               33     MOV @R1,A
+002F ED               34     MOV A,R5
+0030                  35     Load_Result:
+0030 7823             36     MOV R0,#23H ;Loading Address for Result Z in R0
+0032 F6               37     MOV @R0,A
+0033 800A             38     JMP ENDLOOP
+0035                  39     M_Over: ;Label for multiplication overflow
+0035 FD               40     MOV R5,A
+0036 7403             41     MOV A,#03H
+0038 F7               42     MOV @R1,A  ;Error due to Multiplication overflow
+0039 ED               43     MOV A,R5
+003A 80F4             44     JMP Load_Result
+003C                  45     AD_Over: ;Label for addition overflow
+003C 7401             46     MOV A,#01H 
+003E F7               47     MOV @R1,A ;Error due to Addition overflow
+003F                  48     ENDLOOP:
+003F 80FE             49     JMP ENDLOOP
+                      50     END
+A51 MACRO ASSEMBLER  LAB1_8051                                                            02/02/2018 19:11:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AD_OVER. . . . . .  C ADDR   003CH   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DIVIDE . . . . . .  C ADDR   0012H   A   
+DIVIDE_DONE. . . .  C ADDR   001AH   A   
+ENDLOOP. . . . . .  C ADDR   003FH   A   
+LOAD_RESULT. . . .  C ADDR   0030H   A   
+M_OVER . . . . . .  C ADDR   0035H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

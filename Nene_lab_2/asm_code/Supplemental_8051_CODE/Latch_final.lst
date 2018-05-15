@@ -1,0 +1,78 @@
+A51 MACRO ASSEMBLER  SUPPLEMENTAL_LED_LATCH                                               02/24/2018 17:40:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Supplemental_LED_LATCH.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Supplemental_LED_LATCH.a51 SET(SMALL) DEBUG PRINT(.\Listings\Supplement
+                      al_LED_LATCH.lst) OBJECT(.\Objects\Supplemental_LED_LATCH.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H ;Program Execution Begins here 
+0000 801B              2     JMP Main
+000B                   3     ORG 000BH; Timer0 Interrupt vector address
+000B 0B                4     INC R3 ; Increment Static Counter
+000C EB                5     MOV A,R3 ; ISR static Counter
+000D 7004              6     JNZ LOG_ISR
+000F B290              7     CPL P1.0 ; Toggle port pin or LED
+0011 7BF6              8     MOV R3,#0F6H ;Reload the value of static counter
+0013                   9     LOG_ISR:
+0013 E9               10     MOV A,R1
+0014 F0               11     MOVX @DPTR,A ; Move to Latch 
+0015 09               12     INC R1  ;Increment ISR counter
+0016 E9               13     MOV A,R1
+0017 7003             14     JNZ EXIT_ISR
+0019 7980             15     MOV R1,#80H ;Reset ISR Counter
+001B F4               16     CPL A ; Complement A to avoid infinite loop
+001C                  17     EXIT_ISR:
+001C 32               18     RETI ; Return from interrupt
+001D                  19     MAIN:
+001D 90ABCD           20     MOV DPTR,#0ABCDH
+0020 7800             21     MOV R0,#00H
+0022 7980             22     MOV R1,#80H
+0024 75A882           23     MOV IE,#82H ;Activate Timer0 interrupt
+0027 758901           24     MOV TMOD,#01H ;16 bit TIMER0 MODE selection 
+002A 7BF6             25     MOV R3,#0F6H ; Counter for ISR
+002C D28C             26     SETB TR0 ; Start Timer0
+002E                  27     LOG_RELOAD: ;
+002E E8               28     MOV A,R0
+002F F0               29     MOVX @DPTR,A ; Move to Latch 
+0030 08               30     INC R0 ;Increment Reload counter
+0031 E8               31     MOV A,R0
+0032 947F             32     SUBB A,#7FH
+0034 4002             33     JC RELOAD
+0036 7800             34     MOV R0,#00H ;Reset Reload Counter
+0038                  35     RELOAD:
+0038 758C36           36     MOV TH0,#36H ; Reload MSB of Timer0
+003B 758A85           37     MOV TL0,#85H ; Reload LSB of Timer0
+003E 7400             38     MOV A,#0H ; Clear A for going in infinite loop
+0040                  39     LOOP: 
+0040 60FE             40     JZ LOOP ; Infinite loop if A is 0
+0042 80EA             41     JMP LOG_RELOAD ; Jump to Reload the Timer0 Registers
+                      42     END
+A51 MACRO ASSEMBLER  SUPPLEMENTAL_LED_LATCH                                               02/24/2018 17:40:54 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EXIT_ISR . . . . .  C ADDR   001CH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+LOG_ISR. . . . . .  C ADDR   0013H   A   
+LOG_RELOAD . . . .  C ADDR   002EH   A   
+LOOP . . . . . . .  C ADDR   0040H   A   
+MAIN . . . . . . .  C ADDR   001DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RELOAD . . . . . .  C ADDR   0038H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

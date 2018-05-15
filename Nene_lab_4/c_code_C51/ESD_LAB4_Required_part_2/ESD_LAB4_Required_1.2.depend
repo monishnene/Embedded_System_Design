@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1523667468 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\i2c.c
+	"i2c.h"
+
+1523647341 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\i2c.h
+	<stdint.h>
+	"uart.h"
+	"lcd.h"
+
+1523411485 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\uart.h
+	<stdint.h>
+	"at89c51ed2.h"
+
+1521239237 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\at89c51ed2.h
+	<8052.h>
+
+1523758258 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\lcd.h
+	<stdint.h>
+	"uart.h"
+	"i2c.h"
+
+1523647284 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\gpio.h
+
+1523758542 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\lcd.c
+	"lcd.h"
+
+1523758745 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\main.c
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	<stdint.h>
+	"uart.h"
+	"i2c.h"
+	"lcd.h"
+	"rtc.h"
+
+1523038342 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\mcs51reg.h
+	<mcs51reg.h>
+
+1523749368 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\rtc.h
+	"lcd.h"
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	"uart.h"
+	<stdint.h>
+	"i2c.h"
+
+1523646400 c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\spi.h
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	<stdint.h>
+	"gpio.h"
+	"uart.h"
+
+1523761118 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\rtc.c
+	"rtc.h"
+
+1523646452 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\spi.c
+	"spi.h"
+
+1523641640 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_required_1.2\uart.c
+	"uart.h"
+

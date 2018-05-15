@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  LED_BLINK                                                            02/16/2018 11:27:25 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LED_BLINK.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LED_BLINK.a51 SET(SMALL) DEBUG PRINT(.\Listings\LED_BLINK.lst) OBJECT(.
+                      \Objects\LED_BLINK.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H ;Program Execution Begins here
+0000 75A882            2     MOV IE,#82H ;Activate Timer0 interrupt
+0003 758901            3     MOV TMOD,#01H ;16 bit TIMER0 MODE selection 
+0006 7BF6              4     MOV R3,#0F6H ; Counter for ISR
+0008 D28C              5     SETB TR0 ; Start Timer0
+000A 800B              6     JMP RELOAD ; Jump to Reload 
+000B                   7     ORG 000BH; Timer0 Interrupt vector address
+000B 0B                8     INC R3 ; Increment Static Counter
+000C B291              9     CPL P1.1 ; Toggle pin for entering interrupt 
+000E EB               10     MOV A,R3 ; ISR static Counter
+000F 7005             11     JNZ EXIT_ISR
+0011 B290             12     CPL P1.0 ; Toggle port pin or LED
+0013 7BF6             13     MOV R3,#0F6H ;Reload the value of static counter
+0015 F4               14     CPL A ; Complement A to avoid infinite loop
+0016                  15     EXIT_ISR:
+0016 32               16     RETI ; Return from interrupt
+0017                  17     RELOAD: ; 
+0017 758C36           18     MOV TH0,#36H ; Reload MSB of Timer0
+001A 758A78           19     MOV TL0,#78H ; Reload LSB of Timer0
+001D 7400             20     MOV A,#0H ; Clear A for going in infinite loop
+001F                  21     LOOP: 
+001F 60FE             22     JZ LOOP ; Infinite loop if A is 0
+0021 80F4             23     JMP RELOAD ; Jump to Reload the Timer0 Registers
+                      24     END
+A51 MACRO ASSEMBLER  LED_BLINK                                                            02/16/2018 11:27:25 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EXIT_ISR . . . . .  C ADDR   0016H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+LOOP . . . . . . .  C ADDR   001FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RELOAD . . . . . .  C ADDR   0017H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

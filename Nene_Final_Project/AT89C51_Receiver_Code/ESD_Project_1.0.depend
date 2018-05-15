@@ -1,0 +1,60 @@
+# depslib dependency file v1.0
+1523667468 source:c:\users\monis\documents\academics\esd\final project\esd_project_1.0\i2c.c
+	"i2c.h"
+
+1523647341 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\i2c.h
+	<stdint.h>
+	"uart.h"
+	"lcd.h"
+
+1524860798 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\uart.h
+	<stdint.h>
+	"at89c51ed2.h"
+
+1521239237 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\at89c51ed2.h
+	<8052.h>
+
+1523758258 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\lcd.h
+	<stdint.h>
+	"uart.h"
+	"i2c.h"
+
+1523761098 source:c:\users\monis\documents\academics\esd\final project\esd_project_1.0\lcd.c
+	"lcd.h"
+
+1523761118 source:c:\users\monis\documents\academics\esd\final project\esd_project_1.0\rtc.c
+	"rtc.h"
+
+1523749368 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\rtc.h
+	"lcd.h"
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	"uart.h"
+	<stdint.h>
+	"i2c.h"
+
+1523038342 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\mcs51reg.h
+	<mcs51reg.h>
+
+1524791799 source:c:\users\monis\documents\academics\esd\final project\esd_project_1.0\spi.c
+	"spi.h"
+
+1524791771 c:\users\monis\documents\academics\esd\final project\esd_project_1.0\spi.h
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	<stdint.h>
+	"uart.h"
+
+1524860776 source:c:\users\monis\documents\academics\esd\final project\esd_project_1.0\uart.c
+	"uart.h"
+
+1524935607 source:c:\users\monis\documents\academics\esd\final project\esd_project_1.0\main.c
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	<stdint.h>
+	"uart.h"
+	"i2c.h"
+	"lcd.h"
+	"rtc.h"
+	"spi.h"
+

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1520651174 source:c:\users\monis\documents\academics\esd\lab3\esd_lab3_1.2\main.c
+	<at89c51ed2.h>
+	<mcs51reg.h>
+	<stdint.h>
+	<malloc.h>
+
+1520628161 c:\users\monis\documents\academics\esd\lab3\esd_lab3_1.2\main.h
+	<at89c51ed2.h>
+	<mcs51reg.h>
+	<stdint.h>
+	<malloc.h>
+

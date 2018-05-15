@@ -1,0 +1,24 @@
+Name     LAB3_ESD;
+PartNo   00;
+Date     3/2/2018;
+Revision 01;
+Designer Monish Nene;
+Company  University of Colorado;
+Assembly None;
+Location Boulder;
+Device   g16v8a;
+
+
+ORDER: PSEN_BAR, %2, RD_BAR, %4, A11, %4, A15, %3, A14, %5, A13, %8, A12, %7, WR_BAR, %7, A10, %8, OE_BAR, %8, CE_BAR, %8, DEBUG_LATCH_CLOCK, %8, WE_BAR; 
+
+
+VECTORS:
+000000000****
+011100000****
+100111110****
+1111011X0****
+1X11010X1****
+X110XXX11****
+0X01XXXX1****
+X00111XX1****
+XXXXXXXXX****

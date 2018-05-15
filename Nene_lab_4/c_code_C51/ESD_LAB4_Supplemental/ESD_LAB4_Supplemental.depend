@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1523762406 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\spi.c
+	"spi.h"
+
+1523762418 c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\spi.h
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	<stdint.h>
+	"uart.h"
+
+1521239237 c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\at89c51ed2.h
+	<8052.h>
+
+1523038342 c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\mcs51reg.h
+	<mcs51reg.h>
+
+1523647284 c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\gpio.h
+
+1523411485 c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\uart.h
+	<stdint.h>
+	"at89c51ed2.h"
+
+1523641640 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\uart.c
+	"uart.h"
+
+1523674901 source:c:\users\monis\documents\academics\esd\lab4\esd_lab4_supplemental\main.c
+	"at89c51ed2.h"
+	"mcs51reg.h"
+	<stdint.h>
+	"uart.h"
+	"spi.h"
+
